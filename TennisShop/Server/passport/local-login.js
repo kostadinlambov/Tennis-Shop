@@ -11,9 +11,14 @@ module.exports = new PassportLocalStrategy({
   const user = {
     email: email.trim(),
     password: password.trim()
+    // name: req.body.name.trim(),
+    // username: req.body.username.trim(),
+    // firstName: req.body.firstName.trim(),
+    // lastName: req.body.lastName.trim(),
   }
 
   let savedUser = usersData.findByEmail(email)
+  console.log('savedUser: ', savedUser)
 
   if (!savedUser) {
     const error = new Error('Incorrect email or password')
@@ -31,14 +36,19 @@ module.exports = new PassportLocalStrategy({
     return done(error)
   }
 
+  // create a jwt-token string
   const payload = {
     sub: savedUser.id
   }
 
-  // create a token string
   const token = jwt.sign(payload, 's0m3 r4nd0m str1ng')
   const data = {
-    name: savedUser.name
+    id: savedUser.id,
+    email: savedUser.email,
+    // username: savedUser.username,
+    firstName: savedUser.firstName,
+    lastName: savedUser.lastName,
+    password: savedUser.password,
   }
 
   return done(null, token, data)

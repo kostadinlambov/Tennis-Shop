@@ -9,7 +9,7 @@ function validateSignupForm (payload) {
   let isFormValid = true
   let message = ''
   // Custom change #################
-  payload.name = payload.username;
+  // payload.name = payload.username;
 
   console.log(payload)
 
@@ -24,9 +24,19 @@ function validateSignupForm (payload) {
     errors.password = 'Password must have at least 4 characters.'
   }
 
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
+  // if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0) {
+  //   isFormValid = false
+  //   errors.name = 'Please provide your username.'
+  // }
+
+  if (!payload || typeof payload.firstName !== 'string' || payload.firstName.trim().length === 0) {
     isFormValid = false
-    errors.name = 'Please provide your name.'
+    errors.name = 'Please provide your First Name.'
+  }
+
+  if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
+    isFormValid = false
+    errors.name = 'Please provide your Last Name.'
   }
 
   if (!isFormValid) {
@@ -77,7 +87,7 @@ router.post('/signup', (req, res, next) => {
     })
   }
 
-  return passport.authenticate('local-signup', (err) => {
+  return passport.authenticate('local-signup', (err, token, userData) => {
     if (err) {
       return res.status(400).json({
         success: false,
@@ -87,7 +97,10 @@ router.post('/signup', (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'You have successfully signed up! Now you should be able to log in.'
+      message: 'You have successfully registered and logged in!',
+      token,
+      userData
+      // message: 'You have successfully signed up! Now you should be able to log in.'
     })
   })(req, res, next)
 })
@@ -121,7 +134,7 @@ router.post('/login', (req, res, next) => {
       success: true,
       message: 'You have successfully logged in!',
       token,
-      user: userData
+      userData
     })
   })(req, res, next)
 })

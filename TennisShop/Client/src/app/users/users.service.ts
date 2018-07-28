@@ -17,17 +17,19 @@ export class UsersService {
     }
 
     logout() {
+        return new Observable();
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Use this after implement JWT and /logout Route on Server
     //     return this.http.post(logoutUrl,
     //         {},
     //         {
     //             headers: this.createAuthHeaders('Kinvey')
     //         });
-    // const sequence = new Observable();
-        return new Observable();
     }
 
     checkIfLoggedIn() {
-        return this.currentAuthtoken === localStorage.getItem('authtoken');
+        // return this.currentAuthtoken === localStorage.getItem('authtoken');
+        return localStorage.getItem('authtoken') !== null;
     }
 
     get authtoken() {
@@ -38,7 +40,17 @@ export class UsersService {
         this.currentAuthtoken = value;
     }
 
-    // getMoviesInTheaters(): Observable<Movies> {
-    //     return this.http.get<Movies>(`${this.path}${this.moviesInTheaters}${this.authentication}${apiKey}`);
+    // private createAuthHeaders(type: string): HttpHeaders {
+    //     if (type === 'Basic') {
+    //         return new HttpHeaders({
+    //             'Authorization': `Basic ${btoa(`${appKey}:${appSecret}`)}`,
+    //             'Content-Type': 'application/json'
+    //         });
+    //     } else {
+    //         return new HttpHeaders({
+    //             'Authorization': `Kinvey ${localStorage.getItem('authtoken')}`,
+    //             'Content-Type': 'application/json'
+    //         });
+    //     }
     // }
 }

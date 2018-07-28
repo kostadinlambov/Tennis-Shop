@@ -15,4 +15,32 @@ export class HttpService {
         // .subscribe();
         // .subscribe(res => res.json());
     }
+
+    // post (url, data) {
+    //     return this.http
+    //     .post(baseUrl + url, data,
+    //     // JSON.stringify(registerModel),
+    //         // {
+    //         //     headers: this.createAuthHeaders('Basic')
+    //         // });
+
+    //     // ####################################
+    //     // .post(baseUrl + url, JSON.stringify(data));
+    //     // .subscribe();
+    //     // .subscribe(res => res.json());
+    // }
+
+       // private createAuthHeaders(type: string): HttpHeaders {
+    //     if (type === 'Basic') {
+    //         return new HttpHeaders({
+    //             'Authorization': `Basic ${btoa(`${appKey}:${appSecret}`)}`,
+    //             'Content-Type': 'application/json'
+    //         });
+    //     } else {
+    //         return new HttpHeaders({
+    //             'Authorization': `Kinvey ${localStorage.getItem('authtoken')}`,
+    //             'Content-Type': 'application/json'
+    //         });
+    //     }
+    // }
 }

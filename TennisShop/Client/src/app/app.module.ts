@@ -1,17 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
+// Modules
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { PagesModule } from './pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
 import { CarRoutesModule } from './routes.module';
 import { CoreModule } from './core/core.module';
-import { HomeComponent } from './home/home.component';
 import { UserModule } from './users/users.module';
 
-
-
+// Components
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+
 
 // import { NavbarComponent } from './core/navbar-component';
 // import { RegisterComponent } from './users/register.component';
@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
     // NavbarComponent
   ],
   imports: [
@@ -30,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     UserModule,
     CarRoutesModule,
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
