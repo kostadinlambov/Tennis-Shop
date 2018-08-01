@@ -8,28 +8,33 @@ export class UsersService {
     private currentAuthtoken: string;
     constructor(private httpService: HttpService) { }
 
-    register(user)  {
-        return this.httpService.post('auth/signup', user);
+    register(user) {
+        return this.httpService.post('auth/register', user);
     }
 
-    login(formData)  {
+    login(formData) {
         return this.httpService.post('auth/login', formData);
     }
 
     logout() {
         return new Observable();
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // Use this after implement JWT and /logout Route on Server
-    //     return this.http.post(logoutUrl,
-    //         {},
-    //         {
-    //             headers: this.createAuthHeaders('Kinvey')
-    //         });
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // Use this after implement JWT and /logout Route on Server
+        //     return this.http.post(logoutUrl,
+        //         {},
+        //         {
+        //             headers: this.createAuthHeaders('Kinvey')
+        //         });
     }
 
-    checkIfLoggedIn() {
+    createCar(formData) {
+        return this.httpService.post('cars/create', formData);
+    }
+
+    checkIfLoggedIn(): boolean {
         // return this.currentAuthtoken === localStorage.getItem('authtoken');
-        return localStorage.getItem('authtoken') !== null;
+        // return localStorage.getItem('authtoken') !== null || localStorage.getItem('authtoken') !== undefined ;
+        return localStorage.getItem('currentUser') !== null;
     }
 
     get authtoken() {

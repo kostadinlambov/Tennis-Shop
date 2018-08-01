@@ -16,6 +16,8 @@ import { UsersService } from '../../users/users.service';
 
 const appKey = 'kid_ryaKoAwE7'; // Here JWT from Server
 const appSecret = '218c5675532648babe97c768fd32c650'; // Here JWT from Server
+const jwtToken = localStorage.getItem('authtoken');
+
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -27,23 +29,31 @@ export class TokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler)
         : Observable<HttpEvent<any>> {
-        if (request.url.endsWith('login') || request.url.endsWith(appKey)) {
-            request = request.clone({
-                setHeaders: {
-                     // Need to be changed with JWT-headers, which to be sent to Server
-                    'Authorization': `Basic ${btoa(`${appKey}:${appSecret}`)}`,
-                    'Content-Type': 'application/json'
-                },
-            });
-        } else {
-            request = request.clone({
-                setHeaders: {
-                    // Need to be changed with JWT-headers, which to be sent to Server
-                    'Authorization': `Kinvey ${localStorage.getItem('authtoken')}`,
-                    'Content-Type': 'application/json'
-                },
-            });
-        }
+
+        console.log('jwtToken:', jwtToken);
+        request = request.clone({
+            setHeaders: {
+                'Authorization': `Bearer ${jwtToken}`,
+                'Content-Type': 'application/json'
+            },
+        });
+        // if (request.url.endsWith('login') || request.url.endsWith(appKey)) {
+        //     request = request.clone({
+        //         setHeaders: {
+        //             // Need to be changed with JWT-headers, which to be sent to Server
+        //             'Authorization': `Basic ${btoa(`${appKey}:${appSecret}`)}`,
+        //             'Content-Type': 'application/json'
+        //         },
+        //     });
+        // } else {
+        //     request = request.clone({
+        //         setHeaders: {
+        //             // Need to be changed with JWT-headers, which to be sent to Server
+        //             'Authorization': `Kinvey ${localStorage.getItem('authtoken')}`,
+        //             'Content-Type': 'application/json'
+        //         },
+        //     });
+        // }
 
         return next.handle(request)
             .pipe(tap((event: HttpEvent<any>) => {
@@ -51,7 +61,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     console.log(event);
                     // this.toastrService.success('You have successfully logged in!');
                     this.successfulLoginAndRegister(event['body']);
-                } else if (event instanceof HttpResponse && request.url.endsWith('signup')) {
+                } else if (event instanceof HttpResponse && request.url.endsWith('register')) {
                     // this.toastrService.success('You have registered successfully!');
                     console.log('register: ', event);
                     this.successfulLoginAndRegister(event['body']);

@@ -6,6 +6,7 @@ const localSignupStrategy = require('./passport/local-signup')
 const localLoginStrategy = require('./passport/local-login')
 const authRoutes = require('./routes/auth')
 const carsRoutes = require('./routes/cars')
+const furnitureRoutes = require('./routes/furniture')
 const statsRoutes = require('./routes/stats')
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use(cors())
+// app.use(cors({origin: 'http://localhost:4200'}))
 
 passport.use('local-signup', localSignupStrategy)
 passport.use('local-login', localLoginStrategy)
@@ -24,6 +26,7 @@ passport.use('local-login', localLoginStrategy)
 app.use('/auth', authRoutes)
 app.use('/cars', carsRoutes)
 app.use('/stats', statsRoutes)
+app.use('/furniture', furnitureRoutes)
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}...`)

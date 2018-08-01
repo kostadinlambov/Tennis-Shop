@@ -1,0 +1,67 @@
+<!-- <div class="container">
+  <div class="row space-top">
+    <div class="col-md-12">
+      <h1>Welcome to Furniture System</h1>
+      <p>Select furniture from the catalog to view details.</p>
+    </div>
+  </div>
+  <div class="row space-top">
+    <div class="col-md-4" *ngFor="let item of furniture | async">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <blockquote class="card-blockquote">
+            <img src="{{item.image}}" width="150" height="auto" />
+            <p>{{item.description}}</p>
+            <div class="pull-right">
+              <a class="btn btn-info" routerLink="/furniture/details/{{item.id}}">Details</a>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="row space-top">
+    <div class="col-md-12">
+      <h1>Welcome to Furniture System</h1>
+      <p>Select furniture from the catalog to view details.</p>
+    </div>
+  </div>
+  <div class="row space-top">
+    <div class="col-md-4" *ngFor="let item of furniture | async">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <blockquote class="card-blockquote">
+            <img src="{{item.image}}" />
+            <p>{{item.description}}</p>
+            <div class="pull-right">
+              <a class="btn btn-info" routerLink="/furniture/details/{{item.id}}">Details</a>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div *ngIf="isSeachButtonClicked">
+    <div *ngIf="foundMovies.results.length > 0; else loading" class="panel panel-default"  >
+      <div class="panel-heading">
+        <h3  class="panel-title mt-5 mb-5 text-center">Matched Movies</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div *ngFor="let movie of foundMovies.results;let i=index" class="col-md-2">
+            <app-movie *ngIf="i < 6" [movie]="movie"></app-movie>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <h1 class="panel-title mt-5 text-center">No matches! </h1>
+  </ng-template> -->

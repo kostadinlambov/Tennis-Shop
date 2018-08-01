@@ -9,6 +9,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginAndRegisterGuard } from './guards/loginAndRegister.guard';
 import { HTTP_INTERCEPTORS } from '../../../node_modules/@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [NavBarComponent],
@@ -18,9 +20,19 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HttpService,
     AuthGuard,
     LoginAndRegisterGuard,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ]

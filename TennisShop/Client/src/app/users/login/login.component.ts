@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UsersService } from './../users.service';
 import { LoginUser } from './login-user.model';
-import { Router } from '../../../../node_modules/@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +17,14 @@ success: boolean = true;
   constructor(
     private userService: UsersService,
     private router: Router,
-    private toastrService: ToastrService
+    // private toastrService: ToastrService
   ) { }
 
   login() {
     this.userService.login(this.user)
     .subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         // this.message = res['message'];
         // this.success = res['success'];
         // this.toastrService.success(data['message']);
@@ -32,7 +32,7 @@ success: boolean = true;
         // this.router.navigate(['/home']);
       },
       err => {
-        console.log(err);
+        // console.log(err);
         // this.message = err.error['message'];
         // this.success = err['success'];
         // this.toastrService.error(err.error['message']);

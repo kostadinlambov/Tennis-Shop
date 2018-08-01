@@ -10,12 +10,14 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1]
 
   // decode the token using a secret key-phrase
-  return jwt.verify(token, 's0m3 r4nd0m str1ng', (err, decoded) => {
+  return jwt.verify(token, 's0m3 r4nd0m str1ng', (err, authData) => {
+  // return jwt.verify(token, 's0m3 r4nd0m str1ng', (err, decoded) => {
     // the 401 code is for unauthorized status
     if (err) { return res.status(401).end() }
 
-    const userId = decoded.sub
+    const userId = authData.sub
 
+    // Get User from DataBase
     const user = usersData.findById(userId)
     if (!user) {
       return res.status(401).end()

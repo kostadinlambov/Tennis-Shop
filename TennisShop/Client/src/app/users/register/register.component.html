@@ -10,7 +10,7 @@
 
   <h1 class="mt-5 mb-5">Register</h1>
 
-  <form #registerForm="ngForm" (submit)="register()">
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
     <!-- <div class="form-group">
         <label for="username">Username</label>
         <input 

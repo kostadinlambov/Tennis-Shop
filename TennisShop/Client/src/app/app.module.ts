@@ -8,10 +8,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { CarRoutesModule } from './routes.module';
 import { CoreModule } from './core/core.module';
 import { UserModule } from './users/users.module';
+import { FurnitureModule } from './furniture/furniture.module';
+import { CustomFormsModule } from 'ng5-validation';
+
 
 // Components
 import { AppComponent } from './app.component';
-
 
 // import { NavbarComponent } from './core/navbar-component';
 // import { RegisterComponent } from './users/register.component';
@@ -29,7 +31,9 @@ import { AppComponent } from './app.component';
     CoreModule,
     UserModule,
     CarRoutesModule,
-    PagesModule
+    PagesModule,
+    FurnitureModule,
+    CustomFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
