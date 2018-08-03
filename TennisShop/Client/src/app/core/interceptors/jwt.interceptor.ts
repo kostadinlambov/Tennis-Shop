@@ -68,7 +68,8 @@ export class JwtInterceptor implements HttpInterceptor {
     saveToken(data) {
         localStorage.setItem('currentUser', JSON.stringify({
             user: data['userData'],
-            token: data['token']
+            token: data['token'],
+            isAdmin: data['userData']['isAdmin']
         },
             null,
             4));

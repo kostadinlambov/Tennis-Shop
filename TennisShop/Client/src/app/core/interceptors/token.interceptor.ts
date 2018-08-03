@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../components/users/users.service';
 
 const appKey = 'kid_ryaKoAwE7'; // Here JWT from Server
 const appSecret = '218c5675532648babe97c768fd32c650'; // Here JWT from Server

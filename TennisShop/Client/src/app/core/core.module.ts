@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
-import { HttpService } from './http.service';
+import { HttpService } from './services/http.service';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginAndRegisterGuard } from './guards/loginAndRegister.guard';
-import { HTTP_INTERCEPTORS } from '../../../node_modules/@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';

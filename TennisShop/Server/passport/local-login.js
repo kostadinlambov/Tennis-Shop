@@ -51,6 +51,7 @@ module.exports = new PassportLocalStrategy({
     firstName: savedUser.firstName,
     lastName: savedUser.lastName,
     password: savedUser.password,
+    isAdmin: savedUser.roles.includes('Admin')
   }
 
   return done(null, token, data)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from './../../users/users.service';
+import { UsersService } from '../../components/users/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -38,34 +38,4 @@ export class NavBarComponent implements OnInit {
       ? this.dropdownMenu = 'dropdown-menu'
       : this.dropdownMenu = 'dropdown-menu show';
   }
-
-
-
-  // !!!!!!!!!!!!!!!!!!
-  // Use this implementation after implementing logout() in usersService.ts
-  // logout() {
-  //   this.userService.logout()
-  //     .subscribe(data => {});
-  // }
-
-
-  logout1() {
-
-    localStorage.clear();
-    this.userService.authtoken = '';
-    this.toastrService.info('You have been successfully logged out!');
-    // this.router.navigate(['/login']);
-
-
-    // debugger;
-    // this.userService.logout()
-    //   .subscribe(data => {
-
-    //     localStorage.clear();
-    //     this.userService.authtoken = '';
-    //     this.toastrService.info('You have been successfully logged out!');
-    //     // this.router.navigate(['/login']);
-    //   });
-  }
-
 }

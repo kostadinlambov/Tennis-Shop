@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FurnitureModule } from './components/furniture/furniture.module';
 
-import { RegisterComponent } from './users/register/register.component';
-import { LoginComponent } from './users/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { CreateCarFormComponent } from './pages/create-car-form/create-car-form.component';
+import { RegisterComponent } from './components/users/register/register.component';
+import { LoginComponent } from './components/users/login/login.component';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginAndRegisterGuard } from './core/guards/loginAndRegister.guard';
-import { AllFurnitureComponent } from './furniture/all-furniture/all-furniture.component';
-import { CreateFurnitureComponent } from './furniture/create-furniture/create-furniture.component';
-import { FurnitureDetailsComponent } from './furniture/furniture-details/furniture-details.component';
-import { MyFurnitureComponent } from './furniture/my-furniture/my-furniture.component';
-import { DeleteFurnitureComponent } from './furniture/delete-furniture/delete-furniture.component';
-import { EditFurnitureComponent } from './furniture/edit-furniture/edit-furniture.component';
+
+import { CreateCarFormComponent } from './components/pages/create-car-form/create-car-form.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,17 +18,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [LoginAndRegisterGuard] },
     { path: 'login', component: LoginComponent, canActivate: [LoginAndRegisterGuard] },
     { path: 'car/create', component: CreateCarFormComponent, canActivate: [AuthGuard] },
-    {
-        path: 'furniture', children:
-            [
-                { path: 'all', component: AllFurnitureComponent },
-                { path: 'create', component: CreateFurnitureComponent, canActivate: [AuthGuard] },
-                { path: 'details/:id', component: FurnitureDetailsComponent, canActivate: [AuthGuard] },
-                { path: 'my', component: MyFurnitureComponent, canActivate: [AuthGuard] },
-                { path: 'delete/:id', component: DeleteFurnitureComponent, canActivate: [AuthGuard] },
-                { path: 'edit/:id', component: EditFurnitureComponent, canActivate: [AuthGuard] },
-            ]
-    },
+    { path: 'furniture', loadChildren: () => FurnitureModule },
     { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -41,4 +27,4 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class CarRoutesModule { }
+export class AppRoutesModule { }

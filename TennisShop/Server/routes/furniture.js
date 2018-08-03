@@ -152,8 +152,15 @@ router.post('/edit/:id', authCheck, (req, res) => {
 
   const checkFurniture = furnitureData.findById(id)
   
-  if (!checkFurniture || checkFurniture.createdBy !== user) {
-    return res.status(200).json({
+   // if (checkFurniture.createdBy !== user && !req.user.roles.includes('Admin')) {
+  //   return res.status(401).json({
+  //     success: false,
+  //     message: 'No permission to perform current operation!'
+  //   })
+  // }
+
+  if (!checkFurniture || (checkFurniture.createdBy !== user && !req.user.roles.includes('Admin'))) {
+    return res.status(404).json({
       success: false,
       message: 'Furniture does not exists!'
     })
@@ -178,6 +185,88 @@ router.post('/edit/:id', authCheck, (req, res) => {
     message: 'Furniture updated successfully!',
     furniture
   })
+})
+
+router.put('/edit/:id', authCheck, (req, res) => {
+  const id = req.params.id;
+  const user = req.user.email;
+  const furniture = req.body;
+
+  if (!furniture ||  !req.user.roles.includes('Admin')) {
+  // if (!furniture) {
+    return res.status(404).json({
+      success: false,
+      message: 'Furniture does not exists!'
+    })
+  }
+
+  // if (!req.user.roles.includes('Admin')) {
+  //   return res.status(401).json({
+  //     success: false,
+  //     message: 'No permission to perform current operation!'
+  //   })
+  // }
+
+  const validationResult = validateFurnitureForm(furniture)
+  if (!validationResult.success) {
+    return res.status(400).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors
+    })
+  }
+
+  furnitureData.edit(id, furniture);
+  furniture.id = id;
+  return res.status(200).json({
+    success: true,
+    message: 'Furniture edited successfully!'
+  })
+})
+
+router.get('/:id',  authCheck, (req, res) => {
+  const id = req.params.id
+
+  const furniture = furnitureData.findById(id)
+
+  if (!furniture) {
+    return res.status(400).json({
+      success: false,
+      message: 'Entry does not exists!'
+    })
+  }
+
+  // let response = {
+  //   id,
+  //   make: furniture.make,
+  //   model: furniture.model,
+  //   year: furniture.year,
+  //   description: furniture.description,
+  //   price: furniture.price,
+  //   image: furniture.image
+  // }
+
+  // if (furniture.material) {
+  //   response.material = furniture.material
+  // }
+
+  let response = {
+    id,
+    make: furniture.make,
+    model: furniture.model,
+    year: furniture.year,
+    description: furniture.description,
+    price: furniture.price,
+    image: furniture.image,
+    createdOn: furniture.createdOn,
+    likes: furniture.likes.length
+  }
+
+  if (furniture.material) {
+    response.material = furniture.material
+  }
+
+  res.status(200).json(response)
 })
 
 module.exports = router

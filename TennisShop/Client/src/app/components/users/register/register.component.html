@@ -1,0 +1,151 @@
+
+<div class="container">
+      <p>{{user | json }}</p>
+
+  <!-- <h3 class="alert alert-danger" *ngIf="!success;else successTemplate">{{message}}</h3>
+
+  <ng-template #successTemplate>
+      <h3 *ngIf="success&&message" class="alert alert-success">{{message}}</h3>
+  </ng-template> -->
+
+  <h1 class="mt-5 mb-5">Register</h1>
+
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <!-- <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="username"
+          name="username"
+          [(ngModel)]="user.username"
+          #usernameField="ngModel"
+          ngModel 
+          appUsernameValidator="usernameField"
+          required 
+        >
+        <div class="alert alert-danger" *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)">
+          <div *ngIf="usernameField.errors.invalidUsername">Username must start with a capital letter and must contain only letters and digits!</div>
+          <div *ngIf="usernameField.errors.required">Username is required!</div>
+        </div>
+      </div> -->
+
+      <div class="form-group">
+          <label for="email">Email Address</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="email"
+            name="email" 
+            [(ngModel)]="user.email"
+            #emailField="ngModel"
+            pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+            ngMode
+            required
+            (click)= "inputClick(emailField)"
+          >
+          <div 
+            class="alert alert-danger" *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)">
+              <div *ngIf="emailField.errors.pattern">Invalid e-mail address!</div>
+              <div *ngIf="emailField.errors.required">E-mail is required!</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            id="firstName"
+            name="firstName" 
+            [(ngModel)]="user.firstName"
+            #firstNameField="ngModel"
+            appNamesValidator
+            ngModel
+            required
+        >
+        <div class="alert alert-danger" *ngIf="firstNameField.invalid && (firstNameField.dirty || firstNameField.touched)">
+          <div *ngIf="firstNameField.errors.invalidName">First Name must start with a capital letter and must contain only letters and digits.</div>
+          <div *ngIf="firstNameField.errors.required">First Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            id="lastName"
+            name="lastName" 
+            [(ngModel)]="user.lastName"
+            #lastNameField="ngModel"
+            appNamesValidator
+            ngModel
+            required
+        >
+        <div class="alert alert-danger" *ngIf="lastNameField.invalid && (lastNameField.dirty || lastNameField.touched)">
+          <div *ngIf="lastNameField.errors.invalidName">Last Name must start with a capital letter and must contain only letters and digits.</div>
+          <div *ngIf="lastNameField.errors.required">Last Name is required</div>
+        </div>
+      </div>
+
+    <!-- <div ngModelGroup="passwordGroup" > -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password"
+              name="password"
+              [(ngModel)]="user.password"
+              #passwordField="ngModel"
+              appPasswordValidator = "passwordField"
+              (input)="confirmPasswordField.control.updateValueAndValidity()"
+              minlength="4"
+              maxlength="16"
+              ngModel 
+              required
+            >
+            <div 
+              class="alert alert-danger" *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)">
+              <div *ngIf="passwordField.errors.invalidPassword">Password must contain only letters and digits.</div>
+              <div *ngIf="passwordField.errors.required">Password is required</div>
+              <div *ngIf="passwordField.errors.minlength">Password should be at least 4 and maximum 16 characters long.</div>
+              <div *ngIf="passwordField.errors.maxlength">Password should be maximum 16 characters long.</div>
+            </div>
+          </div>
+      
+          <div class="form-group" >
+            <label for="confirmPassword">Confirm Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="confirmPassword"
+              name="confirmPassword" 
+              #confirmPasswordField="ngModel"
+              appMatchPasswordValidator="password"
+              ngModel
+              required
+            >
+            <!-- <div class="alert alert-danger" [hidden]="password.value === confirmPassword.value"> Passwords do not match.</div> -->
+            <div 
+              class="alert alert-danger" *ngIf=" (confirmPasswordField.dirty || confirmPasswordField.touched) 
+              && confirmPasswordField.invalid">
+                <!-- <div *ngIf="passwordField.errors.notEqual">Passwords do not match.</div> -->
+                Passwords do not match.
+            </div>
+          </div>
+        <!-- </div> -->
+
+
+    <button 
+      type="submit" 
+      class="btn btn-success"
+      [disabled]="!registerForm.form.valid ||  password?.value !== confirmPassword?.value">
+      Register
+    </button>
+
+  </form>
+</div> 
+
+

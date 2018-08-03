@@ -2,21 +2,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { PagesModule } from './pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CarRoutesModule } from './routes.module';
+import { AppRoutesModule } from './routes.module';
 import { CoreModule } from './core/core.module';
-import { UserModule } from './users/users.module';
-import { FurnitureModule } from './furniture/furniture.module';
+import { FurnitureModule } from './components/furniture/furniture.module';
 import { CustomFormsModule } from 'ng5-validation';
-
+import { UserModule } from './components/users/users.module';
+import { PagesModule } from './components/pages/pages.module';
+import { SharedModule } from './components/shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
-
-// import { NavbarComponent } from './core/navbar-component';
-// import { RegisterComponent } from './users/register.component';
 
 @NgModule({
   declarations: [
@@ -25,15 +22,16 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    AppRoutesModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
     CoreModule,
     UserModule,
-    CarRoutesModule,
     PagesModule,
     FurnitureModule,
     CustomFormsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
