@@ -28,7 +28,8 @@ export class AllFurnitureComponent implements OnInit {
   }
 
   all() {
-    this.furniture = this.furnitureService.getAll();
+    // this.furniture = this.furnitureService.getAll();
+    this.furniture = this.furnitureService.getAllSpringTest();
 
     // this.furnitureService.getAll()
     // .subscribe(

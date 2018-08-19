@@ -1,6 +1,6 @@
 package kl.tennisshop.servicesImpl;
 
-import kl.tennisshop.entities.Order;
+import kl.tennisshop.domain.entities.Order;
 import kl.tennisshop.repositories.OrderRepository;
 import kl.tennisshop.services.OrderService;
 import org.springframework.stereotype.Service;

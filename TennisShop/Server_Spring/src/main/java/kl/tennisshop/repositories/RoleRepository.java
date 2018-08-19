@@ -1,11 +1,12 @@
 package kl.tennisshop.repositories;
 
-import kl.tennisshop.entities.Role;
+import kl.tennisshop.domain.entities.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, String> {
+//@RepositoryRestResource(path = "/roles")
+public interface RoleRepository extends JpaRepository<UserRole, String> {
 
-    Role findByName(String name);
+    UserRole findByAuthority(String authority);
 }

@@ -7,15 +7,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  email: string
+  username: string
   constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
     const currentUser = localStorage.getItem('currentUser');
     console.log('currentUser-Before: ', currentUser);
     if (currentUser) {
-      this.email = JSON.parse(localStorage.getItem('currentUser')).user.email;
-      console.log('email: ', this.email);
+      this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+      console.log('username: ', this.username);
     }
   }
 

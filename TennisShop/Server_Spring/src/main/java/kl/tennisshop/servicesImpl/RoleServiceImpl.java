@@ -1,6 +1,6 @@
 package kl.tennisshop.servicesImpl;
 
-import kl.tennisshop.entities.Role;
+import kl.tennisshop.domain.entities.UserRole;
 import kl.tennisshop.repositories.RoleRepository;
 import kl.tennisshop.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public void persist(Role role) {
+    public void persist(UserRole role) {
         this.roleRepository.save(role);
     }
 
     @Override
-    public Role getByName(String name) {
-        return this.roleRepository.findByName(name);
+    public UserRole getByName(String name) {
+        return this.roleRepository.findByAuthority(name);
     }
 }

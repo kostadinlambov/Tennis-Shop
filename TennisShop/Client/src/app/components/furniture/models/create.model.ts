@@ -6,5 +6,5 @@ export class CreateFurnitureModel {
         public price: number,
         public image: string,
         public material?: string
-    ){}
+    ) {}
 }

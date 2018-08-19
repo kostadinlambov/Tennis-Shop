@@ -1,14 +1,12 @@
 package kl.tennisshop.services;
 
-import kl.tennisshop.entities.Category;
-import kl.tennisshop.entities.Racket;
-
-import java.util.List;
+        import kl.tennisshop.domain.entities.Category;
+        import kl.tennisshop.domain.entities.Racket;
 
 public interface CategoryService {
-     void persistCategory(Category category);
+    void persistCategory(Category category);
 
-     Category findByName(String name);
+    Category findByName(String name);
 
 
 }

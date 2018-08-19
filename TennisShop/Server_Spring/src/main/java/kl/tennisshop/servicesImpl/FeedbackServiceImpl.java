@@ -1,6 +1,6 @@
 package kl.tennisshop.servicesImpl;
 
-import kl.tennisshop.entities.Feedback;
+import kl.tennisshop.domain.entities.Feedback;
 import kl.tennisshop.repositories.FeedbackRepository;
 import kl.tennisshop.services.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;

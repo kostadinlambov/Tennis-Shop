@@ -13,7 +13,8 @@ import { Directive, Input } from '@angular/core';
 export class UsernameValidatorDirective implements Validator {
     // @Input('appUsernameValidator') inputUsernameValue: string;
     validate(control: AbstractControl): { [key: string]: any } | null {
-        return !/^[A-Z]([a-zA-Z0-9]+)?$/.test(control.value) ? {'invalidUsername': true} : null;
+        // return !/^[A-Z]([a-zA-Z0-9]+)?$/.test(control.value) ? {'invalidUsername': true} : null;
+        return !/^([a-zA-Z0-9]+)$/.test(control.value) ? {'invalidUsername': true} : null;
         // return control.value === /^[A-Z]/.test(this.inputUsernameValue) ? {'invalidUsername': true} : null;
     }
 }

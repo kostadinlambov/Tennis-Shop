@@ -1,0 +1,203 @@
+<div class="container">
+    <div class="row space-top">
+        <div class="col-md-12">
+            <h1>Add New Racket</h1>
+            <h4>Please fill all fields.</h4>
+        </div>
+    </div>
+    <form #createForm="ngForm" (ngSubmit)="createRacket(createForm)" >
+        <div class="row space-top">
+            
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label class="form-control-label" for="new-categoryName">Category Name</label>
+                    <input 
+                      class="form-control" 
+                      id="new-categoryName" 
+                      type="text"
+                      name="categoryName"
+                      [(ngModel)]="bindingModel.categoryName"
+                      #categoryNameField="ngModel"
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="categoryNameField.invalid && (categoryNameField.dirty || categoryNameField.touched)">
+                      <div *ngIf="categoryNameField.errors.required">Category Name is required</div>
+                    </div>
+              </div>
+                <div class="form-group ">
+                    <label class="form-control-label" for="new-racketName">Racket Name</label>
+                    <input 
+                      class="form-control" 
+                      id="new-racketName" 
+                      type="text"
+                      name="name"
+                      [(ngModel)]="bindingModel.name"
+                      #nameField="ngModel"
+                      minlength="4"
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
+                      <div *ngIf="nameField.errors.minlength">Racket Name must be at least 4 characters long.</div>
+                      <div *ngIf="nameField.errors.required">Racket Name is required</div>
+                    </div>
+              </div>
+
+
+              
+            
+                <div class="form-group">
+                    <label class="form-control-label" for="new-price">Price</label>
+                    <input 
+                      class="form-control" 
+                      id="new-price" 
+                      type="number"
+                      name="price"
+                      [(ngModel)]="bindingModel.price"
+                      #priceField="ngModel"
+                      appNumberValidator
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="priceField.invalid && (priceField.dirty || priceField.touched)">
+                          <div *ngIf="priceField.errors.invalidNumber">Price must be a number between 0 and 10000.</div>
+                          <div *ngIf="priceField.errors.required">Price is required.</div>
+                       </div>
+                </div>
+  
+              <div class="form-group">
+                  <label class="form-control-label" for="new-description">Description</label>
+                  <textarea 
+                    class="form-control" 
+                    id="new-description" 
+                    rows="8"
+                    cols="6"
+                    name="description"
+                    [(ngModel)]="bindingModel.description"
+                    #descriptionField="ngModel"
+                    minlength="10"
+                    required
+                    ngModel
+                  > </textarea>
+                  <div class="alert alert-danger" *ngIf="descriptionField.invalid && (descriptionField.dirty || descriptionField.touched)">
+                        <div *ngIf="descriptionField.errors.minlength">Description must be more than 10 symbols.</div>
+                        <div *ngIf="descriptionField.errors.required">Description is required.</div>
+                  </div>
+
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              
+                <div class="form-group">
+                    <label class="form-control-label" for="new-headSize">Head Size</label>
+                    <input 
+                      class="form-control" 
+                      id="new-headSize" 
+                      type="number"
+                      name="headSize"
+                      [(ngModel)]="bindingModel.headSize"
+                      #headSizeField="ngModel"
+                      appNumberValidator
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="headSizeField.invalid && (headSizeField.dirty || headSizeField.touched)">
+                          <div *ngIf="headSizeField.errors.invalidNumber">Head Size must be a number between 0 and 10000.</div>
+                          <div *ngIf="headSizeField.errors.required">Head Size is required.</div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="new-weight">Weight</label>
+                    <input 
+                      class="form-control" 
+                      id="new-weight" 
+                      type="number"
+                      name="weight"
+                      [(ngModel)]="bindingModel.weight"
+                      #weightField="ngModel"
+                      appNumberValidator
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="weightField.invalid && (weightField.dirty || weightField.touched)">
+                          <div *ngIf="weightField.errors.invalidNumber">Weight must be a number between 0 and 10000.</div>
+                          <div *ngIf="weightField.errors.required">Weight is required.</div>
+                        </div>
+                </div>
+  
+                <div class="form-group">
+                    <label class="form-control-label" for="new-stringPattern">String Pattern</label>
+                    <input 
+                      class="form-control" 
+                      id="new-stringPattern" 
+                      type="text"
+                      name="image"
+                      [(ngModel)]="bindingModel.stringPattern"
+                      #stringPatternField="ngModel"
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="stringPatternField.invalid && (stringPatternField.dirty || stringPatternField.touched)">
+                          <div *ngIf="stringPatternField.errors.required">String Pattern is required.</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="new-mainImageUrl">Main Image URL</label>
+                    <input 
+                      class="form-control" 
+                      id="new-mainImageUrl" 
+                      type="text"
+                      name="mainImageUrl"
+                      [(ngModel)]="bindingModel.mainImageUrl"
+                      #mainImageUrlField="ngModel"
+                      required
+                      ngModel
+                    >
+                    <div class="alert alert-danger" *ngIf="mainImageUrlField.invalid && (mainImageUrlField.dirty || mainImageUrlField.touched)">
+                          <div *ngIf="mainImageUrlField.errors.required">Main Image URL is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="new-secondImageUrl">Second Image URL (optional)</label>
+                    <input 
+                      class="form-control" 
+                      id="new-secondImageUrl" 
+                      type="text"
+                      name="secondImageUrl"
+                      [(ngModel)]="bindingModel.secondImageUrl"
+                      #secondImageUrlField="ngModel"
+                      ngModel
+                      >
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="new-thirdImageUrl">Third Image URL (optional)</label>
+                    <input 
+                      class="form-control" 
+                      id="new-thirdImageUrl" 
+                      type="text"
+                      name="thirdImageUrl"
+                      [(ngModel)]="bindingModel.thirdImageUrl"
+                      #secondImageUrlField="ngModel"
+                      ngModel
+                      >
+                </div>
+             
+            </div>
+        </div>
+        <div >
+          <input 
+            type="submit" 
+            class="btn btn-primary" 
+            value="Add Racket"
+            [disabled]="createForm.form.invalid" 
+          />
+        </div>
+     
+    </form>
+  </div>
+  
+  

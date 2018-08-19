@@ -1,6 +1,6 @@
 package kl.tennisshop.servicesImpl;
 
-import kl.tennisshop.entities.Category;
+import kl.tennisshop.domain.entities.Category;
 import kl.tennisshop.repositories.CategoryRepository;
 import kl.tennisshop.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

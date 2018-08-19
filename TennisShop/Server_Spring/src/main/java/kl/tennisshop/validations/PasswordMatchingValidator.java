@@ -1,6 +1,6 @@
 package kl.tennisshop.validations;
 
-import kl.tennisshop.models.bindingModels.user.RegisterUserDto;
+import kl.tennisshop.domain.models.bindingModels.user.UserRegisterBindingModel;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
@@ -15,8 +15,8 @@ public class PasswordMatchingValidator implements ConstraintValidator<PasswordMa
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-        if (o instanceof RegisterUserDto) {
-            RegisterUserDto user = (RegisterUserDto) o;
+        if (o instanceof UserRegisterBindingModel) {
+            UserRegisterBindingModel user = (UserRegisterBindingModel) o;
             return user.getPassword().equals(user.getConfirmPassword());
         }
         return false;

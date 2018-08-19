@@ -8,12 +8,19 @@ export class UsersService {
     private currentAuthtoken: string;
     constructor(private httpService: HttpService) { }
 
+    // register(user) {
+    //     return this.httpService.post('auth/register', user);
+    // }
+
     register(user) {
-        return this.httpService.post('auth/register', user);
+        return this.httpService.post('users/register', user);
     }
 
+    // login(formData) {
+    //     return this.httpService.post('auth/login', formData);
+    // }
     login(formData) {
-        return this.httpService.post('auth/login', formData);
+        return this.httpService.post('login', formData);
     }
 
 

@@ -1,6 +1,6 @@
 package kl.tennisshop.services;
 
-import kl.tennisshop.entities.Payment;
+import kl.tennisshop.domain.entities.Payment;
 
 public interface PaymentService {
     Payment persistPayment(Payment payment);

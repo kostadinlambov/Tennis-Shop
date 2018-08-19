@@ -38,42 +38,76 @@ export class JwtInterceptor implements HttpInterceptor {
             .pipe(tap(
                 (event: HttpEvent<any>) => {
                     console.log('event: ', event);
-                    if (event instanceof HttpResponse && event.body.token && request.url.endsWith('login')) {
+                    debugger;
+                    // if (event instanceof HttpResponse && event.body.token && request.url.endsWith('login')) {
+                    if (event instanceof HttpResponse && request.url.endsWith('login')) {
+                        debugger;
                         console.log('login: ', event);
-                        this.saveToken(event['body']);
-                        this.router.navigate(['/furniture/all']);
-                    }
-
-                    if (event instanceof HttpResponse && event.body.success && request.url.endsWith('register')) {
-                        console.log('register: ', event);
-                        this.saveToken(event['body']);
+                        console.log('headeers: ', event.headers);
+                        // this.toastrService.success('You have successfully logged in! - from Angular');
                         // this.toastrService.success(event['body']['message']);
-                        this.router.navigate(['/furniture/all']);
+
+
+                        this.saveToken(event['body']);
+                        // this.router.navigate(['/furniture/all']);
                     }
 
-                    if (event instanceof HttpResponse && event.body.success && request.url.endsWith('create')) {
+                    // if (event instanceof HttpResponse && event.body.success && request.url.endsWith('register')) {
+                    if (event instanceof HttpResponse && request.url.endsWith('register')) {
+                        console.log('register: ', event);
+                        // this.toastrService.success('You have successfully registered and logged in!  - from Angular');
+                        // this.saveToken(event['body']);
+                        this.toastrService.success(event['body']['message']);
+                        this.router.navigate(['/login']);
+                    }
+
+                    if (event instanceof HttpResponse && event.body.success && request.url.endsWith('rackets/create')) {
                         console.log('create Furniture: ', event);
                         this.toastrService.success(event['body']['message']);
-                        this.router.navigate(['/furniture/all']);
+                        this.router.navigate(['/racket/all']);
                     }
 
                     if (event instanceof HttpResponse && event.body.success && request.url.indexOf('edit') > -1) {
                         console.log('edit Furniture: ', event);
                         this.toastrService.success(event['body']['message']);
-                        this.router.navigate(['/furniture/my']);
+                        this.router.navigate(['/racket/all']);
                     }
                 }));
     }
 
     saveToken(data) {
+        debugger;
+        console.log('saveToken: ', '########################');
+        const token = data.split(' ')[1];
+
         localStorage.setItem('currentUser', JSON.stringify({
-            user: data['userData'],
-            token: data['token'],
-            isAdmin: data['userData']['isAdmin']
-        },
-            null,
-            4));
-        this.toastrService.success(data['message']);
+            token,
+            isAdmin: true,
+            username: 'pesho'
+        }));
+        // localStorage.setItem('currentUser', JSON.stringify({
+        //     user: data,
+        //     token: data['token'],
+        //     isAdmin: data['userData']['isAdmin']
+        // },
+        //     null,
+        //     4));
+        this.toastrService.success('You have successfully logged in! - from Angular');
+        // this.toastrService.success(data['message']);
         this.router.navigate(['/home']);
     }
+
+    // saveToken(data) {
+    //     debugger;
+    //     console.log('saveToken: ', '########################');
+    //     localStorage.setItem('currentUser', JSON.stringify({
+    //         user: data['userData'],
+    //         token: data['token'],
+    //         isAdmin: data['userData']['isAdmin']
+    //     },
+    //         null,
+    //         4));
+    //     this.toastrService.success(data['message']);
+    //     this.router.navigate(['/home']);
+    // }
 }

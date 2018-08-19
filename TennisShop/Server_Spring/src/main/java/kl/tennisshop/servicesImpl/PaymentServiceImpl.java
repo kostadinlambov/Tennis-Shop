@@ -1,6 +1,6 @@
 package kl.tennisshop.servicesImpl;
 
-import kl.tennisshop.entities.Payment;
+import kl.tennisshop.domain.entities.Payment;
 import kl.tennisshop.repositories.PaymentRepository;
 import kl.tennisshop.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

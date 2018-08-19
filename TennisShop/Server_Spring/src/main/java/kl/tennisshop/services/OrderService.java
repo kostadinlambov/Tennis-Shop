@@ -1,6 +1,6 @@
 package kl.tennisshop.services;
 
-import kl.tennisshop.entities.Order;
+import kl.tennisshop.domain.entities.Order;
 
 public interface OrderService {
 

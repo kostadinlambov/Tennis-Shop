@@ -1,16 +1,20 @@
 package kl.tennisshop.services;
 
 
-import kl.tennisshop.entities.Category;
-import kl.tennisshop.entities.Racket;
-import kl.tennisshop.models.bindingModels.racket.AddRacketDto;
-import kl.tennisshop.models.viewModels.racket.RacketViewModel;
+import kl.tennisshop.domain.entities.Category;
+import kl.tennisshop.domain.entities.Racket;
+import kl.tennisshop.domain.models.bindingModels.racket.RacketCreateBindingModel;
+import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
 
 import java.util.List;
 
-public interface RacketService  {
+public interface RacketService {
 
-    Racket persist(AddRacketDto addRacketDto);
+    Racket persist(RacketCreateBindingModel addRacketDto);
+
+    boolean saveRacket(RacketServiceModel racketServiceModel);
+
+    boolean updateRacket(RacketServiceModel racketServiceModel);
 
     void persistRacket(Racket racket);
 
@@ -18,8 +22,9 @@ public interface RacketService  {
 
     Racket getByName(String name);
 
-    List<RacketViewModel> getAll();
+    Racket getFirstRacketByName(String name);
 
+    List<RacketServiceModel> getAllRackets();
 
-
+    RacketServiceModel getById(String id);
 }

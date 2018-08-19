@@ -29,7 +29,7 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  expand() {
+  expand1() {
     this.dropdownLi.endsWith('show')
       ? this.dropdownLi = 'nav-item dropdown'
       : this.dropdownLi = 'nav-item dropdown show';

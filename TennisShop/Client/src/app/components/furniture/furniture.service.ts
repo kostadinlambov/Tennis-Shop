@@ -9,6 +9,7 @@ import { CreateFurnitureModel } from './models/create.model';
 const createUrl = 'http://localhost:5000/furniture/create';
 const getAllUrl = 'http://localhost:5000/furniture/all';
 const myFurnitureUrl = 'http://localhost:5000/furniture/my';
+const springTestUrl = 'http://localhost:8000/rackets';
 
 
 
@@ -62,4 +63,8 @@ export class FurnitureService {
     //     const editfurnitureByIdUrl = `http://localhost:5000/furniture/edit/${id}`
     //     return this.http.put<DetailsFurnitureModel>(editfurnitureByIdUrl, body);
     // }
+
+    getAllSpringTest(): Observable<DetailsFurnitureModel[]> {
+        return this.http.get<DetailsFurnitureModel[]>(springTestUrl);
+    }
 }

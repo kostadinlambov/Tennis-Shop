@@ -1,11 +1,10 @@
 package kl.tennisshop.services;
 
-import kl.tennisshop.entities.Role;
-import org.springframework.stereotype.Service;
+import kl.tennisshop.domain.entities.UserRole;
 
 
 public interface RoleService {
-    void persist(Role role);
+    void persist(UserRole role);
 
-    Role getByName(String name);
+    UserRole getByName(String name);
 }

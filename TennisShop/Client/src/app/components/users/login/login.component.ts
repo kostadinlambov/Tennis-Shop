@@ -21,8 +21,8 @@ success: boolean = true;
   login() {
     this.userService.login(this.user)
     .subscribe(
-      data => {
-        // console.log(data);
+      data =>   {
+        console.log('login data: ', data);
         // this.message = res['message'];
         // this.success = res['success'];
         // this.toastrService.success(data['message']);
@@ -30,7 +30,7 @@ success: boolean = true;
         // this.router.navigate(['/home']);
       },
       err => {
-        // console.log(err);
+        console.log('err: ', err);
         // this.message = err.error['message'];
         // this.success = err['success'];
         // this.toastrService.error(err.error['message']);

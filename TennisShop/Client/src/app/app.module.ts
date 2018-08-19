@@ -11,6 +11,7 @@ import { CustomFormsModule } from 'ng5-validation';
 import { UserModule } from './components/users/users.module';
 import { PagesModule } from './components/pages/pages.module';
 import { SharedModule } from './components/shared/shared.module';
+import { RacketModule } from './components/rackets/racket.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -24,10 +25,19 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutesModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
+    // ToastrModule.forRoot({
+    //   enableHtml: true,
+    //   easing: 'ease-in',
+    //   progressBar: true,
+    //   preventDuplicates: true,
+    // })
     HttpClientModule,
     CoreModule,
     UserModule,
+    RacketModule,
     PagesModule,
     FurnitureModule,
     CustomFormsModule,
