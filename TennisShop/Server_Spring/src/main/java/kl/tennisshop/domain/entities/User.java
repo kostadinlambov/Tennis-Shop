@@ -78,7 +78,7 @@ public class User implements UserDetails {
     @Override
 //    @Pattern(regexp = "^([a-zA-Z0-9]+)$")
 //    @Size(min = 4, max = 16, message = INVALID_USERNAME_MESSAGE)
-    @Column(nullable = false, name = "username", unique = true)
+    @Column(nullable = false, name = "username", unique = true, columnDefinition = "VARCHAR(50) BINARY")
     public String getUsername() {
         return this.username;
     }
@@ -88,7 +88,7 @@ public class User implements UserDetails {
     }
 
 //    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",message = INVALID_EMAIL_MESSAGE)
-    @Column(nullable = false, name = "email", unique = true)
+    @Column(nullable = false, name = "email", unique = true, columnDefinition = "VARCHAR(50) BINARY")
     public String getEmail() {
         return this.email;
     }
@@ -176,7 +176,7 @@ public class User implements UserDetails {
         isDeleted = deleted;
     }
 
-
+    @Column(name = "address", nullable = false)
     public String getAddress() {
         return this.address;
     }
@@ -185,6 +185,7 @@ public class User implements UserDetails {
         this.address = address;
     }
 
+    @Column(name = "city", nullable = false)
     public String getCity() {
         return this.city;
     }

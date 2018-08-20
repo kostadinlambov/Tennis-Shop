@@ -1,34 +1,21 @@
 package kl.tennisshop.domain.models.bindingModels.user;
 
-import kl.tennisshop.validations.Password;
+import kl.tennisshop.utils.constants.ValidationMessageConstants;
 import kl.tennisshop.validations.PasswordMatching;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @PasswordMatching
 public class UserUpdateBindingModel implements Serializable {
-    private static final String INVALID_EMAIL_MESSAGE = "Invalid e-mail address.";
-    private static final String INVALID_USERNAME_MESSAGE = "Username should be at least 4 and maximum 16 characters long.";
-    private static final String INVALID_FIRST_NAME_MESSAGE = "First Name must start with a capital letter and must contain only letters.";
-    private static final String INVALID_LAST_NAME_MESSAGE = "Last Name must start with a capital letter and must contain only letters.";
-
     private String id;
-
-    @Pattern(regexp = "^([a-zA-Z0-9]+)$")
-    @Size(min = 4, max = 16, message = INVALID_USERNAME_MESSAGE)
     private String username;
-
-    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",message = INVALID_EMAIL_MESSAGE)
     private String email;
-
-    @Pattern(regexp = "^[A-Z]([a-zA-Z]+)?$", message = INVALID_FIRST_NAME_MESSAGE)
     private String firstName;
-
-    @Pattern(regexp = "^[A-Z]([a-zA-Z]+)?$", message = INVALID_LAST_NAME_MESSAGE)
     private String lastName;
-
     private String address;
     private String city;
 
@@ -42,14 +29,6 @@ public class UserUpdateBindingModel implements Serializable {
     public UserUpdateBindingModel() {
     }
 
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getId() {
         return this.id;
     }
@@ -58,6 +37,17 @@ public class UserUpdateBindingModel implements Serializable {
         this.id = id;
     }
 
+    @Pattern(regexp = "^([a-zA-Z0-9]+)$")
+    @Size(min = 4, max = 16, message = ValidationMessageConstants.USER_INVALID_USERNAME_MESSAGE)
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",message = ValidationMessageConstants.USER_INVALID_EMAIL_MESSAGE)
     public String getEmail() {
         return this.email;
     }
@@ -70,10 +60,12 @@ public class UserUpdateBindingModel implements Serializable {
         return this.firstName;
     }
 
+    @Pattern(regexp = "^[A-Z]([a-zA-Z]+)?$", message = ValidationMessageConstants.USER_INVALID_FIRST_NAME_MESSAGE)
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    @Pattern(regexp = "^[A-Z]([a-zA-Z]+)?$", message = ValidationMessageConstants.USER_INVALID_LAST_NAME_MESSAGE)
     public String getLastName() {
         return this.lastName;
     }
@@ -82,6 +74,8 @@ public class UserUpdateBindingModel implements Serializable {
         this.lastName = lastName;
     }
 
+    @NotNull(message = ValidationMessageConstants.USER_ADDRESS_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.USER_ADDRESS_REQUIRED_MESSAGE)
     public String getAddress() {
         return this.address;
     }
@@ -90,6 +84,8 @@ public class UserUpdateBindingModel implements Serializable {
         this.address = address;
     }
 
+    @NotNull(message = ValidationMessageConstants.USER_CITY_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.USER_CITY_REQUIRED_MESSAGE)
     public String getCity() {
         return this.city;
     }

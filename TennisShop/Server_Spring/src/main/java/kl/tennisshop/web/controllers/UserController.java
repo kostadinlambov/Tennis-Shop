@@ -1,17 +1,19 @@
 package kl.tennisshop.web.controllers;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kl.tennisshop.domain.models.bindingModels.user.UserLoginBindingModel;
 import kl.tennisshop.domain.models.bindingModels.user.UserRegisterBindingModel;
 import kl.tennisshop.domain.models.bindingModels.user.UserUpdateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.UserServiceModel;
+import kl.tennisshop.domain.models.viewModels.racket.RacketAllViewModel;
+import kl.tennisshop.domain.models.viewModels.user.UserAllViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserCreateViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserDeleteViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserLoginViewModel;
+import kl.tennisshop.utils.constants.ResponseMessageConstants;
 import kl.tennisshop.utils.responseHandler.exceptions.BadRequestException;
+import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
 import kl.tennisshop.utils.responseHandler.exceptions.UserNotFoundException;
 import kl.tennisshop.services.UserService;
 import kl.tennisshop.utils.responseHandler.successResponse.SuccessResponse;
@@ -23,10 +25,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -50,7 +52,7 @@ public class UserController {
 
         if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
 //            throw new IllegalArgumentException("Passwords do not match.");
-            throw new BadRequestException("Passwords do not match.");
+            throw new BadRequestException(ResponseMessageConstants.PASSWORDS_MISMATCH_ERROR_MESSAGE);
 //            return ResponseEntity.badRequest().body("Error: Passwords do not match!");
         }
 
@@ -60,7 +62,7 @@ public class UserController {
         if (user != null) {
             SuccessResponse successResponse = new SuccessResponse(
                     new Date(),
-                    "You have been successfully registered.",
+                    ResponseMessageConstants.SUCCESSFUL_REGISTER_MESSAGE,
                     savedUser,
                     true);
 
@@ -70,28 +72,12 @@ public class UserController {
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
         }
 
-        throw new IllegalStateException(SERVER_ERROR_MESSAGE);
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //        ResponseEntity.badRequest().body(new ExceptionResponse())
     }
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<Object> loginUser(@Validated @RequestBody UserLoginBindingModel userLoginBindingModel) {
-
-        UserLoginViewModel user = this.userService.loginUser(userLoginBindingModel);
-        String message = "You have successfully logged in!";
-
-//        Map<String, Object> responseBodyMap = new HashMap<>();
-//        responseBodyMap
-
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Incorrect email or password", HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PutMapping(value = "update")
+    @PutMapping(value = "/update")
     public ResponseEntity<Object> updateUser(@RequestBody UserUpdateBindingModel userUpdateBindingModel) {
         UserServiceModel user = modelMapper.map(userUpdateBindingModel, UserServiceModel.class);
 
@@ -100,13 +86,13 @@ public class UserController {
             return new ResponseEntity<>(savedUser, HttpStatus.OK);
         }
 
-        throw new IllegalStateException("Server Error");
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
 
 //        return this.userService.updateUser(user);
 
     }
 
-    @DeleteMapping(value = "delete/{email}")
+    @DeleteMapping(value = "/delete/{email}")
     public ResponseEntity<Object> deleteUser(@PathVariable String email) {
 
         UserDeleteViewModel user = this.userService.deleteUserByEmail(email);
@@ -119,17 +105,66 @@ public class UserController {
 //        return new ResponseEntity<>("User not found!", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(value = "all")
-    public ResponseEntity<List<UserCreateViewModel>> getAllUsers() {
+    @GetMapping(value = "/all")
+    public List<UserAllViewModel> getAllUsers() {
+        return this.userService
+                .getAllUsers()
+                .stream()
+                .map(x -> {
+                    UserAllViewModel userAllViewModel = this.modelMapper.map(x, UserAllViewModel.class);
+                    userAllViewModel.setRole(x.extractAuthority());
+                    return userAllViewModel;
+                })
+                .collect(Collectors.toList());
 
-        List<UserCreateViewModel> allUsers = this.userService.getAllUsers();
-        return new ResponseEntity<List<UserCreateViewModel>>(allUsers, HttpStatus.OK);
+    }
 
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add("header1", "new value 1");
-////        httpHeaders.add("header2", "new value 2");
 
-//        return new ResponseEntity<List<UserCreateViewModel>>(allUsers, httpHeaders, HttpStatus.OK);
+    @PostMapping(value = "/promote")
+    public ResponseEntity promoteUser(@RequestParam(name = "id") String id) throws JsonProcessingException {
+        boolean resultOfPromoting = this.userService.promoteUser(id);
+
+        if (resultOfPromoting) {
+            SuccessResponse successResponse = new SuccessResponse(
+                    new Date(),
+                    ResponseMessageConstants.SUCCESSFUL_REGISTER_MESSAGE,
+                    "User promoted successfully!",
+                    true);
+            return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+        }
+        throw new CustomException("Failure promoting user!");
+    }
+
+    @PostMapping(value = "/demote")
+    public ResponseEntity demoteUser(@RequestParam(name = "id") String id) throws JsonProcessingException {
+        boolean resultOfDemoting = this.userService.demoteUser(id);
+
+        if (resultOfDemoting) {
+            SuccessResponse successResponse = new SuccessResponse(
+                    new Date(),
+                    ResponseMessageConstants.SUCCESSFUL_REGISTER_MESSAGE,
+                    "User demoted successfully!",
+                    true);
+            return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+        }
+        throw new CustomException("Failure promoting user!");
+    }
+
+
+    // TODO: Delete all login method in User Controller, Service and Repository
+    @PostMapping(value = "/login")
+    public ResponseEntity<Object> loginUser(@Validated @RequestBody UserLoginBindingModel userLoginBindingModel) throws JsonProcessingException {
+        UserLoginViewModel user = this.userService.loginUser(userLoginBindingModel);
+
+//        if (user != null) {
+        SuccessResponse successResponse = new SuccessResponse(
+                new Date(),
+                ResponseMessageConstants.SUCCESSFUL_LOGIN_MESSAGE,
+                user,
+                true);
+        return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+//        }
+//        throw new CustomException(ResponseMessageConstants.INVALID_CREDENTIALS_ERROR_MESSAGE);
     }
 
 

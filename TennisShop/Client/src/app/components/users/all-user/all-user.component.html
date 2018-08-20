@@ -1,0 +1,38 @@
+<h1 class="text-center display-3">All Users</h1>
+<hr class="display-3" />
+<table class="table table-hover  mt-3 w-80 mx-auto ">
+  <thead>
+    <tr class="row">
+      <th class="col-md-1" scope="col">#</th>
+      <th class="col-md-5" scope="col">Username</th>
+      <th class="col-md-3" scope="col">Role</th>
+      <th class="col-md-3" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="row" *ngFor="let item of allUsers | async; index as i">
+      <td class="col-md-1" scope="col">
+        <h5>{{i+1}}</h5>
+      </td>
+      <td class="col-md-5" scope="col">
+        <h5>{{item.username}}</h5>
+      </td>
+      <td class="col-md-3" scope="col">
+        <h5>{{item.role}}</h5>
+      </td>
+      <td class="col-md-3 d-flex justify-content-between" scope="col" >
+        <h5>
+          <button id="refresh-users-button" class="btn btn-success" (click) = "promote(item.id)" *ngIf="!isRoot(item.role) && !isLoggedInUser(item.username)">Promote</button>
+        </h5>
+        <h5>
+          <button id="refresh-users-button" class="btn btn-warning" (click) = "demote(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Demote</button>
+        </h5>
+      </td>
+    </tr>
+
+  </tbody>
+  <div class="d-flex justify-content-center">
+    <button id="refresh-users-button" class="btn btn-secondary">Refresh</button>
+  </div>
+</table>

@@ -13,12 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserServiceModel implements Serializable {
-
-    private static final String INVALID_EMAIL_MESSAGE = "Invalid e-mail address.";
-    private static final String INVALID_USERNAME_MESSAGE = "Username should be at least 4 and maximum 16 characters long.";
-    private static final String INVALID_FIRST_NAME_MESSAGE = "First Name must start with a capital letter and must contain only letters.";
-    private static final String INVALID_LAST_NAME_MESSAGE = "Last Name must start with a capital letter and must contain only letters.";
-
     private String id;
     private String email;
     private String password;
@@ -26,15 +20,10 @@ public class UserServiceModel implements Serializable {
     private String lastName;
     private String address;
     private String city;
-
     private String username;
-
     private boolean isAccountNonExpired;
-
     private boolean isAccountNonLocked;
-
     private boolean isCredentialsNonExpired;
-
     private boolean isEnabled;
 
     private Set<UserRole> authorities;
@@ -58,7 +47,6 @@ public class UserServiceModel implements Serializable {
         this.payments = new HashSet<>();
         this.feedbackSet = new HashSet<>();
     }
-
 
     public String getId() {
         return this.id;
@@ -195,6 +183,14 @@ public class UserServiceModel implements Serializable {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    public String extractAuthority() {
+        return this.getAuthorities()
+                .stream()
+                .findFirst()
+                .orElse(null)
+                .getAuthority();
     }
 
 }

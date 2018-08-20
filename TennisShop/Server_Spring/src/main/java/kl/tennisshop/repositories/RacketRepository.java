@@ -18,6 +18,5 @@ public interface RacketRepository extends JpaRepository<Racket, String> {
 
         Racket findFirstByName(String name);
 
-
-
+        Racket deleteRacketById(String id);
 }

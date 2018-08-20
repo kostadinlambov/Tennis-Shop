@@ -4,15 +4,18 @@ import kl.tennisshop.domain.entities.UserRole;
 import kl.tennisshop.domain.models.bindingModels.user.UserLoginBindingModel;
 import kl.tennisshop.domain.models.bindingModels.user.UserUpdateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.UserServiceModel;
+import kl.tennisshop.domain.models.viewModels.user.UserAllViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserCreateViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserDeleteViewModel;
 import kl.tennisshop.domain.models.viewModels.user.UserLoginViewModel;
+import kl.tennisshop.utils.constants.ResponseMessageConstants;
 import kl.tennisshop.utils.modelMapper.ModelMapperConfig;
 import kl.tennisshop.domain.entities.User;
 import kl.tennisshop.domain.models.bindingModels.user.UserRegisterBindingModel;
 import kl.tennisshop.repositories.RoleRepository;
 import kl.tennisshop.repositories.UserRepository;
 import kl.tennisshop.services.UserService;
+import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -62,11 +66,12 @@ public class UserServiceImpl implements UserService {
         UserRole rootRole = this.roleRepository.findByAuthority("ROOT");
         Set<UserRole> roles = new HashSet<>();
         if (this.userRepository.findAll().isEmpty()) {
-            roles.add(adminRole);
             roles.add(rootRole);
+//            roles.add(moderatorRole);
+        }else{
+            roles.add(userRole);
         }
 
-        roles.add(userRole);
         userEntity.setAuthorities(roles);
 
         User user = this.userRepository.saveAndFlush(userEntity);
@@ -127,62 +132,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLoginBindingModel login(String email, String password) {
-        User user = this.userRepository.findByEmailAndPassword(email, password);
-        UserLoginBindingModel loggedInUserDto = null;
-        if (user != null) {
-            loggedInUserDto = ModelMapperConfig.getInstance().map(user, UserLoginBindingModel.class);
-        }
-
-        return loggedInUserDto;
-    }
-
-    @Override
-    public UserLoginViewModel loginUser(UserLoginBindingModel userLoginBindingModel) {
-//        User user = this.userRepository.findByEmail(userLoginBindingModel.getEmail());
-        User user = this.userRepository
-                .findByUsername(userLoginBindingModel.getUsername())
-                .orElse(null);
-
-
-        if (user != null) {
-            String enteredPassword = this.bCryptPasswordEncoder.encode(userLoginBindingModel.getPassword());
-
-            if (user.getPassword().equals(enteredPassword)) {
-                return this.modelMapper.map(user, UserLoginViewModel.class);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public List<UserCreateViewModel> getAllUsers() {
-        List<User> users = this.userRepository.findAll();
-        List<UserCreateViewModel> usersViewModelList = new ArrayList<>();
-
-//        for (User user : users) {
-//            UserCreateViewModel  mappedUser = this.modelMapper.map(user, UserCreateViewModel.class);
-//            Set<String> roleSet = new HashSet<>();
-//            for (UserRole role : user.getAuthorities()) {
-//                String roleName = role.getAuthority();
-//                roleSet.add(roleName);
-//            }
-//            mappedUser.setRoleName(roleSet);
-//            usersViewModelList.add(mappedUser);
-//        }
-
-        for (User user : users) {
-            UserCreateViewModel mappedUser = this.modelMapper.map(user, UserCreateViewModel.class);
-            Set<String> roleSet = new HashSet<>();
-            for (UserRole role : user.getAuthorities()) {
-                String roleName = role.getAuthority();
-                roleSet.add(roleName);
-            }
-            mappedUser.setRoles(roleSet);
-            usersViewModelList.add(mappedUser);
-        }
-
-        return usersViewModelList;
+    public List<UserServiceModel> getAllUsers() {
+        return this.userRepository
+                .findAll()
+                .stream()
+                .map(x -> this.modelMapper.map(x, UserServiceModel.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -227,4 +182,104 @@ public class UserServiceImpl implements UserService {
 //
 //        this.userRepository.save(user);
 //    }
+
+    public boolean promoteUser(String id) {
+        User user = this.userRepository
+                .findById(id)
+                .orElse(null);
+
+        if(user == null) return false;
+
+        String userAuthority = this.getUserAuthority(user.getId());
+
+        switch (userAuthority) {
+            case "USER":
+                user.setAuthorities(this.getAuthorities("ADMIN"));
+                break;
+//            case "ADMIN":
+//                user.setAuthorities(this.getAuthorities("ROOT"));
+//                break;
+            default:
+                throw new CustomException("There is no role, higher than Admin");
+        }
+
+        this.userRepository.saveAndFlush(user);
+        return true;
+    }
+
+    @Override
+    public boolean demoteUser(String id) {
+        User user = this.userRepository
+                .findById(id)
+                .orElse(null);
+
+        if(user == null) return false;
+
+        String userAuthority = this.getUserAuthority(user.getId());
+
+        switch (userAuthority) {
+//            case "ROOT":
+//                user.setAuthorities(this.getAuthorities("ADMIN"));
+//                break;
+            case "ADMIN":
+                user.setAuthorities(this.getAuthorities("USER"));
+                break;
+            default:
+                throw new CustomException("There is no role, lower than USER");
+        }
+
+        this.userRepository.saveAndFlush(user);
+        return true;
+    }
+
+    private Set<UserRole> getAuthorities(String authority) {
+        Set<UserRole> userAuthorities = new HashSet<>();
+
+        userAuthorities.add(this.roleRepository.getByAuthority(authority));
+
+        return userAuthorities;
+    }
+
+    private String getUserAuthority(String userId) {
+        return this
+                .userRepository
+                .findById(userId)
+                .get()
+                .getAuthorities()
+                .stream()
+                .findFirst()
+                .get()
+                .getAuthority();
+    }
+
+
+    // TODO: Delete all login method in User Controller, Service and Repository
+    @Override
+    public UserLoginBindingModel login(String email, String password) {
+        User user = this.userRepository.findByEmailAndPassword(email, password);
+        UserLoginBindingModel loggedInUserDto = null;
+        if (user != null) {
+            loggedInUserDto = ModelMapperConfig.getInstance().map(user, UserLoginBindingModel.class);
+        }
+
+        return loggedInUserDto;
+    }
+
+    // TODO: Delete all login method in User Controller, Service and Repository
+    @Override
+    public UserLoginViewModel loginUser(UserLoginBindingModel userLoginBindingModel) {
+//        User user = this.userRepository.findByEmail(userLoginBindingModel.getEmail());
+        User user = this.userRepository
+                .findByUsername(userLoginBindingModel.getUsername())
+                .orElse(null);
+
+        if (user != null) {
+            String enteredPassword = this.bCryptPasswordEncoder.encode(userLoginBindingModel.getPassword());
+
+            if (user.getPassword().equals(enteredPassword)) {
+                return this.modelMapper.map(user, UserLoginViewModel.class);
+            }
+        }
+        throw new CustomException(ResponseMessageConstants.INVALID_CREDENTIALS_ERROR_MESSAGE);
+    }
 }

@@ -4,13 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kl.tennisshop.domain.models.bindingModels.racket.RacketCreateBindingModel;
 import kl.tennisshop.domain.models.bindingModels.racket.RacketEditBindingModel;
-import kl.tennisshop.domain.models.bindingModels.user.UserUpdateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
-import kl.tennisshop.domain.models.serviceModels.UserServiceModel;
 import kl.tennisshop.domain.models.viewModels.racket.RacketAllViewModel;
 import kl.tennisshop.domain.models.viewModels.racket.RacketDetailsViewModel;
-import kl.tennisshop.domain.models.viewModels.user.UserCreateViewModel;
 import kl.tennisshop.services.RacketService;
+import kl.tennisshop.utils.constants.ResponseMessageConstants;
+import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
 import kl.tennisshop.utils.responseHandler.successResponse.SuccessResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/rackets")
 public class RacketController {
-    private static final String SERVER_ERROR_MESSAGE = "Server Error";
-
     private RacketService racketService;
     private ModelMapper modelMapper;
     private ObjectMapper objectMapper;
@@ -57,11 +54,11 @@ public class RacketController {
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
 //        return ResponseEntity.created(new URI("/rackets/create")).body(result);
         }
-        throw new IllegalStateException(SERVER_ERROR_MESSAGE);
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
 
     @PutMapping(value = "/edit", produces = "application/json")
-    public ResponseEntity updateUser(@RequestBody RacketEditBindingModel racketEditBindingModel) throws JsonProcessingException {
+    public ResponseEntity updateUser(@RequestBody @Valid RacketEditBindingModel racketEditBindingModel) throws JsonProcessingException {
         boolean result = this.racketService.updateRacket(this.modelMapper.map(racketEditBindingModel, RacketServiceModel.class));
 
         if (result) {
@@ -74,7 +71,7 @@ public class RacketController {
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
 //        return ResponseEntity.created(new URI("/rackets/create")).body(result);
         }
-        throw new IllegalStateException(SERVER_ERROR_MESSAGE);
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
 
 
@@ -89,8 +86,22 @@ public class RacketController {
     }
 
     @GetMapping(value = "/details/{id}", produces = "application/json")
-    public @ResponseBody
-    RacketDetailsViewModel getRacketDetails(@PathVariable String id) {
+    public @ResponseBody RacketDetailsViewModel getRacketDetails(@PathVariable String id) {
         return this.modelMapper.map(this.racketService.getById(id), RacketDetailsViewModel.class);
+    }
+
+    @DeleteMapping(value = "/delete/{id}", produces = "application/json")
+    public ResponseEntity deleteRacket(@PathVariable String id) throws JsonProcessingException {
+        boolean result = this.racketService.deleteById(id);
+
+        if (result) {
+            SuccessResponse successResponse = new SuccessResponse(
+                    new Date(),
+                    "Racket have been successfully deleted.",
+                    "",
+                    true);
+            return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+        }
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
 }

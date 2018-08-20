@@ -1,14 +1,22 @@
+
+// Modules
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+// Components
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
+// Services
 import { HttpService } from './services/http.service';
+
+// Guards
 import { AuthGuard } from './guards/auth.guard';
 import { LoginAndRegisterGuard } from './guards/loginAndRegister.guard';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
+
+// Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/token.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
@@ -20,6 +28,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     HttpService,
     AuthGuard,
     LoginAndRegisterGuard,
+    AdminAuthGuard,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: TokenInterceptor,

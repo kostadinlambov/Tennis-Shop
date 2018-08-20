@@ -28,7 +28,7 @@
                     <p>Price: ${{item.price}}</p>
                     <div class="pull-right">
                       <a class="btn btn-info" routerLink="/racket/details/{{item.id}}">Details</a>
-                      <a *ngIf="userService.isAdmin()" routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
+                      <a *ngIf="userService.isAdmin()"  routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
                       <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning m-2">Edit</a>
                     </div>
                   </div>

@@ -1,4 +1,5 @@
 <div class="container ">
+  <!-- <div *ngIf="userService.isAdmin()"> -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" routerLink="/home">Tennis Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -12,7 +13,7 @@
         <li (click)="expand1()" [class]="dropdownLi">
           <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
           <div [class]="dropdownMenu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" routerLink="/furniture/all">All Furniture</a>
+            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/user/all">All Users</a>
             <a class="dropdown-item" routerLink="/furniture/my">My Furniture</a>
             <a class="dropdown-item" routerLink="/furniture/create">Create</a>
           </div>
@@ -21,12 +22,12 @@
 
       <ul class="navbar-nav mr-auto" *ngIf="userService.checkIfLoggedIn()">
 
-          <li (click)="expand1()" [class]="dropdownLi">
-            <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Racket Admin Bar</a>
-            <div [class]="dropdownMenu" aria-labelledby="dropdown02">
-            <a class="dropdown-item" routerLink="/racket/create">Create Racket</a>
+        <li (click)="expand1()" [class]="dropdownLi">
+          <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Racket Admin Bar</a>
+          <div [class]="dropdownMenu" aria-labelledby="dropdown02">
+            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/racket/create">Create Racket</a>
             <a class="dropdown-item" routerLink="/racket/all">All Rackets</a>
-            <a class="dropdown-item" routerLink="/racket/my">My Rackets(Orders)</a>
+            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/racket/my">My Rackets(Orders)</a>
           </div>
         </li>
       </ul>
@@ -37,12 +38,12 @@
           </a>
         </li>
         <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" routerLink="user/register">Register</a>
         </li>
         <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="user/login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
+        <li class="nav-item" *ngIf="userService.isAdmin()">
           <a class="nav-link" routerLink="/racket/create">Create Racket</a>
         </li>
         <!-- <li class="nav-item"> -->
@@ -72,5 +73,7 @@
       </form>
     </div>
   </nav>
+
+  <!-- </div> -->
 
 </div>

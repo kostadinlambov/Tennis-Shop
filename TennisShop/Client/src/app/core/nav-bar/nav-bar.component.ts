@@ -12,6 +12,7 @@ export class NavBarComponent implements OnInit {
   dropdownLi: string = 'nav-item dropdown';
   dropdownMenu: string = 'dropdown-menu';
 
+
   constructor(
     private userService: UsersService,
     private toastrService: ToastrService,
@@ -26,7 +27,7 @@ export class NavBarComponent implements OnInit {
     event.preventDefault();
     localStorage.clear();
     this.toastrService.info('You have been successfully logged out!');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/user/login']);
   }
 
   expand1() {

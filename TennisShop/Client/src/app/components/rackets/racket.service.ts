@@ -31,24 +31,12 @@ export class RacketService {
         return this.http.get<DetailsRacketModel>(baseUrl + `details/${id}`);
     }
 
-    getRacketById(id: string) {
-        return this.http.get<CreateRacketModel>(baseUrl + id);
-    }
+    // getRacketById(id: string) {
+    //     return this.http.get<CreateRacketModel>(baseUrl + id);
+    // }
 
     editRacket(id, data) {
-        console.log('edit data: ', data);
-        const editUrl = baseUrl + `edit`;
-        // const editUrl = baseUrl + `edit/${id}`;
-        // return this.http.put(editUrl, data);
-        return this.http.put(editUrl, data);
-    }
-
-    test(id, data) {
-        console.log('edit data: ', data);
-        const editUrl = baseUrl + `test`;
-        // const editUrl = baseUrl + `edit/${id}`;
-        // return this.http.put(editUrl, data);
-        return this.http.put(editUrl, data);
+        return this.http.put(baseUrl + `edit`, data);
     }
 
 
@@ -56,15 +44,10 @@ export class RacketService {
     //     return this.http.get<DetailsFurnitureModel[]>(myFurnitureUrl);
     // }
 
-    // delete(id) {
-    //     const deleteUrl = `http://localhost:5000/furniture/delete/${id}`;
-    //     return this.http.delete(deleteUrl);
-    // }
-
+    deleteRacket(id) {
+        return this.http.delete(baseUrl + `delete/${id}`);
+    }
     
-
-   
-
     // editFurnitureById(id: string, body: DetailsFurnitureModel) {
     //     const editfurnitureByIdUrl = `http://localhost:5000/furniture/edit/${id}`
     //     return this.http.post<DetailsFurnitureModel>(editfurnitureByIdUrl, body);

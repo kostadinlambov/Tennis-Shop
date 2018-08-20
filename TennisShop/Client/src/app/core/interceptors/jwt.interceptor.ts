@@ -22,14 +22,15 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler)
         : Observable<HttpEvent<any>> {
 
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const token = localStorage.getItem('token');
 
-        if (currentUser && currentUser['token']) {
-            console.log('jwtToken2:', currentUser['token']);
+        if (token) {
+            console.log('jwtToken2:', token);
 
             request = request.clone({
                 setHeaders: {
-                    'Authorization': `Bearer ${currentUser['token']}`,
+                    'Authorization': `Bearer ${token}`,
                 },
             });
         }
@@ -43,7 +44,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     if (event instanceof HttpResponse && request.url.endsWith('login')) {
                         debugger;
                         console.log('login: ', event);
-                        console.log('headeers: ', event.headers);
+                        console.log('headers: ', event.headers);
                         // this.toastrService.success('You have successfully logged in! - from Angular');
                         // this.toastrService.success(event['body']['message']);
 
@@ -58,18 +59,25 @@ export class JwtInterceptor implements HttpInterceptor {
                         // this.toastrService.success('You have successfully registered and logged in!  - from Angular');
                         // this.saveToken(event['body']);
                         this.toastrService.success(event['body']['message']);
-                        this.router.navigate(['/login']);
+                        this.router.navigate(['/user/login']);
                     }
 
                     if (event instanceof HttpResponse && event.body.success && request.url.endsWith('rackets/create')) {
-                        console.log('create Furniture: ', event);
+                        console.log('create Racket: ', event);
                         this.toastrService.success(event['body']['message']);
                         this.router.navigate(['/racket/all']);
                     }
 
-                    if (event instanceof HttpResponse && event.body.success && request.url.indexOf('edit') > -1) {
-                        console.log('edit Furniture: ', event);
-                        this.toastrService.success(event['body']['message']);
+                    if (event instanceof HttpResponse && event.body.success && request.url.indexOf('rackets/edit') > -1) {
+                        console.log('edit Racket: ', event);
+                        this.toastrService.info(event['body']['message']);
+                        this.router.navigate(['/racket/all']);
+                    }
+
+                    if (event instanceof HttpResponse && event.body.success && request.url.indexOf('rackets/delete') > -1) {
+                        debugger;
+                        console.log('delete Racket: ', event);
+                        this.toastrService.info(event['body']['message']);
                         this.router.navigate(['/racket/all']);
                     }
                 }));
@@ -80,11 +88,17 @@ export class JwtInterceptor implements HttpInterceptor {
         console.log('saveToken: ', '########################');
         const token = data.split(' ')[1];
 
-        localStorage.setItem('currentUser', JSON.stringify({
-            token,
-            isAdmin: true,
-            username: 'pesho'
-        }));
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const role = payload['role'];
+        console.log('role: ', role);
+
+        localStorage.setItem('token', token),
+
+        // localStorage.setItem('currentUser', JSON.stringify({
+        //     token,
+        //     isAdmin: true,
+        //     username: 'pesho'
+        // }));
         // localStorage.setItem('currentUser', JSON.stringify({
         //     user: data,
         //     token: data['token'],

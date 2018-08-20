@@ -7,6 +7,7 @@ import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
 import kl.tennisshop.repositories.RacketRepository;
 import kl.tennisshop.services.CategoryService;
 import kl.tennisshop.services.RacketService;
+import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,28 +41,29 @@ public class RacketServiceImpl implements RacketService {
     public boolean saveRacket(RacketServiceModel racketServiceModel) {
 
         Category category = this.categoryService.findByName(racketServiceModel.getCategory().getName());
-        if(category != null){
+        if (category != null) {
             racketServiceModel.setCategory(category);
             Racket racket = this.modelMapper.map(racketServiceModel, Racket.class);
             Racket savedRacket = this.racketRepository.save(racket);
             return savedRacket != null;
         }
-        return false;
 
+        throw new IllegalStateException("Invalid category");
     }
 
     @Override
-    public boolean updateRacket(RacketServiceModel racketServiceModel){
+    public boolean updateRacket(RacketServiceModel racketServiceModel) {
         Racket racketFromDb = this.racketRepository.findById(racketServiceModel.getId()).orElse(null);
-        if(racketFromDb != null) {
+        if (racketFromDb != null) {
 //            return this.saveRacket(racketServiceModel);
             Category category = this.categoryService.findByName(racketServiceModel.getCategory().getName());
-                if(category != null){
-                    racketServiceModel.setCategory(category);
-                    Racket racket = this.modelMapper.map(racketServiceModel, Racket.class);
-                    Racket savedRacket = this.racketRepository.saveAndFlush(racket);
-                    return savedRacket != null;
-                }
+            if (category != null) {
+                racketServiceModel.setCategory(category);
+                Racket racket = this.modelMapper.map(racketServiceModel, Racket.class);
+                Racket savedRacket = this.racketRepository.saveAndFlush(racket);
+                return savedRacket != null;
+            }
+            throw new IllegalStateException("Invalid category");
         }
         return false;
     }
@@ -95,7 +97,7 @@ public class RacketServiceImpl implements RacketService {
         return this.racketRepository
                 .findAll()
                 .stream()
-                .map(x-> this.modelMapper.map(x, RacketServiceModel.class))
+                .map(x -> this.modelMapper.map(x, RacketServiceModel.class))
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -103,14 +105,24 @@ public class RacketServiceImpl implements RacketService {
     public RacketServiceModel getById(String id) {
         Racket racket = this.racketRepository.findById(id).orElse(null);
 
-        if(racket != null){
-          return  this.modelMapper.map(racket, RacketServiceModel.class);
+        if (racket != null) {
+            return this.modelMapper.map(racket, RacketServiceModel.class);
         }
         return null;
     }
 
     @Override
+    public boolean deleteById(String id) {
+        try{
+            this.racketRepository.deleteById(id);
+        }catch (Exception e){
+            throw new CustomException("Racket doesn't exist. +++ from Custom Exception");
+        }
+        return true;
+    }
+
+    @Override
     public Racket getFirstRacketByName(String name) {
-      return  this.racketRepository.findFirstByName(name);
+        return this.racketRepository.findFirstByName(name);
     }
 }

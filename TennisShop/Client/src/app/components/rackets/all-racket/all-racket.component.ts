@@ -23,16 +23,16 @@ export class AllRacketComponent implements OnInit {
   ngOnInit() {
     this.rackets = this.racketService.getAll();
 
-    this.racketService.getAll().subscribe(
-      res => {
-        debugger;
-        console.log('allRackets res: ', res);
-      },
-      err =>{
-        debugger;
-        console.log('allRackets error: ', err);
-      }
-    );
+    // this.racketService.getAll().subscribe(
+    //   res => {
+    //     debugger;
+    //     console.log('allRackets res: ', res);
+    //   },
+    //   err =>{
+    //     debugger;
+    //     console.log('allRackets error: ', err);
+    //   }
+    // );
   }
 
   changePage(page) {

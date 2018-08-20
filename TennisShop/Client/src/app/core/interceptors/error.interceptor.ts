@@ -27,14 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             .pipe(catchError((err: HttpErrorResponse) => {
                 debugger;
                 switch (err.status) {
-                    case 401:
-                        if (err.error.errors) {
-                            for (const e of Object.values(err.error.errors)) {
-                                this.toastrService.error(e.toString(), 'Error!');
-                            }
-                        }
-                        this.toastrService.error(err['error']['message'], 'Error!');
-                        break;
+
                     case 400:
                         console.log('err:', err);
 
@@ -49,15 +42,29 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.toastrService.error(err['error']['message'], 'Error!');
 
                         break;
+                    case 401:
+                        if (err.error.errors) {
+                            for (const e of Object.values(err.error.errors)) {
+                                this.toastrService.error(e.toString(), 'Error!');
+                            }
+                        }
+                        this.toastrService.error(err['error']['message'], 'Error!');
+                        break;
+                    case 403:
+                        this.toastrService.error('Incorrect credentials.', 'Error!');
+                        // this.router.navigate(['/home']);
+                        break;
                     case 404:
                         this.toastrService.error(err['error']['message'], 'Error!');
                         this.router.navigate(['/page-not-found']);
                         break;
+
                     case 500:
                         this.toastrService.error(err['error']['message'], 'Error!');
-                        this.router.navigate(['/server-error']);
+                        // this.router.navigate(['/server-error']);
                         break;
                     default:
+                        // this.toastrService.error('Server error.', 'Error!');
                         this.toastrService.error(err['error']['message'], 'Error!');
                         this.router.navigate(['/page-not-found']);
                         break;

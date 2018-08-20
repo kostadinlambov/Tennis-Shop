@@ -34,12 +34,12 @@
                       name="name"
                       [(ngModel)]="bindingModel.name"
                       #nameField="ngModel"
-                      minlength="4"
+                      minlength="5"
                       required
                       ngModel
                     >
                     <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
-                      <div *ngIf="nameField.errors.minlength">Racket Name must be at least 4 characters long.</div>
+                      <div *ngIf="nameField.errors.minlength">Racket Name must be at least 5 characters long.</div>
                       <div *ngIf="nameField.errors.required">Racket Name is required</div>
                     </div>
               </div>

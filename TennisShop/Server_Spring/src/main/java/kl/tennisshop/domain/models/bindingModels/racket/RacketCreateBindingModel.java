@@ -1,7 +1,12 @@
 package kl.tennisshop.domain.models.bindingModels.racket;
 
-import kl.tennisshop.domain.entities.Category;
+import kl.tennisshop.utils.constants.ValidationMessageConstants;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -33,6 +38,7 @@ public class RacketCreateBindingModel implements Serializable {
         this.categoryName = categoryName;
     }
 
+    @Size(min = 5, message = ValidationMessageConstants.RACKET_INVALID_RACKET_NAME_MESSAGE)
     public String getName() {
         return this.name;
     }
@@ -41,6 +47,7 @@ public class RacketCreateBindingModel implements Serializable {
         this.name = name;
     }
 
+    @Size(min = 10, message = ValidationMessageConstants.RACKET_INVALID_DESCRIPTION_LENGTH_MESSAGE)
     public String getDescription() {
         return this.description;
     }
@@ -49,6 +56,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.description = description;
     }
 
+    @DecimalMin(value = "0", message = ValidationMessageConstants.RACKET_INVALID_PRICE_MESSAGE)
+    @DecimalMax(value = "10000", message = ValidationMessageConstants.RACKET_INVALID_PRICE_MESSAGE)
     public BigDecimal getPrice() {
         return this.price;
     }
@@ -57,6 +66,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.price = price;
     }
 
+    @DecimalMin(value = "0", message = ValidationMessageConstants.RACKET_INVALID_HEAD_SIZE_MESSAGE)
+    @DecimalMax(value = "10000", message = ValidationMessageConstants.RACKET_INVALID_HEAD_SIZE_MESSAGE)
     public BigDecimal getHeadSize() {
         return this.headSize;
     }
@@ -65,6 +76,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.headSize = headSize;
     }
 
+    @DecimalMin(value = "0", message = ValidationMessageConstants.RACKET_INVALID_WEIGHT_MESSAGE)
+    @DecimalMax(value = "10000", message = ValidationMessageConstants.RACKET_INVALID_WEIGHT_MESSAGE)
     public BigDecimal getWeight() {
         return this.weight;
     }
@@ -73,6 +86,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.weight = weight;
     }
 
+    @NotNull(message = ValidationMessageConstants.RACKET_STRING_PATTERN_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.RACKET_STRING_PATTERN_REQUIRED_MESSAGE)
     public String getStringPattern() {
         return this.stringPattern;
     }
@@ -81,6 +96,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.stringPattern = stringPattern;
     }
 
+    @NotNull(message = ValidationMessageConstants.RACKET_MAIN_IMAGE_URL_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.RACKET_MAIN_IMAGE_URL_REQUIRED_MESSAGE)
     public String getMainImageUrl() {
         return this.mainImageUrl;
     }
@@ -105,6 +122,8 @@ public class RacketCreateBindingModel implements Serializable {
         this.thirdImageUrl = thirdImageUrl;
     }
 
+    @NotNull(message = ValidationMessageConstants.RACKET_CATEGORY_NAME_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.RACKET_CATEGORY_NAME_REQUIRED_MESSAGE)
     public String getCategoryName() {
         return this.categoryName;
     }

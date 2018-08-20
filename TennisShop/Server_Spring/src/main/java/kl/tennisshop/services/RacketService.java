@@ -27,4 +27,6 @@ public interface RacketService {
     List<RacketServiceModel> getAllRackets();
 
     RacketServiceModel getById(String id);
+
+    boolean deleteById(String id);
 }
