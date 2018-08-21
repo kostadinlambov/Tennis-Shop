@@ -53,9 +53,15 @@ public class ApplicationSecurityConfiguration
                         "/users/demote",
                         "/users/details",
                         "/users/editDetails",
-                        "/users/update"
+                        "/users/update",
+                        "categories/all",
+                        "categories/allDeleted",
+                        "categories/create",
+                        "categories/edit",
+                        "categories/restore",
+                        "categories/delete"
                 ).hasAnyAuthority("ADMIN", "ROOT")
-                .antMatchers(  "/rackets/delete", "/users/delete").hasAuthority("ROOT")
+                .antMatchers(  "/rackets/delete", "/users/delete", "categories/delete").hasAuthority("ROOT")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), this.mapper))

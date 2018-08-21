@@ -28,6 +28,8 @@ public class UserUpdateBindingModel implements Serializable {
     public UserUpdateBindingModel() {
     }
 
+    @NotNull(message = ValidationMessageConstants.ID_REQUIRED_MESSAGE)
+    @Length(min = 1, message = ValidationMessageConstants.ID_REQUIRED_MESSAGE)
     public String getId() {
         return this.id;
     }

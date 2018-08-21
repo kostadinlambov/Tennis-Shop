@@ -29,6 +29,8 @@ public class Racket {
     private Set<Order> orders;
     private Set<Feedback> feedbackSet;
 
+    private Boolean deleted = false;
+
 //    @Column(name = "quantity", nullable = false)
 //    private Integer quantity;
 
@@ -199,6 +201,14 @@ public class Racket {
         this.stringPattern = stringPattern;
     }
 
+    @Column(name = "deleted", nullable = false , columnDefinition = "BOOLEAN DEFAULT FALSE")
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 //    public Integer getQuantity() {
 //        return this.quantity;
 //    }

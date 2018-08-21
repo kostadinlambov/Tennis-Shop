@@ -14,8 +14,8 @@
           <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
           <div [class]="dropdownMenu" aria-labelledby="dropdown01">
             <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/user/all">All Users</a>
-            <a class="dropdown-item" routerLink="/furniture/my">My Furniture</a>
-            <a class="dropdown-item" routerLink="/furniture/create">Create</a>
+            <a class="dropdown-item" routerLink="/category/all">All Categories</a>
+            <!-- <a class="dropdown-item" routerLink="/furniture/create">Create</a> -->
           </div>
         </li>
       </ul>

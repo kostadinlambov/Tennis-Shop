@@ -10,9 +10,13 @@ public final class ResponseMessageConstants {
     public static final String PASSWORDS_MISMATCH_ERROR_MESSAGE = "Passwords do not match.";
     public static final String INVALID_CREDENTIALS_ERROR_MESSAGE = "Incorrect email or password";
     public static final String INVALID_CATEGORY_ERROR_MESSAGE = "Invalid category.";
+    public static final String CATEGORY_ALREADY_EXISTS_ERROR_MESSAGE = "Category already exists.";
     public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found.";
     public static final String USER_FAILURE_PROMOTING_MESSAGE = "Failure promoting user!";
-    public static final String USER_FAILURE_DEMOTING_MESSAGE = "Failure DEMOTING user!";
+    public static final String USER_FAILURE_DEMOTING_MESSAGE = "Failure demoting user!";
+    public static final String FAILURE_CATEGORY_RESTORE_MESSAGE = "Failure restoring category!";
+    public static final String FAILURE_CATEGORY_DELETE_MESSAGE = "Failure deleting category!";
+    public static final String FAILURE_CATEGORY_EDIT_MESSAGE = "Failure editing category!";
 
     // Successful Response Messages
     public static final String SUCCESSFUL_REGISTER_MESSAGE = "You have been successfully registered.";
@@ -22,6 +26,9 @@ public final class ResponseMessageConstants {
     public static final String SUCCESSFUL_USER_PROMOTED_MESSAGE = "User promoted successfully.";
     public static final String SUCCESSFUL_USER_PROFILE_EDIT_MESSAGE = "User Profile have been successfully edited.";
     public static final String SUCCESSFUL_USER_DELETE_MESSAGE = "User have been successfully deleted.";
-
+    public static final String SUCCESSFUL_CATEGORY_ADDITION_MESSAGE = "Category have been successfully added.";
+    public static final String SUCCESSFUL_CATEGORY_RESTORE_MESSAGE = "Category restored successfully.";
+    public static final String SUCCESSFUL_CATEGORY_DELETE_MESSAGE = "Category deleted successfully.";
+    public static final String SUCCESSFUL_CATEGORY_EDIT_MESSAGE = "Category edited successfully.";
 
 }

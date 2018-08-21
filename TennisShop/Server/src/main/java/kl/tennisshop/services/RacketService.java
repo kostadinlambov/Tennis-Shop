@@ -20,6 +20,8 @@ public interface RacketService {
 
     List<Racket> findAllRacketsByCategory(Category category);
 
+//    List<Racket> getAllNotDeletedCategories();
+
     Racket getByName(String name);
 
     Racket getFirstRacketByName(String name);

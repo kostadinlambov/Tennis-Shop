@@ -7,6 +7,8 @@ public final class ValidationMessageConstants {
     public static final String NOT_NULL_MESSAGE = "May not be null";
     public static final String IS_REQUIRED_MESSAGE = "Field is required.";
     public static final String INVALID_CREDENTIALS_MESSAGE = "Incorrect credentials.";
+    public static final String ID_REQUIRED_MESSAGE = "Id is required.";
+
 
 
     // User Message Constants
@@ -17,6 +19,7 @@ public final class ValidationMessageConstants {
     public static final String USER_INVALID_PASSWORD_MESSAGE = "Invalid Password format.";
     public static final String USER_CITY_REQUIRED_MESSAGE = "City is required.";
     public static final String USER_ADDRESS_REQUIRED_MESSAGE = "Address is required.";
+    public static final String CATEGORY_NAME_REQUIRED_MESSAGE = "Category name is required.";
 
     // Racket Message Constants
     public static final String RACKET_INVALID_RACKET_NAME_MESSAGE = "Racket Name must be at least 5 characters long.";

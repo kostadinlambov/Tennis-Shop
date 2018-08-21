@@ -12,6 +12,7 @@ import java.util.Set;
 @Table(name = "categories", uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class)
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@DynamicUpdate
 public class Category  {
     // Tour rackets
     // Allround rackets
@@ -20,7 +21,11 @@ public class Category  {
 
     private String id;
     private String name;
+    private Boolean deleted = false;
+
     private Set<Racket> rackets;
+
+
 
     public Category() {
         this.rackets = new HashSet<>();
@@ -59,6 +64,20 @@ public class Category  {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Column(name = "deleted", nullable = false , columnDefinition = "BOOLEAN DEFAULT FALSE")
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+
+
+
+
 
     @OneToMany(mappedBy = "category", targetEntity = Racket.class,
             cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

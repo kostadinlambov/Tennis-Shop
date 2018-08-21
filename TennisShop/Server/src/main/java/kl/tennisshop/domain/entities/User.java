@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
     private Set<UserRole> authorities;
-    private Boolean isDeleted = false;
+    private Boolean deleted = false;
 
     private Set<Order> orders;
     private Set<Payment> payments;
@@ -167,14 +167,16 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    @Column(name = "is_deleted")
+    @Column(name = "deleted", nullable = false , columnDefinition = "BOOLEAN DEFAULT FALSE")
     public Boolean getDeleted() {
-        return this.isDeleted;
+        return this.deleted;
     }
 
     public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
+
+
 
     @Column(name = "address", nullable = false)
     public String getAddress() {

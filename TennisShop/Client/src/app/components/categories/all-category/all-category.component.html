@@ -1,0 +1,126 @@
+<div class="container mt-3 w-80 mx-auto ">
+    <h1 class="text-center display-3 mx-auto">Categories</h1>
+  <hr class="display-3" />
+
+  <h1>Add Category</h1>
+
+<form #createForm="ngForm" (ngSubmit)="create(createForm)" class="mb-5 ">
+  <div class="form-group col-md-4 mx-auto ">
+      <div class="form-group">
+      <label for="name">Category Name</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="name"
+          name="name" 
+          [(ngModel)]="category.name"
+          #nameField="ngModel"
+          ngModel
+          required
+      >
+      <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
+        <div *ngIf="nameField.errors.required">Category Name is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <button 
+    type="submit" 
+    class="btn btn-success"
+    [disabled]="!createForm.form.valid">
+    Add Category
+  </button>
+
+</form>
+
+
+  <table class="table table-hover  mt-3 w-80 mx-auto ">
+    <thead>
+      <tr class="row">
+        <th class="col-md-2" scope="col">#</th>
+        <th class="col-md-4" scope="col">Category Name</th>
+        <th class="col-md-6" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="row" *ngFor="let item of allCategories$ | async; index as i">
+        <td class="col-md-2" scope="col">
+          <h5>{{i+1}}</h5>
+        </td>
+        <td class="col-md-4" scope="col">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="name"
+            name="name" 
+            [(ngModel)]="item.name"
+            #nameField="ngModel"
+            ngModel
+            required
+        >
+        <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
+            <div *ngIf="nameField.errors.required">Category Name is required.</div>
+          </div>
+          <!-- <h5>{{item.name}}</h5> -->
+        </td>
+        <td class="col-md-6 d-flex justify-content-center" scope="col">
+
+          <h5>
+            <button class="btn btn-warning m-1"  (click)="editCategory(item.id, item.name)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">edit</button>
+          </h5>
+          <h5>
+            <button class="btn btn-danger m-1" (click)="deleteCategory(item.id, item.name)">Delete</button>
+          </h5>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+<hr class="display-5" />
+
+<h1 class="text-center display-5 mx-auto">Deleted Categories</h1>
+<hr class="display-5" />
+
+  
+  <table class="table table-hover  mt-3 w-80 mx-auto ">
+    <thead>
+      <tr class="row">
+        <th class="col-md-2" scope="col">#</th>
+        <th class="col-md-4" scope="col">Category Name</th>
+        <th class="col-md-6" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="row" *ngFor="let item of allDeletedCategories$ | async; index as i">
+        <td class="col-md-2" scope="col">
+          <h5>{{i+1}}</h5>
+        </td>
+        <td class="col-md-4" scope="col">
+          <h5>{{item.name}}</h5>
+        </td>
+        <td class="col-md-6 d-flex justify-content-center" scope="col">
+
+          <h5>
+            <button class="btn btn-success m-1" (click)="restore(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Restore Category</button>
+          </h5>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  
+
+  <!-- <div class="pull-right">
+  <a class="btn btn-info" routerLink="/racket/details/{{item.id}}">Details</a>
+  <a *ngIf="userService.isAdmin()"  routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
+  <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning m-2">Edit</a>
+</div> -->
+
+
+
+</div> 
+
+
