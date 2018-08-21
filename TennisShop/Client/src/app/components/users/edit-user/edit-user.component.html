@@ -1,0 +1,155 @@
+
+<div class="container" *ngIf="user">
+  <p>{{user | json }}</p>
+
+<!-- <h3 class="alert alert-danger" *ngIf="!success;else successTemplate">{{message}}</h3>
+
+<ng-template #successTemplate>
+  <h3 *ngIf="success&&message" class="alert alert-success">{{message}}</h3>
+</ng-template> -->
+
+<h1 class="mt-5 mb-5">Edit User</h1>
+
+<form #editForm="ngForm" (ngSubmit)="edit(editForm)">
+<div class="form-group">
+    <label for="username">Username</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="username"
+      name="username"
+      [(ngModel)]="user.username"
+      #usernameField="ngModel"
+      minlength = "4"
+      maxlength="16"
+      appUsernameValidator="usernameField"
+      ngModel 
+      required 
+    >
+    <div class="alert alert-danger" *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)">
+      <div *ngIf="usernameField.errors.invalidUsername">Username must contain only letters and digits!</div>
+      <div *ngIf="usernameField.errors.minlength">Username should be at least 4 and maximum 16 characters long.</div>
+      <div *ngIf="usernameField.errors.maxlength">Username should be maximum 16 characters long.</div>
+      <div *ngIf="usernameField.errors.required">Username is required!</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <label for="email">Email Address</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        id="email"
+        name="email" 
+        [(ngModel)]="user.email"
+        #emailField="ngModel"
+        pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+        ngMode
+        required
+        (click)= "inputClick(emailField)"
+      >
+      <div 
+        class="alert alert-danger" *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)">
+          <div *ngIf="emailField.errors.pattern">Invalid e-mail address!</div>
+          <div *ngIf="emailField.errors.required">E-mail is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        id="firstName"
+        name="firstName" 
+        [(ngModel)]="user.firstName"
+        #firstNameField="ngModel"
+        appNamesValidator
+        ngModel
+        required
+    >
+    <div class="alert alert-danger" *ngIf="firstNameField.invalid && (firstNameField.dirty || firstNameField.touched)">
+      <div *ngIf="firstNameField.errors.invalidName">First Name must start with a capital letter and must contain only letters.</div>
+      <div *ngIf="firstNameField.errors.required">First Name is required.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        id="lastName"
+        name="lastName" 
+        [(ngModel)]="user.lastName"
+        #lastNameField="ngModel"
+        appNamesValidator
+        ngModel
+        required
+    >
+    <div class="alert alert-danger" *ngIf="lastNameField.invalid && (lastNameField.dirty || lastNameField.touched)">
+      <div *ngIf="lastNameField.errors.invalidName">Last Name must start with a capital letter and must contain only letters.</div>
+      <div *ngIf="lastNameField.errors.required">Last Name is required.</div>
+    </div>
+  </div>
+
+  
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        id="address"
+        name="address" 
+        [(ngModel)]="user.address"
+        #addressField="ngModel"
+        ngModel
+        required
+    >
+    <!-- <div class="alert alert-danger" [hidden]="emailField.valid || emailField.pristine ">E-mail is required!</div> -->
+
+    <div class="alert alert-danger" *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)">
+      <div *ngIf="addressField.errors.required">Address is required.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="city">City</label>
+    <input 
+        type="text" 
+        class="form-control" 
+        id="city"
+        name="city" 
+        [(ngModel)]="user.city"
+        #cityField="ngModel"
+        ngModel
+        required
+    >
+    <!-- <div class="alert alert-danger" [hidden]="emailField.valid || emailField.pristine ">E-mail is required!</div> -->
+
+    <div class="alert alert-danger" *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)">
+      <div *ngIf="cityField.errors.required">City is required.</div>
+    </div>
+  </div>
+
+
+    <div class="d-flex justify-content-center ">
+        <button 
+          type="submit" 
+          class="btn btn-warning m-2"
+          routerLink="/user/edit/{{user.id}}"
+          [disabled]="!editForm.form.valid ||  password?.value !== confirmPassword?.value">
+          Edit User
+        </button>
+
+        <button
+            type="button" 
+            class="btn btn-info m-2" 
+            routerLink="/home">
+            Cancel
+        </button> 
+      </div>
+
+  </form>
+</div>  
+

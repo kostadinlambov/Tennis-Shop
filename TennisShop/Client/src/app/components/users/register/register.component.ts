@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterUser } from './register-user.model';
+import { RegisterUser } from '../models/register-user.model';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';

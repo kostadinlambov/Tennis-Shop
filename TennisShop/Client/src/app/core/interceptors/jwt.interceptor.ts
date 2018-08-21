@@ -40,26 +40,24 @@ export class JwtInterceptor implements HttpInterceptor {
                 (event: HttpEvent<any>) => {
                     console.log('event: ', event);
                     debugger;
-                    // if (event instanceof HttpResponse && event.body.token && request.url.endsWith('login')) {
                     if (event instanceof HttpResponse && request.url.endsWith('login')) {
                         debugger;
                         console.log('login: ', event);
                         console.log('headers: ', event.headers);
-                        // this.toastrService.success('You have successfully logged in! - from Angular');
-                        // this.toastrService.success(event['body']['message']);
-
-
                         this.saveToken(event['body']);
-                        // this.router.navigate(['/furniture/all']);
+                        // this.router.navigate(['/home']);
                     }
 
-                    // if (event instanceof HttpResponse && event.body.success && request.url.endsWith('register')) {
                     if (event instanceof HttpResponse && request.url.endsWith('register')) {
                         console.log('register: ', event);
-                        // this.toastrService.success('You have successfully registered and logged in!  - from Angular');
-                        // this.saveToken(event['body']);
                         this.toastrService.success(event['body']['message']);
                         this.router.navigate(['/user/login']);
+                    }
+
+                    if (this.checkUrl(event, request)) {
+                        console.log('Event : ', event);
+                        this.toastrService.info(event['body']['message']);
+                        // this.router.navigate(['home']);
                     }
 
                     if (event instanceof HttpResponse && event.body.success && request.url.endsWith('rackets/create')) {
@@ -81,6 +79,19 @@ export class JwtInterceptor implements HttpInterceptor {
                         this.router.navigate(['/racket/all']);
                     }
                 }));
+    }
+
+    checkUrl(event, request) {
+        const promoteUrl = request.url.indexOf('users/promote') > -1;
+        const demoteUrl = request.url.indexOf('users/demote') > -1;
+        const updateUrl = request.url.indexOf('users/update') > -1;
+        const deleteUrl = request.url.indexOf('users/delete') > -1;
+
+        if (event instanceof HttpResponse && event.body.success && (promoteUrl || demoteUrl || updateUrl || deleteUrl)) {
+            return true;
+        }
+
+        return false;
     }
 
     saveToken(data) {
@@ -106,22 +117,9 @@ export class JwtInterceptor implements HttpInterceptor {
         // },
         //     null,
         //     4));
-        this.toastrService.success('You have successfully logged in! - from Angular');
+        this.toastrService.success('You have successfully logged in.');
         // this.toastrService.success(data['message']);
         this.router.navigate(['/home']);
     }
 
-    // saveToken(data) {
-    //     debugger;
-    //     console.log('saveToken: ', '########################');
-    //     localStorage.setItem('currentUser', JSON.stringify({
-    //         user: data['userData'],
-    //         token: data['token'],
-    //         isAdmin: data['userData']['isAdmin']
-    //     },
-    //         null,
-    //         4));
-    //     this.toastrService.success(data['message']);
-    //     this.router.navigate(['/home']);
-    // }
 }

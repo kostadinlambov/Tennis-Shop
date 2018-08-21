@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AllUserModel } from './all-user.model';
+import { AllUserModel } from '../models/all-user.model';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 

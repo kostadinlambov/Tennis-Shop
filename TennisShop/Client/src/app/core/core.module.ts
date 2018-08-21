@@ -9,7 +9,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 // Services
 import { HttpService } from './services/http.service';
-import { UsersService } from './../components/users/users.service';
+import { UsersService } from '../components/users/users.service';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';

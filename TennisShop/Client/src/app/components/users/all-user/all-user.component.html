@@ -4,9 +4,9 @@
   <thead>
     <tr class="row">
       <th class="col-md-1" scope="col">#</th>
-      <th class="col-md-5" scope="col">Username</th>
+      <th class="col-md-3" scope="col">Username</th>
       <th class="col-md-3" scope="col">Role</th>
-      <th class="col-md-3" scope="col">Actions</th>
+      <th class="col-md-5" scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -15,24 +15,31 @@
       <td class="col-md-1" scope="col">
         <h5>{{i+1}}</h5>
       </td>
-      <td class="col-md-5" scope="col">
+      <td class="col-md-3" scope="col">
         <h5>{{item.username}}</h5>
       </td>
       <td class="col-md-3" scope="col">
         <h5>{{item.role}}</h5>
       </td>
-      <td class="col-md-3 d-flex justify-content-between" scope="col" >
+      <td class="col-md-5 d-flex justify-content-center" scope="col" >
         <h5>
-          <button id="refresh-users-button" class="btn btn-success" (click) = "promote(item.id)" *ngIf="!isRoot(item.role) && !isLoggedInUser(item.username)">Promote</button>
+          <button  class="btn btn-success m-1" (click) = "promote(item.id)" *ngIf="!isRoot(item.role) && !isLoggedInUser(item.username)">Promote</button>
         </h5>
         <h5>
-          <button id="refresh-users-button" class="btn btn-warning" (click) = "demote(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Demote</button>
+          <button class="btn btn-warning m-1" (click) = "demote(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Demote</button>
+        </h5>
+        <h5>
+          <button  class="btn btn-secondary m-1" routerLink="/user/details/{{item.id}}" >Details</button>
         </h5>
       </td>
     </tr>
 
   </tbody>
-  <div class="d-flex justify-content-center">
-    <button id="refresh-users-button" class="btn btn-secondary">Refresh</button>
-  </div>
 </table>
+
+
+<!-- <div class="pull-right">
+  <a class="btn btn-info" routerLink="/racket/details/{{item.id}}">Details</a>
+  <a *ngIf="userService.isAdmin()"  routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
+  <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning m-2">Edit</a>
+</div> -->

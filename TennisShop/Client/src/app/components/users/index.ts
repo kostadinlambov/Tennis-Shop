@@ -8,11 +8,17 @@ import { UsernameValidatorDirective } from './directives/username-validator.dire
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
 import { NamesValidatorDirective } from './directives/names-validator.directive';
 import { MatchPasswordValidatorDirective } from './directives/matchPassword-validator.directive';
+import { DetailsUserComponent } from './details-user/details-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 export const userComponents = [
-   RegisterComponent,
-   LoginComponent,
+    RegisterComponent,
+    LoginComponent,
     AllUserComponent,
+    DetailsUserComponent,
+    EditUserComponent,
+    DeleteUserComponent,
     UsernameValidatorDirective,
     PasswordValidatorDirective,
     NamesValidatorDirective,

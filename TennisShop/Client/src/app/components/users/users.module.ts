@@ -10,7 +10,6 @@ import { userComponents } from '.';
 // Services
 import { UsersService } from './users.service';
 
-
 @NgModule({
     imports: [
         FormsModule,
@@ -18,7 +17,7 @@ import { UsersService } from './users.service';
         UserRoutingModule
     ],
     declarations: [
-      ...userComponents
+      ...userComponents,
     ],
     providers: [UsersService],
     exports: []
