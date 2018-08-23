@@ -67,10 +67,10 @@
         <td class="col-md-6 d-flex justify-content-center" scope="col">
 
           <h5>
-            <button class="btn btn-warning m-1"  (click)="editCategory(item.id, item.name)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">edit</button>
+            <button class="btn btn-warning m-1"  (click)="editCategory(item.id, item.name)">edit</button>
           </h5>
           <h5>
-            <button class="btn btn-danger m-1" (click)="deleteCategory(item.id, item.name)">Delete</button>
+            <button class="btn btn-danger m-1" (click)="deleteCategory(item.id, item.name)">disable</button>
           </h5>
         </td>
       </tr>
@@ -80,46 +80,42 @@
 
 <hr class="display-5" />
 
-<h1 class="text-center display-5 mx-auto">Deleted Categories</h1>
+<h1 class="text-center mt-5 display-5 mx-auto text-danger">Disabled Categories</h1>
 <hr class="display-5" />
 
-  
-  <table class="table table-hover  mt-3 w-80 mx-auto ">
-    <thead>
-      <tr class="row">
-        <th class="col-md-2" scope="col">#</th>
-        <th class="col-md-4" scope="col">Category Name</th>
-        <th class="col-md-6" scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+        
+    <table class="table table-hover  mt-3 w-80 mx-auto" *ngIf="(allDeletedCategories$ | async).length; else loading">
+      <thead>
+        <tr class="row">
+          <th class="col-md-2" scope="col">#</th>
+          <th class="col-md-4" scope="col">Category Name</th>
+          <th class="col-md-6" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <tr class="row" *ngFor="let item of allDeletedCategories$ | async; index as i">
-        <td class="col-md-2" scope="col">
-          <h5>{{i+1}}</h5>
-        </td>
-        <td class="col-md-4" scope="col">
-          <h5>{{item.name}}</h5>
-        </td>
-        <td class="col-md-6 d-flex justify-content-center" scope="col">
+        <tr class="row" *ngFor="let item of allDeletedCategories$ | async; index as i">
+          <td class="col-md-2" scope="col">
+            <h5>{{i+1}}</h5>
+          </td>
+          <td class="col-md-4" scope="col">
+            <h5>{{item.name}}</h5>
+          </td>
+          <td class="col-md-6 d-flex justify-content-center" scope="col">
 
-          <h5>
-            <button class="btn btn-success m-1" (click)="restore(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Restore Category</button>
-          </h5>
-        </td>
-      </tr>
+            <h5>
+              <button class="btn btn-success m-1" (click)="restore(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Enable Category</button>
+            </h5>
+          </td>
+        </tr>
 
-    </tbody>
-  </table>
-  
+      </tbody>
+    </table>
+    <ng-template #loading>
+        <h3 class="mt-5 mb-5 mx-auto display-5 text-center text-info">No disabled Categories. </h3>
+      </ng-template>
 
-  <!-- <div class="pull-right">
-  <a class="btn btn-info" routerLink="/racket/details/{{item.id}}">Details</a>
-  <a *ngIf="userService.isAdmin()"  routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
-  <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning m-2">Edit</a>
-</div> -->
-
-
+      <hr class="display-5 mb-5 " />
 
 </div> 
 

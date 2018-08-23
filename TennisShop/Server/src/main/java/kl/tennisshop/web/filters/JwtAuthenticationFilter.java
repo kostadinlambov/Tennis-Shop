@@ -55,11 +55,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .findFirst()
                 .orElse(null)
                 .getAuthority();
+        String id = user.getId();
 
         String token = Jwts.builder()
                 .setSubject(user.getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + 1200000))
                 .claim("role", authority)
+                .claim("id", id)
                 .signWith(SignatureAlgorithm.HS256, "Secret".getBytes())
                 .compact();
 

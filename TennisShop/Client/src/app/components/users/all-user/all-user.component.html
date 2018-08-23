@@ -29,7 +29,7 @@
           <button class="btn btn-warning m-1" (click) = "demote(item.id)" *ngIf="!isRoot(item.role)  && !isLoggedInUser(item.username)">Demote</button>
         </h5>
         <h5>
-          <button  class="btn btn-secondary m-1" routerLink="/user/details/{{item.id}}" >Details</button>
+          <button  class="btn btn-secondary m-1"  routerLink="/user/details/{{item.id}}" >Details</button>
         </h5>
       </td>
     </tr>

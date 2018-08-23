@@ -11,6 +11,7 @@ import { MatchPasswordValidatorDirective } from './directives/matchPassword-vali
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 export const userComponents = [
     RegisterComponent,
@@ -23,4 +24,5 @@ export const userComponents = [
     PasswordValidatorDirective,
     NamesValidatorDirective,
     MatchPasswordValidatorDirective,
+    ShoppingCartComponent
 ];

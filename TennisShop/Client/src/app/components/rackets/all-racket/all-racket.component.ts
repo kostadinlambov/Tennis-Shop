@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { RacketService } from '../racket.service';
 import { Observable } from 'rxjs';
 import { DetailsRacketModel } from '../models/deatils-racket.model';
+
 import { UsersService } from '../../users/users.service';
+import { NgProgress } from 'ngx-progressbar';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-all-racket',
@@ -11,28 +15,38 @@ import { UsersService } from '../../users/users.service';
 })
 export class AllRacketComponent implements OnInit {
 
-  rackets: Observable<DetailsRacketModel[]>;
-  pageSize: number = 6;
+  racketsObs: Observable<DetailsRacketModel[]>;
+  rackets: DetailsRacketModel[];
+  pageSize: number = 3;
   currentPage: number = 1;
 
   constructor(
     private racketService: RacketService,
-    private userService: UsersService
+    private userService: UsersService,
+    private ngProgress: NgProgress,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
-    this.rackets = this.racketService.getAll();
+    this.spinner.show();
+    // this.racketsObs = this.racketService.getAll()
+    // this.ngProgress.done();
 
-    // this.racketService.getAll().subscribe(
-    //   res => {
-    //     debugger;
-    //     console.log('allRackets res: ', res);
-    //   },
-    //   err =>{
-    //     debugger;
-    //     console.log('allRackets error: ', err);
-    //   }
-    // );
+    this.racketService.getAll().subscribe(
+      res => {
+        debugger;
+        this.rackets = res;
+        console.log('allRackets res: ', res);
+        this.spinner.hide();
+        // setTimeout(() => {
+        //   this.spinner.hide();
+        // }, 5000);
+      },
+      err =>{
+        debugger;
+        console.log('allRackets error: ', err);
+      }
+    );
   }
 
   changePage(page) {

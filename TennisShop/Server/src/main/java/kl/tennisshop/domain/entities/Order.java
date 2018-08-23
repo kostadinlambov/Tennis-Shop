@@ -15,7 +15,7 @@ public class Order {
     private User user;
 //    private String racketName;
     private Set<Racket> rackets;
-    private LocalDateTime entryDate;
+    private LocalDateTime orderedOn;
 //    private Payment payment;
 //    private Integer quantity;
 //    private BigDecimal price;
@@ -31,7 +31,7 @@ public class Order {
     public Order(User user, Set<Racket> rackets) {
         this.user = user;
         this.rackets = rackets;
-        this.entryDate = LocalDateTime.now();
+        this.orderedOn = LocalDateTime.now();
 //        this.payment = payment;
     }
 
@@ -84,13 +84,12 @@ public class Order {
 //        this.payment = payment;
 //    }
 
-
-    @Column(name = "entry_date")
-    public LocalDateTime getEntryDate() {
-        return this.entryDate;
+    @Column(name = "ordered_on", nullable = false)
+    public LocalDateTime getOrderedOn() {
+        return this.orderedOn;
     }
 
-    public void setEntryDate(LocalDateTime entryDate) {
-        this.entryDate = entryDate;
+    public void setOrderedOn(LocalDateTime orderedOn) {
+        this.orderedOn = orderedOn;
     }
 }

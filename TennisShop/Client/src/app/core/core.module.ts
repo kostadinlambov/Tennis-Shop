@@ -1,8 +1,10 @@
 
 // Modules
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MDBBootstrapModule, CardsFreeModule, WavesModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Components
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -10,6 +12,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 // Services
 import { HttpService } from './services/http.service';
 import { UsersService } from '../components/users/users.service';
+import { DataSharingService } from './services/app.data-sharing.service';
+
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -22,15 +26,31 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
-  declarations: [NavBarComponent],
-  exports: [NavBarComponent],
-  imports: [RouterModule, CommonModule],
-providers: [
+  declarations: [
+    NavBarComponent
+  ],
+  exports: [
+    NavBarComponent
+  ],
+  imports: [
+    RouterModule,
+    CommonModule,
+    MDBBootstrapModule,
+    CardsFreeModule,
+    WavesModule,
+    ModalModule,
+    InputsModule,
+    ButtonsModule,
+    NgxSpinnerModule,
+
+  ],
+  providers: [
     HttpService,
     UsersService,
     AuthGuard,
     LoginAndRegisterGuard,
     AdminAuthGuard,
+    DataSharingService,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: TokenInterceptor,
@@ -46,7 +66,8 @@ providers: [
       useClass: ErrorInterceptor,
       multi: true
     }
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 
 export class CoreModule { }

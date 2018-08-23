@@ -20,8 +20,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -93,6 +95,19 @@ public class UserController {
     @GetMapping(value = "details/{id}")
     public ResponseEntity getDetails(@PathVariable String id) throws JsonProcessingException {
         UserDetailsViewModel user = this.userService.getById(id);
+
+        SuccessResponse successResponse = new SuccessResponse(
+                new Date(),
+                SUCCESSFUL_USER_DETAILS_FOUND_MESSAGE,
+                user,
+                true
+        );
+        return new ResponseEntity<>(this.objectMapper.writeValueAsString(user), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "details/username/{username}")
+    public ResponseEntity getDetailsByUsername(@PathVariable String username) throws JsonProcessingException {
+        UserDetailsViewModel user = this.userService.getByUsername(username);
 
         SuccessResponse successResponse = new SuccessResponse(
                 new Date(),
@@ -177,5 +192,17 @@ public class UserController {
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
+
+//    @PostMapping("/order")
+//    public ModelAndView order(@ModelAttribute EventOrderBindingModel eventOrderBindingModel, Principal principal) {
+//        boolean result = this.eventService
+//                .orderEvent(eventOrderBindingModel.getTickets(), eventOrderBindingModel.getEventId(), principal.getName());
+//
+//        if(!result) {
+//            throw new IllegalArgumentException("asd");
+//        }
+//
+//        return this.redirect("all");
+//    }
 
 }

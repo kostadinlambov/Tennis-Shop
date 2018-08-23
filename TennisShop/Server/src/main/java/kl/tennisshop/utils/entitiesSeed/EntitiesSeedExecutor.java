@@ -74,7 +74,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00902902185000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102282.jpg",
                     category1);
 
             Racket racket2 = new Racket("Babolat Pure Aero Decima French Open",
@@ -83,7 +83,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00904202567000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/head_ti_s6_tennis_racket_black.jpg",
                     category1);
 
             Racket racket3 = new Racket("Wilson " +
@@ -93,7 +93,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(612),
                     BigDecimal.valueOf(280),
                     "18/20",
-                    "https://img1.tennis-point.com/out/pictures/generated/product/4/46_46_80/00703002917000_4.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
                     category2);
 
             Racket racket4 = new Racket("Pro Staff 97 Black Countervail Tour Racket",
@@ -102,7 +102,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(626),
                     BigDecimal.valueOf(315),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00704003194000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
                     category2);
 
             Racket racket5 = new Racket("HEAD MXG 5 Comfort racket",
@@ -111,7 +111,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/18",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00603903638000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102385.jpg",
                     category3);
             //####################################################################################
 
@@ -121,7 +121,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00902902185000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102282.jpg",
                     category1);
 
             Racket racket7 = new Racket("Babolat Pure Aero Decima French Open",
@@ -130,7 +130,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00904202567000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/head_ti_s6_tennis_racket_black.jpg",
                     category1);
 
             Racket racket8 = new Racket("Wilson " +
@@ -140,7 +140,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "18/20",
-                    "https://img1.tennis-point.com/out/pictures/generated/product/4/46_46_80/00703002917000_4.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
                     category2);
 
             Racket racket9 = new Racket("Pro Staff 97 Black Countervail Tour Racket",
@@ -149,7 +149,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00704003194000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
                     category2);
 
             Racket racket10 = new Racket("HEAD MXG 5 Comfort racket",
@@ -158,7 +158,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/18",
-                    "https://img2.tennis-point.com/out/pictures/generated/product/1/46_46_80/00603903638000_1.jpg",
+                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102385.jpg",
                     category3);
 
             this.racketService.persistRacket(racket1);

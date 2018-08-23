@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public UserCreateViewModel createUser(UserServiceModel userServiceModel) {
 
@@ -75,7 +74,6 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             return this.modelMapper.map(userEntity, UserCreateViewModel.class);
         }
-
         return null;
     }
 
@@ -91,7 +89,6 @@ public class UserServiceImpl implements UserService {
             userEntity.setOrders(userOrigin.getOrders());
             userEntity.setPayments(userOrigin.getPayments());
 
-
             User updatedUser  = this.userRepository.saveAndFlush(userEntity);
             return updatedUser != null;
         }
@@ -100,10 +97,20 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public UserDetailsViewModel getById(String id) {
         User user = this.userRepository.findById(id).orElse(null);
+
+        if (user != null) {
+            return this.modelMapper.map(user, UserDetailsViewModel.class);
+        }
+
+        throw new CustomException(ResponseMessageConstants.USER_NOT_FOUND_ERROR_MESSAGE);
+    }
+
+    @Override
+    public UserDetailsViewModel getByUsername(String username) {
+        User user = this.userRepository.findById(username).orElse(null);
 
         if (user != null) {
             return this.modelMapper.map(user, UserDetailsViewModel.class);
@@ -147,6 +154,8 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+
 
     @Override
     public List<UserServiceModel> getAllUsers() {

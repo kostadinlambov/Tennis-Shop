@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { CustomFormsModule } from 'ng5-validation';
 import { RacketRoutingModule } from './racket-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { MDBBootstrapModule, WavesModule, CardsFreeModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
+import { UserModule } from './../users/users.module';
 
 // Components and Directives
 import { racketComponents } from '.';
@@ -21,7 +24,16 @@ import { RacketService } from './racket.service';
         RouterModule,
         CustomFormsModule,
         RacketRoutingModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        NgxSpinnerModule,
+        MDBBootstrapModule,
+        WavesModule,
+        ModalModule,
+        InputsModule,
+        ButtonsModule,
+        CardsFreeModule,
+        UserModule
+
     ],
     declarations: [
         ...racketComponents,

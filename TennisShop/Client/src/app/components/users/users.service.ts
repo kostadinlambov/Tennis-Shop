@@ -32,6 +32,11 @@ export class UsersService {
         return this.http.get<DetailsUserModel>(baseUrl + `details/${id}`);
     }
 
+    getUserByUsername(username): Observable<DetailsUserModel>{
+        return this.http.get<DetailsUserModel>(baseUrl + `details/username/${username}`);
+    }
+
+
     getUserEditDetails(id): Observable<DetailsUserModel>{
         return this.http.get<DetailsUserModel>(baseUrl + `editDetails/${id}`);
     }
@@ -107,6 +112,15 @@ export class UsersService {
             const username = payload['sub'];
             console.log('username: ', username);
             return username;
+        }
+    }
+
+    getId(){
+        if (this.token) {
+            const payload = JSON.parse(atob(this.token.split('.')[1]));
+            const id = payload['id'];
+            console.log('id: ', id);
+            return id;
         }
     }
 

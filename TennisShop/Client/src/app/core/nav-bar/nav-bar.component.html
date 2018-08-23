@@ -1,79 +1,108 @@
-<div class="container ">
-  <!-- <div *ngIf="userService.isAdmin()"> -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/home">Tennis Shop</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+ <!-- ########################## -->
+<!-- Loading Spinner -->
+<ngx-spinner>
+  <div d-flex justify-content-center>
+    bdColor="rgba(51,51,51,0.8)"
+    size="small"
+    color="#fff"
+    type="ball-8bits">
+   <p  class="spinner-style">Loading...</p>
+  </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto" *ngIf="userService.checkIfLoggedIn()">
+</ngx-spinner>
+ <!-- ########################## -->
 
-        <li (click)="expand1()" [class]="dropdownLi">
-          <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store</a>
-          <div [class]="dropdownMenu" aria-labelledby="dropdown01">
-            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/user/all">All Users</a>
-            <a class="dropdown-item" routerLink="/category/all">All Categories</a>
-            <!-- <a class="dropdown-item" routerLink="/furniture/create">Create</a> -->
-          </div>
-        </li>
-      </ul>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+    <!-- Navbar brand -->
+    <mdb-navbar-brand>
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <a class="navbar-brand" routerLink="/home">Tennis Shop</a>
+    </mdb-navbar-brand>
+  
+    <!-- Collapsible content -->
+    <links>
 
-      <ul class="navbar-nav mr-auto" *ngIf="userService.checkIfLoggedIn()">
-
-        <li (click)="expand1()" [class]="dropdownLi">
-          <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Racket Admin Bar</a>
-          <div [class]="dropdownMenu" aria-labelledby="dropdown02">
-            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/racket/create">Create Racket</a>
-            <a class="dropdown-item" routerLink="/racket/all">All Rackets</a>
-            <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/racket/my">My Rackets(Orders)</a>
-          </div>
-        </li>
-      </ul>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" *ngIf="userService.checkIfLoggedIn()">
-          <a class="nav-link" routerLink="/home">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
-          <a class="nav-link" routerLink="user/register">Register</a>
-        </li>
-        <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
-          <a class="nav-link" routerLink="user/login">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="userService.isAdmin()">
-          <a class="nav-link" routerLink="/racket/create">Create Racket</a>
-        </li>
-        <!-- <li class="nav-item"> -->
-        <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
-          <!-- <a class="nav-link" (click)="logout()" routerLink="/login">Logout</a> -->
-          <a class="nav-link" href="#" (click)="logout($event)" routerLink="/login">Logout</a>
-        </li>
-
-        <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/all" *ngIf="userService.checkIfLoggedIn()">All Rackets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/create" *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">Create Racket</a>
+            </li>
+            
+
+            <li class="nav-item">
+                <!-- <a class="nav-link waves-light" mdbWavesEffect routerLink="/user/details/{{item.id}}">Profile</a> -->
+            </li>
+           
+            <!-- <li class="nav-item active" *ngIf="userService.checkIfLoggedIn()">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/all">All Rackets</a>
             </li> -->
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
 
-  <!-- </div> -->
+            <!-- Dropdown -->
+            <!-- <li class="nav-item dropdown" dropdown  *ngIf="userService.checkIfLoggedIn()">
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                Rackets<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a *ngIf="userService.isAdmin()" class="dropdown-item waves-light" mdbWavesEffect routerLink="/racket/create">Create Racket</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/racket/all">All Rackets</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+                </div>
+            </li> -->
 
-</div>
+             <!-- Dropdown -->
+             <li class="nav-item dropdown" dropdown *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                Admin dropdown<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/user/all">All Users</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/category/all">All Categories</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav d-flex justify-content-end align-items-center">
+            
+            <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
+              <a class="nav-link" routerLink="user/register">Register</a>
+            </li>
+            <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
+              <a class="nav-link" routerLink="user/login">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
+                <a class="nav-link" (click) = "reloadSubscribe()" routerLink="/user/details/{{userId}}">
+                  <div>Hello {{username}}!</div>
+                  <div>Your account</div>
+                  </a>
+                <!-- <a class="nav-link" [username] = "userService.getUsername()">Hello {{username}}!</a> -->
+              </li>
+            <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
+              <!-- <a class="nav-link" (click)="logout()" routerLink="/login">Logout</a> -->
+              <a class="nav-link" href="#" (click)="logout($event)" routerLink="/login">Logout</a>
+            </li>  
+          </ul>
+
+        <!-- Links -->
+
+<!-- Search form -->
+        <!-- <form class="form-inline waves-light" mdbWavesEffect>
+            <div class="md-form mt-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            </div>
+        </form> -->
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+

@@ -1,45 +1,91 @@
-
- <p>{{currentItem | json }}</p>
 <div class="container" *ngIf="currentItem | async as item">
-  <div class="row space-top">
-    <div class="col-md-12">
-      <h1>User Profile</h1>
-    </div>
-  </div>
-  <div class="row space-top">
-    <div class="col-md-4">
-      <div class="card text-white bg-warning">
-        <div class="card-body">
-          <blockquote class="card-blockquote">
-            <h5 class="text-dark">{{item.username}}</h5>
-            <img src="{{item.mainImageUrl}}" />
-          </blockquote>
-        </div>
+
+  <div class="d-flex justify-content-center ">
+    <div class="col-md-6">
+      <table class="table table-hover  mt-3 mx-auto">
+        <thead>
+          <tr class="row align-center">
+            <!-- <th class="col-md-6" scope="col">Category:</th>
+          <th class="col-md-6" scope="col">Price</th> -->
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">Username</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.username}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">Email</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.email}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">First Name</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.firstName}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">Last Name</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.lastName}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">Address</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.address}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">City</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <h5>{{item.city}}</h5>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-6" scope="col">
+              <h5 class=" font-weight-bold">Role</h5>
+            </td>
+            <td class="col-md-6" scope="col">
+              <div *ngFor="let role of item.authorities; index as i">
+                <h5>{{role.authority}}</h5>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center ">
+        <a class="btn btn-warning m-2" routerLink="/user/edit/{{item.id}}" *ngIf="!userService.checkIfUserIsRoot(item.authorities) || userService.isRoot() ">Edit Account</a>
+        <a class="btn btn-danger m-2" routerLink="/user/delete/{{item.id}}" *ngIf="!userService.checkIfUserIsRoot(item.authorities) && userService.isRoot()">Delete User</a>
+        <a class="btn btn-info m-2" routerLink="/user/all" *ngIf="userService.isAdmin() || userService.isRoot()">All Users</a>
+      </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <p>Username: {{item.username}}</p>
-      <p>Email: {{item.email}}</p>
-      <p>First Name: {{item.firstName}}</p>
-      <p>Last Name: {{item.lastName}}</p>
-      <p>Address: {{item.address}}</p>
-      <p>City: {{item.city}}</p>
-      <div *ngFor="let role of item.authorities; index as i">
-        <!-- <p>{{i + 1}}.Role: {{role.authority}}</p> -->
-        <p>Role: {{role.authority}}</p>
-    </div>
-      <p>Payments: {{item.payments}}</p>
-      <p>Orders: {{item.orders}}</p>
-      <p>Feedback: {{item.feedbackSet}}</p>
-      <img src="{{item.secondImageUrl}}" />
-      <img src="{{item.thirdImageUrl}}" />
-    </div>
+  </div>
 
 
-  </div>
-  <div class="d-flex justify-content-center ">
-    <a class="btn btn-warning m-2" routerLink="/user/edit/{{item.id}}" *ngIf="!userService.checkIfUserIsRoot(item.authorities) || userService.isRoot() ">Edit User</a>
-    <a class="btn btn-danger m-2"   routerLink="/user/delete/{{item.id}}" *ngIf="!userService.checkIfUserIsRoot(item.authorities) && userService.isRoot()">Delete User</a>
-    <a class="btn btn-info m-2"   routerLink="/user/all">All Users</a>
-  </div>
-</div>
+
+<!-- <p>Payments: {{item.payments}}</p>
+<p>Orders: {{item.orders}}</p>
+<p>Feedback: {{item.feedbackSet}}</p>
+<img src="{{item.secondImageUrl}}" />
+<img src="{{item.thirdImageUrl}}" /> -->

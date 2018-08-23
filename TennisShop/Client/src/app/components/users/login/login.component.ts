@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from '../users.service';
 import { LoginUser } from '../models/login-user.model';
 import { Router } from '@angular/router';
+import { DataSharingService } from '../../../core/services/app.data-sharing.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,12 @@ export class LoginComponent {
 user: LoginUser = new LoginUser();
 message: string;
 success: boolean = true;
+username: string;
 
   constructor(
     private userService: UsersService,
     private router: Router,
+    private dataSharingService: DataSharingService
   ) { }
 
   login() {
@@ -23,6 +26,8 @@ success: boolean = true;
     .subscribe(
       data =>   {
         console.log('login data: ', data);
+        this.username = this.userService.getUsername();
+        this.dataSharingService.isUserLoggedIn.next(this.username);
         // this.message = res['message'];
         // this.success = res['success'];
         // this.toastrService.success(data['message']);

@@ -52,6 +52,7 @@ public class ApplicationSecurityConfiguration
                         "/users/promote",
                         "/users/demote",
                         "/users/details",
+                        "/users/details/username",
                         "/users/editDetails",
                         "/users/update",
                         "categories/all",

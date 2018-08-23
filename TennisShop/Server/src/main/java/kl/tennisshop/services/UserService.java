@@ -27,6 +27,8 @@ public interface UserService extends  UserDetailsService {
 
     User getByUsernameValidation(String username);
 
+    UserDetailsViewModel getByUsername(String username);
+
     List<UserServiceModel> getAllUsers();
 
     UserDeleteViewModel deleteUserByEmail(String email);

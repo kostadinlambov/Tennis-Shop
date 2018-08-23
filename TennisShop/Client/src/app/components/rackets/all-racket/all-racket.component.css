@@ -1,0 +1,9 @@
+.card {
+  border-color: greenyellow
+}
+
+.carousel {
+    width:120px;
+    height:200px;
+    background-size: 300px 100px;
+  }

@@ -8,6 +8,7 @@ import { LoginComponent } from "./login/login.component";
 import { AllUserComponent } from "./all-user/all-user.component";
 import { DetailsUserComponent } from "./details-user/details-user.component";
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 // Guards
 import { LoginAndRegisterGuard } from "../../core/guards/loginAndRegister.guard";
@@ -19,13 +20,14 @@ const userRoutes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [LoginAndRegisterGuard] },
     { path: 'login', component: LoginComponent, canActivate: [LoginAndRegisterGuard] },
     { path: 'all', component: AllUserComponent, canActivate: [AdminAuthGuard, AuthGuard] },
-    { path: 'details/:id', component: DetailsUserComponent, canActivate: [AdminAuthGuard, AuthGuard] },
-    { path: 'edit/:id', component: EditUserComponent, canActivate: [AdminAuthGuard, AuthGuard] },
-    { path: 'delete/:id', component: DeleteUserComponent, canActivate: [AdminAuthGuard, AuthGuard] }
+    { path: 'details/:id', component: DetailsUserComponent, canActivate: [AuthGuard] },
+    { path: 'edit/:id', component: EditUserComponent, canActivate: [AuthGuard] },
+    { path: 'delete/:id', component: DeleteUserComponent, canActivate: [AdminAuthGuard, AuthGuard] },
+    { path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(userRoutes)],
-    exports: [RouterModule]
+exports: [RouterModule]
 })
 export class UserRoutingModule { }

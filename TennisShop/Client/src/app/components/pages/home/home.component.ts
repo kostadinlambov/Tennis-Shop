@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '../../users/users.service';
+import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,16 @@ export class HomeComponent implements OnInit {
   username;
   constructor(
     private toastr: ToastrService,
-  private userService: UsersService
+  private userService: UsersService,
+  private router: Router
 ) { }
 
   ngOnInit() {
     debugger;
     const token = localStorage.getItem('token');
-    console.log('currentUser-Before: ', token);
     if (token) {
       this.username = this.userService.getUsername();
-      console.log('username: ', this.username);
+      // console.log('username: ', this.username);
     }
   }
 

@@ -52,7 +52,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                         break;
                     case 403:
                         this.toastrService.error('Incorrect credentials.', 'Error!');
-                        // this.router.navigate(['/home']);
+                        localStorage.clear();
+                        this.router.navigate(['/home']);
                         break;
                     case 404:
                         this.toastrService.error(err['error']['message'], 'Error!');
