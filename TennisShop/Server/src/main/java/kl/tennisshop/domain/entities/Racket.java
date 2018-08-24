@@ -26,7 +26,8 @@ public class Racket {
     private String secondImageUrl;
     private String thirdImageUrl;
     private Category category;
-    private Set<Order> orders;
+//    private Set<Order> orders;
+//    private Order order;
     private Set<Feedback> feedbackSet;
 
     private Boolean deleted = false;
@@ -39,7 +40,6 @@ public class Racket {
 
 
     public Racket() {
-        this.orders = new HashSet<>();
         this.feedbackSet = new HashSet<>();
     }
 
@@ -55,7 +55,6 @@ public class Racket {
         this.category = category;
 //        this.orders = orders;
 //        this.feedbackSet = feedbackSet;
-        this.orders = new HashSet<>();
         this.feedbackSet = new HashSet<>();
     }
 
@@ -72,7 +71,6 @@ public class Racket {
         this.category = category;
 //        this.orders = orders;
 //        this.feedbackSet = feedbackSet;
-        this.orders = new HashSet<>();
         this.feedbackSet = new HashSet<>();
     }
 
@@ -90,14 +88,15 @@ public class Racket {
         this.id = id;
     }
 
-    @ManyToMany(targetEntity = Order.class, mappedBy = "rackets")
-    public Set<Order> getOrders() {
-        return this.orders;
-    }
+//    @OneToMany(targetEntity = Order.class, mappedBy = "racket", fetch = FetchType.EAGER)
+//    public Set<Order> getOrders() {
+//        return this.orders;
+//    }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
+
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     public String getDescription() {

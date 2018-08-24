@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MDBBootstrapModule, CardsFreeModule, WavesModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { UserModule } from '../components/users/users.module';
 
 // Components
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -42,6 +43,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     InputsModule,
     ButtonsModule,
     NgxSpinnerModule,
+    UserModule
 
   ],
   providers: [

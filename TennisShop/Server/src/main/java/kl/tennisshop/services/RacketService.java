@@ -6,8 +6,9 @@ import kl.tennisshop.domain.entities.Racket;
 import kl.tennisshop.domain.models.bindingModels.racket.RacketCreateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 public interface RacketService {
 
     Racket persist(RacketCreateBindingModel addRacketDto);
@@ -23,6 +24,7 @@ public interface RacketService {
 //    List<Racket> getAllNotDeletedCategories();
 
     Racket getByName(String name);
+
 
     Racket getFirstRacketByName(String name);
 

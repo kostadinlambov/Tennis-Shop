@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { OrderModel } from '../models/order.model';
+
+const baseUrl = 'http://localhost:8000/orders/';
+
+
+@Injectable()
+export class OrderService {
+
+    private currentAuthtoken: string;
+    constructor(private http: HttpClient) { }
+
+    placeOrder(payload){
+        return this.http.post(baseUrl + 'order', payload);
+    }
+
+    loadOrders(id) {
+       return this.http.get<OrderModel[]>(baseUrl + `all/${id}`);
+    }
+
+    checkout(id) {
+        return this.http.post(baseUrl + 'checkout?id=' + id, id);
+    }
+
+    removeOrder(id) {
+        return this.http.post(baseUrl + 'remove?id=' + id, id);
+    }
+
+}

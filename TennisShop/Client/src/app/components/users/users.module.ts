@@ -12,10 +12,12 @@ import { userComponents } from '.';
 
 // Services
 import { UsersService } from './users.service';
+import { OrderService } from './services/order.service';
+
 
 @NgModule({
     imports: [
-    FormsModule,
+FormsModule,
         CommonModule,
         UserRoutingModule,
         MDBBootstrapModule,
@@ -28,8 +30,7 @@ import { UsersService } from './users.service';
     declarations: [
       ...userComponents,
     ],
-    providers: [UsersService],
-    
+    providers: [UsersService, OrderService],
     exports: [ShoppingCartComponent]
 })
 

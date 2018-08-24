@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UsersService } from '../../users/users.service';
-import { Router } from '../../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
+import { UsersService } from './../../users/users.service';
 
 @Component({
   selector: 'app-home',

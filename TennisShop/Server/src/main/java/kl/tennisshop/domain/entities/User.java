@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -47,8 +48,8 @@ public class User implements UserDetails {
     private Set<Feedback> feedbackSet;
 
     // Shopping Cart
-    private Set<Racket> shoppingCartProducts;
-    private Set<Racket> boughtProducts;
+    private List<Racket> shoppingCartProducts;
+//    private Set<Racket> boughtProducts;
 
 //    private byte[] profilePicture;
 //    private LocalDateTime registeredOn;
@@ -97,7 +98,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Set<Order> getOrders() {
         return this.orders;
     }
@@ -233,8 +234,27 @@ public class User implements UserDetails {
     }
 
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "shopping_cart",referencedColumnName = "id")
+    public List<Racket> getShoppingCartProducts() {
+        return this.shoppingCartProducts;
+    }
 
-//    @Transient
+    public void setShoppingCartProducts(List<Racket> shoppingCartProducts) {
+        this.shoppingCartProducts = shoppingCartProducts;
+    }
+
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "bought_products",referencedColumnName = "id")
+//    public Set<Racket> getBoughtProducts() {
+//        return this.boughtProducts;
+//    }
+//
+//    public void setBoughtProducts(Set<Racket> boughtProducts) {
+//        this.boughtProducts = boughtProducts;
+//    }
+
+    //    @Transient
 //    public String getConfirmPassword() {
 //        return this.confirmPassword;
 //    }

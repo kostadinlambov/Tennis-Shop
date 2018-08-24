@@ -29,32 +29,16 @@
                 <a class="nav-link waves-light" mdbWavesEffect routerLink="/home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/all" *ngIf="userService.checkIfLoggedIn()">All Rackets</a>
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/all" *ngIf="userService.checkIfLoggedIn()">Rackets</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/create" *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">Create Racket</a>
             </li>
-            
+             -->
 
             <li class="nav-item">
                 <!-- <a class="nav-link waves-light" mdbWavesEffect routerLink="/user/details/{{item.id}}">Profile</a> -->
             </li>
-           
-            <!-- <li class="nav-item active" *ngIf="userService.checkIfLoggedIn()">
-                <a class="nav-link waves-light" mdbWavesEffect routerLink="/racket/all">All Rackets</a>
-            </li> -->
-
-            <!-- Dropdown -->
-            <!-- <li class="nav-item dropdown" dropdown  *ngIf="userService.checkIfLoggedIn()">
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                Rackets<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a *ngIf="userService.isAdmin()" class="dropdown-item waves-light" mdbWavesEffect routerLink="/racket/create">Create Racket</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/racket/all">All Rackets</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-                </div>
-            </li> -->
 
              <!-- Dropdown -->
              <li class="nav-item dropdown" dropdown *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">
@@ -65,7 +49,7 @@
                     <div class="divider dropdown-divider"></div>
                     <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/category/all">All Categories</a>
                     <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+                     <a class="dropdown-item"  routerLink="/racket/create" *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">Create Racket</a>
                 </div>
             </li>
         </ul>
@@ -76,8 +60,12 @@
               <a class="nav-link" routerLink="user/register">Register</a>
             </li>
             <li class="nav-item" *ngIf="!userService.checkIfLoggedIn()">
-              <a class="nav-link" routerLink="user/login">Login</a>
+              <a class="nav-link"  routerLink="user/login">Login</a>
             </li>
+            <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
+                <a class="teal accent-3 nav-link" routerLink="user/cart">Shopping Cart </a>
+              </li>
+           
             <li class="nav-item" *ngIf="userService.checkIfLoggedIn()">
                 <a class="nav-link" (click) = "reloadSubscribe()" routerLink="/user/details/{{userId}}">
                   <div>Hello {{username}}!</div>
@@ -90,7 +78,7 @@
               <a class="nav-link" href="#" (click)="logout($event)" routerLink="/login">Logout</a>
             </li>  
           </ul>
-
+          
         <!-- Links -->
 
 <!-- Search form -->

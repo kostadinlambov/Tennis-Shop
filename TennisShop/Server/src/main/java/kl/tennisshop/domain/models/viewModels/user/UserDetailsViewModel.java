@@ -14,13 +14,13 @@ public class UserDetailsViewModel {
     private String city;
 
     private Set<UserRole> authorities;
-    private Set<Order> orders;
-    private Set<Payment> payments;
-    private Set<Feedback> feedbackSet;
+//    private Set<Order> orders;
+//    private Set<Payment> payments;
+//    private Set<Feedback> feedbackSet;
 
     // Shopping Cart
-    private Set<Racket> shoppingCartProducts;
-    private Set<Racket> boughtProducts;
+//    private Set<Racket> shoppingCartProducts;
+//    private Set<Racket> boughtProducts;
 
     public UserDetailsViewModel() {
     }
@@ -89,43 +89,43 @@ public class UserDetailsViewModel {
         this.authorities = authorities;
     }
 
-    public Set<Order> getOrders() {
-        return this.orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Set<Payment> getPayments() {
-        return this.payments;
-    }
-
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
-    }
-
-    public Set<Feedback> getFeedbackSet() {
-        return this.feedbackSet;
-    }
-
-    public void setFeedbackSet(Set<Feedback> feedbackSet) {
-        this.feedbackSet = feedbackSet;
-    }
-
-    public Set<Racket> getShoppingCartProducts() {
-        return this.shoppingCartProducts;
-    }
-
-    public void setShoppingCartProducts(Set<Racket> shoppingCartProducts) {
-        this.shoppingCartProducts = shoppingCartProducts;
-    }
-
-    public Set<Racket> getBoughtProducts() {
-        return this.boughtProducts;
-    }
-
-    public void setBoughtProducts(Set<Racket> boughtProducts) {
-        this.boughtProducts = boughtProducts;
-    }
+//    public Set<Order> getOrders() {
+//        return this.orders;
+//    }
+//
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
+//
+//    public Set<Payment> getPayments() {
+//        return this.payments;
+//    }
+//
+//    public void setPayments(Set<Payment> payments) {
+//        this.payments = payments;
+//    }
+//
+//    public Set<Feedback> getFeedbackSet() {
+//        return this.feedbackSet;
+//    }
+//
+//    public void setFeedbackSet(Set<Feedback> feedbackSet) {
+//        this.feedbackSet = feedbackSet;
+//    }
+//
+//    public Set<Racket> getShoppingCartProducts() {
+//        return this.shoppingCartProducts;
+//    }
+//
+//    public void setShoppingCartProducts(Set<Racket> shoppingCartProducts) {
+//        this.shoppingCartProducts = shoppingCartProducts;
+//    }
+//
+//    public Set<Racket> getBoughtProducts() {
+//        return this.boughtProducts;
+//    }
+//
+//    public void setBoughtProducts(Set<Racket> boughtProducts) {
+//        this.boughtProducts = boughtProducts;
+//    }
 }

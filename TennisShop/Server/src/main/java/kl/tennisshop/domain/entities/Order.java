@@ -11,13 +11,11 @@ import java.util.Set;
 @Table(name = "orders")
 public class Order {
     private String id;
-//    private String userName;
     private User user;
-//    private String racketName;
-    private Set<Racket> rackets;
+    private Racket racket;
     private LocalDateTime orderedOn;
 //    private Payment payment;
-//    private Integer quantity;
+    private Integer quantity;
 //    private BigDecimal price;
 //    private BigDecimal totalPrice;
 //    private Boolean status;
@@ -25,12 +23,11 @@ public class Order {
 
 
     public Order() {
-        this.rackets = new HashSet<>();
+
     }
 
-    public Order(User user, Set<Racket> rackets) {
+    public Order(User user) {
         this.user = user;
-        this.rackets = rackets;
         this.orderedOn = LocalDateTime.now();
 //        this.payment = payment;
     }
@@ -49,7 +46,7 @@ public class Order {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "user_id")
     public User getUser() {
         return this.user;
@@ -59,19 +56,30 @@ public class Order {
         this.user = user;
     }
 
-    @ManyToMany
-    @JoinTable(name = "orders_rackets",
-    joinColumns =
-            @JoinColumn(name = "order_id", referencedColumnName = "id"),
-    inverseJoinColumns =
-    @JoinColumn(name = "racket_id", referencedColumnName = "id"))
-    public Set<Racket> getRackets() {
-        return this.rackets;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name= "racket_id")
+    public Racket getRacket() {
+        return this.racket;
     }
 
-    public void setRackets(Set<Racket> rackets) {
-        this.rackets = rackets;
+    public void setRacket(Racket racket) {
+        this.racket = racket;
     }
+
+
+    //    @ManyToMany
+//    @JoinTable(name = "orders_rackets",
+//    joinColumns =
+//            @JoinColumn(name = "order_id", referencedColumnName = "id"),
+//    inverseJoinColumns =
+//    @JoinColumn(name = "racket_id", referencedColumnName = "id"))
+//    public Racket getRackets() {
+//        return this.rackets;
+//    }
+
+//    public void setRackets(Racket rackets) {
+//        this.rackets = rackets;
+//    }
 
     // BiDirectional
 //    @OneToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -91,5 +99,14 @@ public class Order {
 
     public void setOrderedOn(LocalDateTime orderedOn) {
         this.orderedOn = orderedOn;
+    }
+
+    @Column(name = "quantity", nullable = false)
+    public Integer getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

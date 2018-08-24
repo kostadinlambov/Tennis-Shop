@@ -2,7 +2,6 @@ package kl.tennisshop.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kl.tennisshop.domain.models.bindingModels.user.UserLoginBindingModel;
 import kl.tennisshop.domain.models.bindingModels.user.UserRegisterBindingModel;
 import kl.tennisshop.domain.models.bindingModels.user.UserUpdateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.UserServiceModel;
@@ -10,7 +9,6 @@ import kl.tennisshop.domain.models.viewModels.user.*;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
 import kl.tennisshop.utils.responseHandler.exceptions.BadRequestException;
 import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
-import kl.tennisshop.utils.responseHandler.exceptions.UserNotFoundException;
 import kl.tennisshop.services.UserService;
 import kl.tennisshop.utils.responseHandler.successResponse.SuccessResponse;
 import org.modelmapper.ModelMapper;
@@ -18,12 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -192,6 +187,8 @@ public class UserController {
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
+
+
 
 //    @PostMapping("/order")
 //    public ModelAndView order(@ModelAttribute EventOrderBindingModel eventOrderBindingModel, Principal principal) {

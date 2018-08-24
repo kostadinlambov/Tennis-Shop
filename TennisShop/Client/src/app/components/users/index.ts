@@ -12,6 +12,7 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { OrderQuantityValidatorDirective } from './directives/order-quantity-validator.directive';
 
 export const userComponents = [
     RegisterComponent,
@@ -24,5 +25,6 @@ export const userComponents = [
     PasswordValidatorDirective,
     NamesValidatorDirective,
     MatchPasswordValidatorDirective,
+    OrderQuantityValidatorDirective,
     ShoppingCartComponent
 ];

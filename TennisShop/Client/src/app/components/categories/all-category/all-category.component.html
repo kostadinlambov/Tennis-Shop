@@ -1,37 +1,43 @@
-<div class="container mt-3 w-80 mx-auto ">
-    <h1 class="text-center display-3 mx-auto">Categories</h1>
-  <hr class="display-3" />
+<div class="container mt-3 w-80 mx-auto " >
+    <!-- <h1 class="text-center display-3 mx-auto">Categories</h1> -->
+    <h1 class="mt-3 mb-3 text-center font-weight-bold display-5">Categories</h1>
+    <hr class="my-2 mb-5 col-md-6">
+    <!-- <hr class="display-3" /> -->
 
-  <h1>Add Category</h1>
+  <h3 class="mt-3 mb-3 text-center font-weight-bold display-5">Add Category</h3>
+  <hr class="my-2 mb-3 col-md-6">
 
-<form #createForm="ngForm" (ngSubmit)="create(createForm)" class="mb-5 ">
-  <div class="form-group col-md-4 mx-auto ">
-      <div class="form-group">
-      <label for="name">Category Name</label>
-      <input 
-          type="text" 
-          class="form-control" 
-          id="name"
-          name="name" 
-          [(ngModel)]="category.name"
-          #nameField="ngModel"
-          ngModel
-          required
-      >
-      <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
-        <div *ngIf="nameField.errors.required">Category Name is required.</div>
+    <form #createForm="ngForm" (ngSubmit)="create(createForm)" class="mb-5 ">
+      <div class="form-group col-md-4 mx-auto ">
+          <div class="form-group">
+          <label for="name">Category Name</label>
+          <input 
+              type="text" 
+              class="form-control" 
+              id="name"
+              name="name" 
+              [(ngModel)]="category.name"
+              #nameField="ngModel"
+              ngModel
+              required
+          >
+          <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
+            <div *ngIf="nameField.errors.required">Category Name is required.</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <button 
-    type="submit" 
-    class="btn btn-success"
-    [disabled]="!createForm.form.valid">
-    Add Category
-  </button>
+      <button 
+        type="submit" 
+        class="btn btn-success"
+        [disabled]="!createForm.form.valid">
+        Add Category
+      </button>
 
-</form>
+      <hr class="my-2 mb-3 mt-5 col-md-6">
+
+    </form>
+
 
 
   <table class="table table-hover  mt-3 w-80 mx-auto ">
@@ -80,8 +86,8 @@
 
 <hr class="display-5" />
 
-<h1 class="text-center mt-5 display-5 mx-auto text-danger">Disabled Categories</h1>
-<hr class="display-5" />
+<h1 class="text-center mt-5 mb-3 display-5 mx-auto font-weight-bold text-danger">Disabled Categories</h1>
+<hr class="my-2 mb-3 col-md-6">
 
         
     <table class="table table-hover  mt-3 w-80 mx-auto" *ngIf="(allDeletedCategories$ | async).length; else loading">

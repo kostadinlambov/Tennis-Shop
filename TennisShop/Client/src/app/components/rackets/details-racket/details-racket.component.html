@@ -1,7 +1,7 @@
-<div class="container" *ngIf="currentItem | async as item">
+<div class="container p-0" *ngIf="currentItem | async as item">
   <div class="card ">
    
-    <div class="card-body mx-auto" style="width: 90%;">
+    <div class="card-body mx-auto " style="width: 90%;">
       <h5 class="card-title h1 h1-responsive mb-3">{{item.name}}</h5>
       <hr class="my-2 mb-3">
       <p class=" h5 h5-responsives mb-3" >{{item.description}}</p>
@@ -42,7 +42,7 @@
               </tr>
               <tr class="row">
                 <td class="col-md-6" scope="col">
-                  <h5 class=" font-weight-bold">HeadSize</h5>
+                  <h5 class=" font-weight-bold">Head Size</h5>
                 </td>
                 <td class="col-md-6" scope="col">
                   <h5>{{item.headSize}}</h5>
@@ -71,7 +71,7 @@
       </div>
       <div class="d-flex justify-content-center ">
         <!-- <a class="btn btn-info m-2" routerLink="/racket/all">Back</a> -->
-        <app-shopping-cart></app-shopping-cart>
+        <button type="button" mdbBtn color="success" class="waves-light m-2" (click) = "addRacketToCart(item.id)" mdbWavesEffect>Add to cart</button>
         <button type="button" mdbBtn color="primary" class="waves-light m-2" routerLink="/racket/all" mdbWavesEffect>Back</button>
       </div>
     </div>

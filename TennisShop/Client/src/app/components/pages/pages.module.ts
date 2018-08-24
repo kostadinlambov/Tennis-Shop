@@ -6,7 +6,6 @@ import { MDBBootstrapModule, WavesModule, CardsFreeModule, ModalModule, InputsMo
 
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CreateCarFormComponent } from './create-car-form/create-car-form.component';
 
 @NgModule({
     imports: [
@@ -23,7 +22,6 @@ import { CreateCarFormComponent } from './create-car-form/create-car-form.compon
     declarations: [
         HomeComponent,
         PageNotFoundComponent,
-        CreateCarFormComponent
     ],
     providers: [],
     exports: []

@@ -8,7 +8,7 @@ import { RacketRoutingModule } from './racket-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MDBBootstrapModule, WavesModule, CardsFreeModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
-import { UserModule } from './../users/users.module';
+import { UserModule } from '../users/users.module';
 
 // Components and Directives
 import { racketComponents } from '.';

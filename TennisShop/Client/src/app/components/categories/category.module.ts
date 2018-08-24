@@ -16,7 +16,7 @@ import { CategoryService } from './category.service';
 
 @NgModule({
     imports: [
-    FormsModule,
+        FormsModule,
         CommonModule,
         RouterModule,
         CustomFormsModule,

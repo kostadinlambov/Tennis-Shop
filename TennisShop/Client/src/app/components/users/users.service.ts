@@ -32,12 +32,12 @@ export class UsersService {
         return this.http.get<DetailsUserModel>(baseUrl + `details/${id}`);
     }
 
-    getUserByUsername(username): Observable<DetailsUserModel>{
+    getUserByUsername(username): Observable<DetailsUserModel> {
         return this.http.get<DetailsUserModel>(baseUrl + `details/username/${username}`);
     }
 
 
-    getUserEditDetails(id): Observable<DetailsUserModel>{
+    getUserEditDetails(id): Observable<DetailsUserModel> {
         return this.http.get<DetailsUserModel>(baseUrl + `editDetails/${id}`);
     }
 
@@ -110,7 +110,7 @@ export class UsersService {
         if (this.token) {
             const payload = JSON.parse(atob(this.token.split('.')[1]));
             const username = payload['sub'];
-            console.log('username: ', username);
+            // console.log('username: ', username);
             return username;
         }
     }
@@ -119,7 +119,7 @@ export class UsersService {
         if (this.token) {
             const payload = JSON.parse(atob(this.token.split('.')[1]));
             const id = payload['id'];
-            console.log('id: ', id);
+            // console.log('id: ', id);
             return id;
         }
     }
@@ -145,6 +145,4 @@ export class UsersService {
     createCar(formData) {
         return this.http.post('cars/create', formData);
     }
-
-    
 }

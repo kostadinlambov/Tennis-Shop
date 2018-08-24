@@ -43,7 +43,15 @@ public class ApplicationSecurityConfiguration
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers( "/rackets/test", "/users/register", "/rackets/all").permitAll()
+                .antMatchers(
+                        "/users/register",
+                        "/rackets/all",
+                        "/orders/order",
+                        "/orders/all",
+                        "/orders/checkout",
+                        "/orders/remove",
+                        "/rackets/test"
+                        ).permitAll()
                 .antMatchers(
                         "/rackets/details",
                         "/rackets/create",

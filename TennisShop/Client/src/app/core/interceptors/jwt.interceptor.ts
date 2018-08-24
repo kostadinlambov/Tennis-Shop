@@ -42,7 +42,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     debugger;
                     if (this.checkUrl(event, request)) {
                         console.log('Event : ', event);
-                        this.toastrService.info(event['body']['message']);
+                        this.toastrService.success(event['body']['message']);
                         // this.router.navigate(['home']);
                     }
 
@@ -89,9 +89,13 @@ export class JwtInterceptor implements HttpInterceptor {
         const restoreCategoryUrl = request.url.indexOf('categories/restore') > -1;
         const deleteCategoryUrl = request.url.indexOf('categories/delete') > -1;
         const editCategoryUrl = request.url.indexOf('categories/edit') > -1;
+        const orderRacketUrl = request.url.indexOf('orders/order') > -1;
+        const checkoutUrl = request.url.indexOf('orders/checkout') > -1;
+        const removeOrderUrl = request.url.indexOf('orders/remove') > -1;
 
         const success = promoteUserUrl || demoteUserUrl || updateUserUrl || deleteUserUrl
-         || createCategoryUrl || restoreCategoryUrl || deleteCategoryUrl || editCategoryUrl;
+         || createCategoryUrl || restoreCategoryUrl || deleteCategoryUrl || editCategoryUrl
+         || orderRacketUrl || checkoutUrl || removeOrderUrl;
 
 
         if (event instanceof HttpResponse && event.body.success && success) {

@@ -3,9 +3,9 @@ import { RacketService } from '../racket.service';
 import { Observable } from 'rxjs';
 import { DetailsRacketModel } from '../models/deatils-racket.model';
 
-import { UsersService } from '../../users/users.service';
 import { NgProgress } from 'ngx-progressbar';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UsersService } from './../../users/users.service';
 
 
 @Component({

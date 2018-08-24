@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { DetailsRacketModel } from '../models/deatils-racket.model';
 import { ActivatedRoute } from '@angular/router';
 import { RacketService } from '../racket.service';
+import { UsersService } from '../../users/users.service';
+import { OrderService } from '../../users/services/order.service';
 
 @Component({
   selector: 'app-details-racket',
@@ -14,7 +16,9 @@ export class DetailsRacketComponent implements OnInit {
   id: string
   constructor(
     private route: ActivatedRoute,
-    private racketService: RacketService
+    private racketService: RacketService,
+    private userService: UsersService,
+    private orderService: OrderService
   ) {
     this.id = this.route.snapshot.params['id'];
   }
@@ -35,5 +39,18 @@ export class DetailsRacketComponent implements OnInit {
     //       )
     //   }
     // })
+  }
+
+  addRacketToCart(racketId) {
+    debugger;
+    console.log('Product id: ', racketId);
+    const userId = this.userService.getId();
+    const quantity = 1;
+    const payload = { userId, racketId, quantity };
+    this.orderService.placeOrder(payload).subscribe(
+      res => console.log(),
+      err => console.log()
+    );
+
   }
 }

@@ -31,6 +31,9 @@ public final class ValidationMessageConstants {
     public static final String RACKET_MAIN_IMAGE_URL_REQUIRED_MESSAGE = "Main Image Url is required.";
     public static final String RACKET_CATEGORY_NAME_REQUIRED_MESSAGE = "Category Name is required.";
 
+    // Order Message Constants
+    public static final String ORDER_INVALID_QUANTITY_MESSAGE = "Quantity must be a positive number.";
+
 
 
 }

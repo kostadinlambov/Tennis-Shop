@@ -38,4 +38,7 @@ public interface UserService extends  UserDetailsService {
     boolean demoteUser(String id);
 
     boolean deleteUserById(String id);
+
+    boolean addToCart(String userId, String racketId);
+
 }

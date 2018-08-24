@@ -4,7 +4,7 @@ public final class ResponseMessageConstants {
 
     private ResponseMessageConstants(){}
 
-    // Exception Messages
+    // Error Messages
     public static final String SERVER_ERROR_MESSAGE = "Server Error.";
     public static final String VALIDATION_ERROR_MESSAGE = "Validation error.";
     public static final String PASSWORDS_MISMATCH_ERROR_MESSAGE = "Passwords do not match.";
@@ -17,6 +17,9 @@ public final class ResponseMessageConstants {
     public static final String FAILURE_CATEGORY_RESTORE_MESSAGE = "Failure restoring category!";
     public static final String FAILURE_CATEGORY_DELETE_MESSAGE = "Failure deleting category!";
     public static final String FAILURE_CATEGORY_EDIT_MESSAGE = "Failure editing category!";
+    public static final String FAILURE_ORDER_CREATE_MESSAGE = "Order or User cannot be null!";
+    public static final String FAILURE_CHECKOUT_MESSAGE = "Error during checkout!";
+    public static final String FAILURE_ORDER_REMOVE_MESSAGE = "Error during removing order!";
 
     // Successful Response Messages
     public static final String SUCCESSFUL_REGISTER_MESSAGE = "You have been successfully registered.";
@@ -30,5 +33,7 @@ public final class ResponseMessageConstants {
     public static final String SUCCESSFUL_CATEGORY_RESTORE_MESSAGE = "Category restored successfully.";
     public static final String SUCCESSFUL_CATEGORY_DELETE_MESSAGE = "Category deleted successfully.";
     public static final String SUCCESSFUL_CATEGORY_EDIT_MESSAGE = "Category edited successfully.";
-
+    public static final String SUCCESSFUL_ADDED_TO_CART_MESSAGE = "Product added to cart successfully.";
+    public static final String SUCCESSFUL_CHECKOUT_MESSAGE = "Checkout processed successfully.";
+    public static final String SUCCESSFUL_REMOVE_ORDER_MESSAGE = "Product removed from shopping cart.";
 }

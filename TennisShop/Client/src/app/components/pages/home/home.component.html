@@ -2,9 +2,13 @@
 
   <div class="jumbotron">
     <h3 class="md-display-5 h3 h3-responsive mb-3" *ngIf="userService.checkIfLoggedIn()">Hello {{username}}!</h3>
+    <hr class="my-2 mb-3 mt-3 col-md-6" *ngIf="userService.checkIfLoggedIn()">
+
     <h2 class="h1 h1-responsive">Welcome to Tennis Shop!</h2>
-    <p *ngIf="!userService.checkIfLoggedIn()" class="lead">Please <b class="text-info">Login</b> or <b class="text-info">Register</b> if you don't have an account.</p>
-    <hr class="my-2">
+    <hr class="my-2 mb-3 mt-3 col-md-6" *ngIf="!userService.checkIfLoggedIn()">
+
+    <p *ngIf="!userService.checkIfLoggedIn()" class="lead">Please <a class="text-info" routerLink="/user/login">Login</a> or <a class="text-info" routerLink="/user/register">Register</a> if you don't have an account.</p>
+    <hr class="my-2 mb-3 mt-3  col-md-6">
     <a *ngIf="!userService.checkIfLoggedIn()" class="btn btn-primary btn-lg waves-light"  routerLink="/user/login" role="button" mdbWavesEffect>Login</a>
     <a  *ngIf="!userService.checkIfLoggedIn()" class="btn btn-primary btn-lg waves-light"  routerLink="/user/register" role="button" mdbWavesEffect>Register</a>
     <a  *ngIf="userService.checkIfLoggedIn()" class="btn btn-primary btn-lg waves-light"  routerLink="/racket/all" role="button" mdbWavesEffect>Go to the Rackets</a>
@@ -22,31 +26,4 @@
   </ng-template> -->
 
 
-
 </div>
-
-<!-- Button trigger modal -->
-<button id="modalActivate" type="button" class="btn btn-danger">
-    Launch demo modal
-  </button>
-  <!-- Modal -->
-  <div class="modal fade right" id="exampleModalPreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalPreviewLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal -->

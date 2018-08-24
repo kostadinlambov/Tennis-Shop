@@ -1,14 +1,12 @@
 package kl.tennisshop.servicesImpl;
 
+import kl.tennisshop.domain.entities.Racket;
 import kl.tennisshop.domain.entities.UserRole;
-import kl.tennisshop.domain.models.bindingModels.user.UserLoginBindingModel;
-import kl.tennisshop.domain.models.bindingModels.user.UserUpdateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.UserServiceModel;
 import kl.tennisshop.domain.models.viewModels.user.*;
+import kl.tennisshop.repositories.RacketRepository;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
-import kl.tennisshop.utils.modelMapper.ModelMapperConfig;
 import kl.tennisshop.domain.entities.User;
-import kl.tennisshop.domain.models.bindingModels.user.UserRegisterBindingModel;
 import kl.tennisshop.repositories.RoleRepository;
 import kl.tennisshop.repositories.UserRepository;
 import kl.tennisshop.services.UserService;
@@ -21,7 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,13 +29,15 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final RacketRepository racketRepository;
     private final ModelMapper modelMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, RacketRepository racketRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.racketRepository = racketRepository;
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -92,6 +91,22 @@ public class UserServiceImpl implements UserService {
             User updatedUser  = this.userRepository.saveAndFlush(userEntity);
             return updatedUser != null;
         }
+
+        return false;
+    }
+
+    public boolean addToCart(String userId, String racketId ){
+       User user = this.userRepository.findById(userId).orElse(null);
+
+       if(user != null){
+         Racket racket = this.racketRepository.findById(racketId).orElse(null);
+           if(racket != null){
+               user.getShoppingCartProducts().add(racket);
+
+               User updatedUser = this.userRepository.saveAndFlush(user);
+               return updatedUser != null;
+           }
+       }
 
         return false;
     }
