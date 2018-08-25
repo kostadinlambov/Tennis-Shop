@@ -63,13 +63,10 @@ public class UserController {
 
             System.out.println(this.objectMapper.writeValueAsString(successResponse));
 
-//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(successResponse));
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
         }
 
         throw new CustomException(SERVER_ERROR_MESSAGE);
-//        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        ResponseEntity.badRequest().body(new ExceptionResponse())
     }
 
 
@@ -187,19 +184,5 @@ public class UserController {
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
-
-
-
-//    @PostMapping("/order")
-//    public ModelAndView order(@ModelAttribute EventOrderBindingModel eventOrderBindingModel, Principal principal) {
-//        boolean result = this.eventService
-//                .orderEvent(eventOrderBindingModel.getTickets(), eventOrderBindingModel.getEventId(), principal.getName());
-//
-//        if(!result) {
-//            throw new IllegalArgumentException("asd");
-//        }
-//
-//        return this.redirect("all");
-//    }
 
 }

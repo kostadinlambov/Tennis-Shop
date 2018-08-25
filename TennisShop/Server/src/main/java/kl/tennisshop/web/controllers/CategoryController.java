@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kl.tennisshop.domain.models.bindingModels.category.CategoryCreateBindingModel;
 import kl.tennisshop.domain.models.bindingModels.category.CategoryEditBindingModel;
-import kl.tennisshop.domain.models.bindingModels.racket.RacketEditBindingModel;
 import kl.tennisshop.domain.models.serviceModels.CategoryServiceModel;
-import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
 import kl.tennisshop.domain.models.viewModels.category.CategoryAllViewModel;
 import kl.tennisshop.services.CategoryService;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
@@ -113,9 +111,7 @@ public class CategoryController {
                     SUCCESSFUL_CATEGORY_EDIT_MESSAGE,
                     "",
                     true);
-//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(successResponse));
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
-//        return ResponseEntity.created(new URI("/rackets/create")).body(result);
         }
         throw new CustomException(FAILURE_CATEGORY_EDIT_MESSAGE);
     }

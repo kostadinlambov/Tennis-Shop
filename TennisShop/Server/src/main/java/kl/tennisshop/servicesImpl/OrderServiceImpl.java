@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -112,10 +111,4 @@ public class OrderServiceImpl implements OrderService {
             throw new CustomException(FAILURE_ORDER_REMOVE_MESSAGE);
         }
     }
-
-
-//    @Scheduled(cron = "* * * * * *")
-//    public void testSchedule(){
-//        System.out.println(new Date());
-//    }
 }

@@ -20,6 +20,7 @@ public final class ResponseMessageConstants {
     public static final String FAILURE_ORDER_CREATE_MESSAGE = "Order or User cannot be null!";
     public static final String FAILURE_CHECKOUT_MESSAGE = "Error during checkout!";
     public static final String FAILURE_ORDER_REMOVE_MESSAGE = "Error during removing order!";
+    public static final String FAILURE_RACKET_NOT_FOUND_MESSAGE = "Racket doesn't exist.";
 
     // Successful Response Messages
     public static final String SUCCESSFUL_REGISTER_MESSAGE = "You have been successfully registered.";
@@ -36,4 +37,5 @@ public final class ResponseMessageConstants {
     public static final String SUCCESSFUL_ADDED_TO_CART_MESSAGE = "Product added to cart successfully.";
     public static final String SUCCESSFUL_CHECKOUT_MESSAGE = "Checkout processed successfully.";
     public static final String SUCCESSFUL_REMOVE_ORDER_MESSAGE = "Product removed from shopping cart.";
+    public static final String SUCCESSFUL_CLEAR_LOGS_MESSAGE = "Logs have been successfully deleted.";
 }

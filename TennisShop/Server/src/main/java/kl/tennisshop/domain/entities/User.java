@@ -16,13 +16,13 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Transactional
-public class User implements UserDetails {
+public class User  extends BaseEntity implements UserDetails  {
     private static final String INVALID_EMAIL_MESSAGE = "Invalid e-mail address.";
     private static final String INVALID_USERNAME_MESSAGE = "Username should be at least 4 and maximum 16 characters long.";
     private static final String INVALID_FIRST_NAME_MESSAGE = "First Name must start with a capital letter and must contain only letters.";
     private static final String INVALID_LAST_NAME_MESSAGE = "Last Name must start with a capital letter and must contain only letters.";
 
-    private String id;
+//    private String id;
     private String username;
     private String email;
     private String password;
@@ -61,20 +61,20 @@ public class User implements UserDetails {
         this.payments = new HashSet<>();
         this.feedbackSet = new HashSet<>();
     }
-
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//
+//    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator")
+//    @Column(name = "id", nullable = false, unique = true, updatable = false)
+//    public String getId() {
+//        return this.id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     @Override
 //    @Pattern(regexp = "^([a-zA-Z0-9]+)$")
@@ -277,22 +277,5 @@ public class User implements UserDetails {
 //        this.profilePicture = profilePicture;
 //    }
 
-    @Override
-    public String toString() {
-        String result = "User{\n" +
-                "id=" + id +
-                ",\nemail='" + email + '\'' +
-                ",\npassword='" + password + '\'' +
-                ",\nfirstName='" + firstName + '\'' +
-                ",\nlastName='" + lastName + "\'\n";
 
-        result += "Roles: ";
-        for (UserRole role : authorities) {
-            result +=  role.getAuthority();
-        }
-
-        result += '}';
-
-        return result;
-    }
 }

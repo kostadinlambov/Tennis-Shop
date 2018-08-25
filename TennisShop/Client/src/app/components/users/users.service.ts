@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AllUserModel } from './models/all-user.model';
 import { DetailsUserModel } from './models/details-user.model';
 import { RegisterUser } from './models/register-user.model';
+import { LogModel } from './models/log.model';
 
 const baseUrl = 'http://localhost:8000/users/';
 
@@ -55,6 +56,21 @@ export class UsersService {
 
     demote(id){
         return this.http.post(baseUrl + 'demote?id=' + id, id);
+    }
+
+    loadLogs(){
+        const url = 'http://localhost:8000/logs/all';
+        return this.http.get<LogModel[]>(url);
+    }
+
+    searchByUsername(username: string){
+        const url = `http://localhost:8000/logs/findByUserName/${username}`;
+        return this.http.get<LogModel[]>(url);
+    }
+
+    clearLogs(){
+        const url = 'http://localhost:8000/logs/clear';
+        return this.http.delete(url);
     }
 
     // Utility Functions

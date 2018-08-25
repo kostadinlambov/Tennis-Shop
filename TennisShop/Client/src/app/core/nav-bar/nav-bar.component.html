@@ -50,6 +50,8 @@
                     <a *ngIf="userService.isAdmin()" class="dropdown-item" routerLink="/category/all">All Categories</a>
                     <div class="divider dropdown-divider"></div>
                      <a class="dropdown-item"  routerLink="/racket/create" *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">Create Racket</a>
+                     <div class="divider dropdown-divider"></div>
+                     <a class="dropdown-item"  routerLink="/user/logs" *ngIf="userService.checkIfLoggedIn() && userService.isAdmin()">Logs</a>
                 </div>
             </li>
         </ul>

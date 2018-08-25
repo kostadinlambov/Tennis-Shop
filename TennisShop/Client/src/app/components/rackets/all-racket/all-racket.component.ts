@@ -5,7 +5,7 @@ import { DetailsRacketModel } from '../models/deatils-racket.model';
 
 import { NgProgress } from 'ngx-progressbar';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UsersService } from './../../users/users.service';
+import { UsersService } from '../../users/users.service';
 
 
 @Component({

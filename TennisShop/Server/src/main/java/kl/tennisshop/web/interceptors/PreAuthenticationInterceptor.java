@@ -23,6 +23,8 @@ public class PreAuthenticationInterceptor extends HandlerInterceptorAdapter {
     }
 
     private boolean isInRole(String role, HttpSession session) {
+
+
         // Uncomment this
 //        return isLoggedIn(session) &&
 //                ((UserRole)session.getAttribute("user-role")).ordinal()
@@ -37,6 +39,7 @@ public class PreAuthenticationInterceptor extends HandlerInterceptorAdapter {
         if(!this.isResourceHandler(handler)) {
             HandlerMethod actionHandler = (HandlerMethod) handler;
 
+            System.out.println(request);
             if (actionHandler != null) {
                 PreAuthenticate annotation = actionHandler.getMethodAnnotation(PreAuthenticate.class);
 

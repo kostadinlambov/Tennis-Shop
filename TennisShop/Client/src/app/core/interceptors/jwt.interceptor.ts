@@ -92,10 +92,14 @@ export class JwtInterceptor implements HttpInterceptor {
         const orderRacketUrl = request.url.indexOf('orders/order') > -1;
         const checkoutUrl = request.url.indexOf('orders/checkout') > -1;
         const removeOrderUrl = request.url.indexOf('orders/remove') > -1;
+        const clearLogsUrl = request.url.indexOf('logs/clear') > -1;
+        const allLogsUrl = request.url.indexOf('logs/all') > -1;
+        const findByUsernameLogsUrl = request.url.indexOf('logs/findByUserName') > -1;
 
         const success = promoteUserUrl || demoteUserUrl || updateUserUrl || deleteUserUrl
          || createCategoryUrl || restoreCategoryUrl || deleteCategoryUrl || editCategoryUrl
-         || orderRacketUrl || checkoutUrl || removeOrderUrl;
+         || orderRacketUrl || checkoutUrl || removeOrderUrl || clearLogsUrl
+         || findByUsernameLogsUrl || allLogsUrl;
 
 
         if (event instanceof HttpResponse && event.body.success && success) {

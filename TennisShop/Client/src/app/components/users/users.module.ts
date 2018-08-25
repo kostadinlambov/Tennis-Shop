@@ -13,6 +13,7 @@ import { userComponents } from '.';
 // Services
 import { UsersService } from './users.service';
 import { OrderService } from './services/order.service';
+import { LogsComponent } from './logs/logs.component';
 
 
 @NgModule({

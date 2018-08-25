@@ -15,6 +15,7 @@ import { LoginAndRegisterGuard } from "../../core/guards/loginAndRegister.guard"
 import { AuthGuard } from "../../core/guards/auth.guard";
 import { AdminAuthGuard } from "../../core/guards/admin-auth.guard";
 import { DeleteUserComponent } from "./delete-user/delete-user.component";
+import { LogsComponent } from "./logs/logs.component";
 
 const userRoutes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [LoginAndRegisterGuard] },
@@ -23,7 +24,8 @@ const userRoutes: Routes = [
     { path: 'details/:id', component: DetailsUserComponent, canActivate: [AuthGuard] },
     { path: 'edit/:id', component: EditUserComponent, canActivate: [AuthGuard] },
     { path: 'delete/:id', component: DeleteUserComponent, canActivate: [AdminAuthGuard, AuthGuard] },
-    { path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard] }
+    { path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard] },
+    { path: 'logs', component: LogsComponent, canActivate: [AdminAuthGuard, AuthGuard] }
 ];
 
 @NgModule({

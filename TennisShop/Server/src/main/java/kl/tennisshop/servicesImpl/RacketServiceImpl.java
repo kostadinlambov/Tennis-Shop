@@ -1,35 +1,42 @@
 package kl.tennisshop.servicesImpl;
 
 import kl.tennisshop.domain.entities.Category;
+import kl.tennisshop.domain.entities.Order;
 import kl.tennisshop.domain.entities.Racket;
-import kl.tennisshop.domain.entities.User;
 import kl.tennisshop.domain.models.bindingModels.racket.RacketCreateBindingModel;
 import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
+import kl.tennisshop.repositories.OrderRepository;
 import kl.tennisshop.repositories.RacketRepository;
-import kl.tennisshop.repositories.UserRepository;
 import kl.tennisshop.services.CategoryService;
 import kl.tennisshop.services.RacketService;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
 import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static kl.tennisshop.utils.constants.ResponseMessageConstants.FAILURE_RACKET_NOT_FOUND_MESSAGE;
 
 @Service
 @Transactional
 public class RacketServiceImpl implements RacketService {
 
     private final RacketRepository racketRepository;
+    private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
     private final CategoryService categoryService;
 
     @Autowired
-    public RacketServiceImpl(RacketRepository racketRepository, ModelMapper modelMapper, CategoryService categoryService) {
+    public RacketServiceImpl(RacketRepository racketRepository, OrderRepository orderRepository, ModelMapper modelMapper, CategoryService categoryService) {
         this.racketRepository = racketRepository;
+        this.orderRepository = orderRepository;
         this.modelMapper = modelMapper;
         this.categoryService = categoryService;
     }
@@ -89,16 +96,8 @@ public class RacketServiceImpl implements RacketService {
 
     @Override
     public List<RacketServiceModel> getAllRackets() {
-//        List<Racket> rackets = this.racketRepository.findAll();
-//        List<RacketServiceModel> racketServiceModels = new ArrayList<>();
-//        for (Racket racket : rackets) {
-//            RacketServiceModel racketServiceModel = this.modelMapper.map(racket,RacketServiceModel.class);
-//            racketServiceModels.add(racketServiceModel);
-//        }
-//        return racketServiceModels;
-
         return this.racketRepository
-                .findAll()
+                .findAllByDeletedFalse()
                 .stream()
                 .map(x -> this.modelMapper.map(x, RacketServiceModel.class))
                 .collect(Collectors.toUnmodifiableList());
@@ -115,19 +114,55 @@ public class RacketServiceImpl implements RacketService {
     }
 
     @Override
+    public Racket getFirstRacketByName(String name) {
+        return this.racketRepository.findFirstByName(name);
+    }
+
+
+    @Override
     public boolean deleteById(String id) {
         try{
             this.racketRepository.deleteById(id);
         }catch (Exception e){
-            throw new CustomException("Racket doesn't exist. +++ from Custom Exception");
+            throw new CustomException(FAILURE_RACKET_NOT_FOUND_MESSAGE);
         }
         return true;
     }
 
-
-
     @Override
-    public Racket getFirstRacketByName(String name) {
-        return this.racketRepository.findFirstByName(name);
+    public boolean disableById(String id) {
+            Racket racket = this.racketRepository.findById(id).orElse(null);
+            if(racket != null){
+                racket.setDeleted(true);
+                this.racketRepository.saveAndFlush(racket);
+                return true;
+            }
+            throw new CustomException(FAILURE_RACKET_NOT_FOUND_MESSAGE);
     }
+
+//    @Override
+//    public void deleteAllDisabledAndWithoutOrderRackets(){
+//
+//        try {
+//            List<Racket> racketsToDelete = this.racketRepository.findAllByDeletedTrue();
+//            List<Order> orders = this.orderRepository.findAll();
+//            racketsToDelete.stream()
+//                    .forEach(racket -> {
+//                        orders.stream().forEach(order -> {
+//                            if (racket.getId().equals(order.getRacket().getId())) {
+//                                racketsToDelete.remove(racket);
+//                            }
+//                        });
+//                    });
+//
+//            racketsToDelete.forEach(racket -> this.deleteById(racket.getId()));
+//            System.out.println("Rackets deleted successfully!");
+//        } catch(Exception ex){
+//            throw new CustomException(FAILURE_RACKET_NOT_FOUND_MESSAGE);
+//        }
+//
+//    }
+
+
+
 }

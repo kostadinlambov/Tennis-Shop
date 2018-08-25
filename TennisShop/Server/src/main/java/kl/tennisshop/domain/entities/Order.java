@@ -9,8 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class Order {
-    private String id;
+public class Order  extends BaseEntity {
+//    private String id;
     private User user;
     private Racket racket;
     private LocalDateTime orderedOn;
@@ -32,19 +32,19 @@ public class Order {
 //        this.payment = payment;
     }
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator")
+//    @Column(name = "id", nullable = false, unique = true, updatable = false)
+//    public String getId() {
+//        return this.id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "user_id")

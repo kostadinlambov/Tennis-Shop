@@ -13,13 +13,13 @@ import java.util.Set;
 //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class)
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 //@DynamicUpdate
-public class Category  {
+public class Category  extends BaseEntity {
     // Tour rackets
     // Allround rackets
     // Comfort rackets
     // Junior rackets
 
-    private String id;
+//    private String id;
     private String name;
     private Boolean deleted = false;
 
@@ -41,20 +41,20 @@ public class Category  {
         this.name = name;
         this.rackets = rackets;
     }
-
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//
+//    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator")
+//    @Column(name = "id", nullable = false, unique = true, updatable = false)
+//    public String getId() {
+//        return this.id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     @Column(name = "name", nullable = false)
     public String getName() {

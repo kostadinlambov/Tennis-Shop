@@ -2,6 +2,7 @@
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AllUserComponent } from './all-user/all-user.component';
+import { LogsComponent } from './logs/logs.component';
 
 // Directives
 import { UsernameValidatorDirective } from './directives/username-validator.directive';
@@ -26,5 +27,7 @@ export const userComponents = [
     NamesValidatorDirective,
     MatchPasswordValidatorDirective,
     OrderQuantityValidatorDirective,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    LogsComponent
+
 ];

@@ -26,6 +26,8 @@ public interface RacketService {
     Racket getByName(String name);
 
 
+    boolean disableById(String id);
+
     Racket getFirstRacketByName(String name);
 
     List<RacketServiceModel> getAllRackets();
@@ -33,4 +35,6 @@ public interface RacketService {
     RacketServiceModel getById(String id);
 
     boolean deleteById(String id);
+
+//    void deleteAllDisabledAndWithoutOrderRackets();
 }
