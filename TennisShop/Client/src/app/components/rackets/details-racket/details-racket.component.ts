@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { DetailsRacketModel } from '../models/deatils-racket.model';
 import { ActivatedRoute } from '@angular/router';
 import { RacketService } from '../racket.service';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../users/services/users.service';
 import { OrderService } from '../../users/services/order.service';
 
 @Component({

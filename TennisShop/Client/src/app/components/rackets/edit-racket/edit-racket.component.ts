@@ -3,6 +3,9 @@ import { DetailsRacketModel } from '../models/deatils-racket.model';
 import { ActivatedRoute } from '@angular/router';
 import { RacketService } from '../racket.service';
 import { CreateRacketModel } from '../models/create-racket.model';
+import { Observable } from 'rxjs';
+import { AllCategoryModel } from './../../categories/all-category/models/all-category.model';
+import { CategoryService } from './../../categories/category.service';
 
 @Component({
   selector: 'app-edit-racket',
@@ -11,10 +14,12 @@ import { CreateRacketModel } from '../models/create-racket.model';
 })
 export class EditRacketComponent implements OnInit {
   bindingModel: CreateRacketModel;
-  id: string
+  id: string;
+  allCategories$: Observable<AllCategoryModel[]>;
   constructor(
     private route: ActivatedRoute,
-    private racketService: RacketService
+    private racketService: RacketService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
@@ -24,6 +29,8 @@ export class EditRacketComponent implements OnInit {
         console.log('bindingModel: ', data);
         this.bindingModel = data;
       });
+    this.allCategories$ =  this.categoryService.getAll();
+
   }
 
   edit() {

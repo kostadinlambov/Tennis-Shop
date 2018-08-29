@@ -11,7 +11,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { userComponents } from '.';
 
 // Services
-import { UsersService } from './users.service';
+import { UsersService } from './services/users.service';
 import { OrderService } from './services/order.service';
 import { LogsComponent } from './logs/logs.component';
 

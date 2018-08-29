@@ -95,11 +95,12 @@ export class JwtInterceptor implements HttpInterceptor {
         const clearLogsUrl = request.url.indexOf('logs/clear') > -1;
         const allLogsUrl = request.url.indexOf('logs/all') > -1;
         const findByUsernameLogsUrl = request.url.indexOf('logs/findByUserName') > -1;
+        const editOrderUrl = request.url.indexOf('orders/edit') > -1;
 
         const success = promoteUserUrl || demoteUserUrl || updateUserUrl || deleteUserUrl
-         || createCategoryUrl || restoreCategoryUrl || deleteCategoryUrl || editCategoryUrl
-         || orderRacketUrl || checkoutUrl || removeOrderUrl || clearLogsUrl
-         || findByUsernameLogsUrl || allLogsUrl;
+            || createCategoryUrl || restoreCategoryUrl || deleteCategoryUrl || editCategoryUrl
+            || orderRacketUrl || checkoutUrl || removeOrderUrl || clearLogsUrl
+            || findByUsernameLogsUrl || allLogsUrl || editOrderUrl;
 
 
         if (event instanceof HttpResponse && event.body.success && success) {
@@ -120,7 +121,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
         localStorage.setItem('token', token),
 
-        this.toastrService.success('You have successfully logged in.');
+            this.toastrService.success('You have successfully logged in.');
         // this.toastrService.success(data['message']);
         this.router.navigate(['/home']);
     }

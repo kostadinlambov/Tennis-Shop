@@ -90,7 +90,7 @@
 <hr class="my-2 mb-3 col-md-6">
 
         
-    <table class="table table-hover  mt-3 w-80 mx-auto" *ngIf="(allDeletedCategories$ | async).length; else loading">
+    <table class="table table-hover  mt-3 w-80 mx-auto" *ngIf="(allDeletedCategories$ | async)?.length; else loading">
       <thead>
         <tr class="row">
           <th class="col-md-2" scope="col">#</th>

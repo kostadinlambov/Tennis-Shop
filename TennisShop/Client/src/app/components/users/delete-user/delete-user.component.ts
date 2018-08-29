@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DetailsUserModel } from '../models/details-user.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-delete-user',

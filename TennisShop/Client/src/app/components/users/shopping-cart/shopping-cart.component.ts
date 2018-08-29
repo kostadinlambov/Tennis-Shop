@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderModel } from '../models/order.model';
 import { Observable } from 'rxjs';
-import { UsersService } from '../users.service';
+import { UsersService } from '../services/users.service';
 import { OrderService } from '../services/order.service';
 
 @Component({
@@ -11,9 +11,10 @@ import { OrderService } from '../services/order.service';
 })
 export class ShoppingCartComponent implements OnInit {
   // orders$: Observable<OrderModel[]>;
-  orders: OrderModel[];
+  orders: OrderModel[] = [];
   totalPrice: number = 0;
   userId: string;
+  newTotalPrice: number = 0;
 
   constructor(
     private userService: UsersService,
@@ -27,7 +28,13 @@ export class ShoppingCartComponent implements OnInit {
     this.load();
   }
 
-  
+  calculateTotalPrice() {
+    let sum = 0;
+    this.orders.forEach(element => {
+      sum += Number(element.quantity) *  Number(element.racketPrice);
+      this.totalPrice = sum;
+    });
+  }
 
 
   load() {
@@ -38,14 +45,14 @@ export class ShoppingCartComponent implements OnInit {
       res => {
         debugger;
         console.log('loadOrders res:', res);
-        res.forEach(element => {
-          debugger;
-          console.log(element.racketPrice);
-          sum +=  Number(element.racketPrice);
-        });
-        this.totalPrice = sum;
+        // res.forEach(element => {
+        //   debugger;
+        //   console.log(element.racketPrice);
+        //   sum +=  Number(element.racketPrice);
+        // });
+        // this.totalPrice = sum;
         this.orders = res;
-      
+        this.calculateTotalPrice() ;
       },
       err => console.log('loadOrders err:', err),
     );
@@ -60,6 +67,18 @@ export class ShoppingCartComponent implements OnInit {
       err => console.log('checkout err:', err)
     );
   
+  }
+  saveChanges(orderId, orderQuantity){
+    debugger;
+    const payload = {id: orderId, quantity: orderQuantity};
+    console.log('payload: ', payload);
+    this.orderService.saveChanges(payload).subscribe(
+      res =>{
+        console.log('saveChanges res:', res),
+        this.load();
+      },
+      err => console.log('saveChanges err:', err)
+    );
   }
 
   remove(orderId) {

@@ -26,7 +26,7 @@ public class LogsInterceptor extends HandlerInterceptorAdapter {
 
         if(authorizationHeader != null){
             String method = request.getMethod();
-            if((method.equals("POST")|| method.equals("PUT")) && !request.getRequestURI().endsWith("error")){
+            if((method.equals("POST")|| method.equals("PUT") || method.equals("DELETE")) && !request.getRequestURI().endsWith("error")){
                 StringBuffer requestURL = request.getRequestURL();
                 String requestURI = request.getRequestURI();
 

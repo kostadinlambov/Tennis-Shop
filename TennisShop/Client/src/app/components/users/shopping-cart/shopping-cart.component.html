@@ -2,7 +2,7 @@
   <div class="mx-auto">
   <h1 class="mt-3 mb-3 text-center font-weight-bold display-5">Shopping Cart</h1>
   <hr class="display-3 col-md-10"  />
-    <table class="table table-hover  mt-3 w-80 mx-auto "  *ngIf="orders.length;else loading">
+    <table class="table table-hover  mt-3 w-80 mx-auto align-items-center"  *ngIf="orders.length;else loading">
             <thead>
                 <tr class="row">
                   <th class="col-md-1" scope="col">#</th>
@@ -38,15 +38,18 @@
 
               <td class="col-md-4 d-flex justify-content-center" scope="col" >
                   <h5>
+                      <button  class="btn btn-success m-1  rgba-green-strong" [disabled]="quantityField.invalid || quantityField.pristine " (click) ="saveChanges(item.id, item.quantity)">Save Changes</button>
+                    </h5>
+                  <h5>
                     <button  class="btn btn-success m-1 pink darken-1" (click) ="remove(item.id)">Remove</button>
                   </h5>
                  
                 </td>
             </tr>
-            <tr class="row">
+            <tr class="row mx-auto my-auto text-center ">
                 <td class="col-md-1 font-weight-bold"></td>
                 <td class="col-md-3 font-weight-bold"></td>
-                <td class="col-md-2 font-weight-bold">Total:</td>
+                <td class="col-md-2 font-weight-bold text-center col-sm-12 align-middle">Total:</td>
                 <td class="col-md-2 font-weight-bold">
                 $ {{totalPrice}} </td>
                 <td class="col-md-4 d-flex justify-content-center" scope="col" >
@@ -60,7 +63,7 @@
         </table>  
       </div>
       <ng-template #loading>
-          <h3 class="mt-5 mb-5 mx-auto display-5 text-center text-info">You shopping cart is empty. </h3>
+          <h3 class="mt-5 mb-5 mx-auto display-5 text-center text-info">Your shopping cart is empty. </h3>
         </ng-template>
 </div>
 

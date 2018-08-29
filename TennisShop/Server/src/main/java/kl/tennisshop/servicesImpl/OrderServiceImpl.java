@@ -3,6 +3,7 @@ package kl.tennisshop.servicesImpl;
 import kl.tennisshop.domain.entities.Order;
 import kl.tennisshop.domain.entities.Racket;
 import kl.tennisshop.domain.entities.User;
+import kl.tennisshop.domain.models.bindingModels.order.OrderEditBindingModel;
 import kl.tennisshop.domain.models.serviceModels.OrderServiceModel;
 import kl.tennisshop.repositories.OrderRepository;
 import kl.tennisshop.repositories.RacketRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,14 +42,31 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public boolean orderRacket(String userId , String racketId, Integer quantity) {
         User user = this.userRepository.findById(userId).orElse(null);
+        List<Order> allByUserId = this.orderRepository.findAllByUserId(userId);
 
         Racket racket = this.racketRepository.findById(racketId).orElse(null);
 
         if (user == null || racket == null) {
             throw new CustomException(FAILURE_ORDER_CREATE_MESSAGE);
         }
+        Order orderByRacketIdAndUserId = this.orderRepository.findOrderByRacketIdAndUserId(racketId, userId);
+        if(orderByRacketIdAndUserId != null){
+            orderByRacketIdAndUserId.setQuantity(orderByRacketIdAndUserId.getQuantity() + quantity);
+            try {
+                this.orderRepository.saveAndFlush(orderByRacketIdAndUserId);
+            } catch (Exception ignored) {
+                throw new CustomException(SERVER_ERROR_MESSAGE);
+            }
+            return true;
 
-       return  this.placeOrder(racket, user, quantity);
+        }
+
+        return  this.placeOrder(racket, user, quantity);
+    }
+
+    @Override
+    public Order findOrderByRacketIdAndUserId(String racketId, String userId) {
+        return null;
     }
 
     @Override
@@ -62,13 +81,13 @@ public class OrderServiceImpl implements OrderService {
         return true;
     }
 
-    private boolean placeOrder(Racket racket, User user, Integer quantitty) {
+    private boolean placeOrder(Racket racket, User user, Integer quantity) {
         OrderServiceModel orderServiceModel = new OrderServiceModel();
 
         orderServiceModel.setOrderedOn(LocalDateTime.now());
         orderServiceModel.setRacket(racket);
         orderServiceModel.setUser(user);
-        orderServiceModel.setQuantity(quantitty);
+        orderServiceModel.setQuantity(quantity);
 
         return  this.createOrder(orderServiceModel);
     }
@@ -111,4 +130,25 @@ public class OrderServiceImpl implements OrderService {
             throw new CustomException(FAILURE_ORDER_REMOVE_MESSAGE);
         }
     }
+
+    @Override
+    public boolean updateQuantity(OrderEditBindingModel orderEditBindingModel) {
+        String orderId = orderEditBindingModel.getId();
+
+        Order order = this.orderRepository.findById(orderId).orElse(null);
+        if(order != null){
+            order.setQuantity(orderEditBindingModel.getQuantity());
+            order.setOrderedOn(LocalDateTime.now());
+
+            Order savedOrder = this.orderRepository.saveAndFlush(order);
+
+            if(savedOrder != null){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }

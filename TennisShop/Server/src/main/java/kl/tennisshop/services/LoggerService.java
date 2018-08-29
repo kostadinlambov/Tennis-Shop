@@ -14,4 +14,6 @@ public interface LoggerService {
     List<LoggerServiceModel> getLogsByUsername(String username);
 
     boolean deleteAll();
+
+    boolean deleteByName(String username);
 }

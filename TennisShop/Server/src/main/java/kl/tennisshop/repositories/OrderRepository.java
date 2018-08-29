@@ -24,4 +24,6 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Query(value = "DELETE FROM Order as o WHERE o.user.id = :userId" )
     List<Order> deleteAllByUserId(@Param("userId") String userId);
 
+    Order findOrderByRacketIdAndUserId(String racketId, String userId);
+
 }

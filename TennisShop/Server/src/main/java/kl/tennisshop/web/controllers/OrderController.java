@@ -2,7 +2,10 @@ package kl.tennisshop.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kl.tennisshop.domain.models.bindingModels.category.CategoryEditBindingModel;
+import kl.tennisshop.domain.models.bindingModels.order.OrderEditBindingModel;
 import kl.tennisshop.domain.models.bindingModels.order.OrderRacketBindingModel;
+import kl.tennisshop.domain.models.serviceModels.CategoryServiceModel;
 import kl.tennisshop.domain.models.viewModels.order.OrderViewModel;
 import kl.tennisshop.services.OrderService;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
@@ -98,4 +101,18 @@ public class OrderController {
         throw new CustomException(FAILURE_CHECKOUT_MESSAGE);
     }
 
+    @PutMapping(value = "/edit")
+    public ResponseEntity remove(@RequestBody @Valid OrderEditBindingModel orderEditBindingModel)throws JsonProcessingException {
+        boolean result = this.orderService.updateQuantity(orderEditBindingModel);
+
+        if (result) {
+            SuccessResponse successResponse = new SuccessResponse(
+                    new Date(),
+                    SUCCESSFUL_ORDER_UPDATE_MESSAGE,
+                    "",
+                    true);
+            return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+        }
+        throw new CustomException(FAILURE_ORDER_EDIT_MESSAGE);
+    }
 }

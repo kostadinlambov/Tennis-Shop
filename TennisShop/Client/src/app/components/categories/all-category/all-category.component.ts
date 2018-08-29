@@ -3,7 +3,7 @@ import { AllCategoryModel } from './models/all-category.model';
 import { Observable } from 'rxjs';
 import { CategoryService } from '../category.service';
 import { Router } from '@angular/router';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../users/services/users.service';
 import { CreateCategoryModel } from './models/create-category.model';
 
 @Component({
@@ -14,7 +14,7 @@ import { CreateCategoryModel } from './models/create-category.model';
 export class AllCategoryComponent implements OnInit {
   allCategories$: Observable<AllCategoryModel[]>;
   allDeletedCategories$: Observable<AllCategoryModel[]>;
-  allCategories: AllCategoryModel[];
+  allCategories: AllCategoryModel[] = [];
   category: CreateCategoryModel;
   constructor(
     private categoryService: CategoryService,

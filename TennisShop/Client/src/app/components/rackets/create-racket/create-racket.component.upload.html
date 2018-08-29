@@ -1,10 +1,15 @@
-<div class="container" *ngIf="bindingModel">
+<div class="container">
     <div class="row space-top">
         <div class="col-md-12">
-            <h1>Edit Racket</h1>
+            <h1 class="mt-3 mb-3 text-center font-weight-bold display-5">Add New Racket</h1>
+            <hr class="my-2 mb-3 col-md-6">
+
+            <h4 class="mt-3 mb-3 text-center font-weight-bold display-5">Please fill all fields.</h4>
+            <hr class="my-2 mb-3 col-md-6">
+
         </div>
     </div>
-    <form #createForm="ngForm" (ngSubmit)="edit(createForm)" >
+    <form #createForm="ngForm" (ngSubmit)="createRacket(createForm)" >
         <div class="row space-top">
             
             <div class="col-md-6">
@@ -22,25 +27,12 @@
                     >
                     <div class="alert alert-danger" *ngIf="categoryNameField.invalid && (categoryNameField.dirty || categoryNameField.touched)">
                       <div *ngIf="categoryNameField.errors.required">Category Name is required</div>
-                    </div>
-              </div> -->
-
-              <label class="form-control-label" for="new-categoryName">Category Name (select one):</label>
-              <select 
-                  class="form-control" 
-                  id="new-categoryName" 
-                  [(ngModel)]="bindingModel.categoryName" 
-                  name="categoryName" 
-                  ngModel 
-              >
-                <option 
-                  *ngFor="let category of allCategories$ | async"  
-                  [ngValue]="category.name"
-                >
-                  {{category.name}}
-                </option>
-              </select>
-
+                    </div> -->
+                    <label class="form-control-label" for="new-categoryName">Category Name (select one):</label>
+                    <select class="form-control" id="new-categoryName" [(ngModel)]="bindingModel.categoryName" name="categoryName" ngModel >
+                      <option *ngFor="let category of allCategories$ | async"  >{{category.name}}</option>
+                    </select>
+              <!-- </div> -->
                 <div class="form-group ">
                     <label class="form-control-label" for="new-racketName">Racket Name</label>
                     <input 
@@ -50,12 +42,12 @@
                       name="name"
                       [(ngModel)]="bindingModel.name"
                       #nameField="ngModel"
-                      minlength="4"
+                      minlength="5"
                       required
                       ngModel
                     >
                     <div class="alert alert-danger" *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)">
-                      <div *ngIf="nameField.errors.minlength">Racket Name must be at least 4 characters long.</div>
+                      <div *ngIf="nameField.errors.minlength">Racket Name must be at least 5 characters long.</div>
                       <div *ngIf="nameField.errors.required">Racket Name is required</div>
                     </div>
               </div>
@@ -160,7 +152,10 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="new-mainImageUrl">Main Image URL</label>
-                    <input 
+                    <!-- <div class="form-group">
+                        <input type="file" placeholder="Picture..." value="Picture">
+                        </div> -->
+                    <!-- <input 
                       class="form-control" 
                       id="new-mainImageUrl" 
                       type="text"
@@ -169,7 +164,21 @@
                       #mainImageUrlField="ngModel"
                       required
                       ngModel
-                    >
+                    > -->
+                    <input 
+                    class="form-control" 
+                    style="display: none"
+                    (change) = "onFileSelected($event)"
+                    id="new-mainImageUrl" 
+                    type="text"
+                    name="mainImageUrl"
+                    [(ngModel)]="bindingModel.mainImageUrl"
+                    #mainImageUrlField="ngModel"
+                    required
+                    ngModel
+                  >
+                  <button type="button" (click)="mainImageUrlField.click()">Pick File</button>
+                  <button type="button" (click)="onUpload()">Upload</button>
                     <div class="alert alert-danger" *ngIf="mainImageUrlField.invalid && (mainImageUrlField.dirty || mainImageUrlField.touched)">
                           <div *ngIf="mainImageUrlField.errors.required">Main Image URL is required.</div>
                     </div>
@@ -179,7 +188,7 @@
                     <input 
                       class="form-control" 
                       id="new-secondImageUrl" 
-                      type="text"
+                      type="file"
                       name="secondImageUrl"
                       [(ngModel)]="bindingModel.secondImageUrl"
                       #secondImageUrlField="ngModel"
@@ -191,44 +200,23 @@
                     <input 
                       class="form-control" 
                       id="new-thirdImageUrl" 
-                      type="text"
+                      type="file"
                       name="thirdImageUrl"
-                      [(ngModel)]="bindingModel.thirdImageUrl"
+                      [(ngModel)]="bindingModel.thirdImageUrl"s
                       #secondImageUrlField="ngModel"
                       ngModel
                       >
                 </div>
-             
             </div>
         </div>
-        <!-- <div >
+        <div >
           <input 
             type="submit" 
             class="btn btn-primary" 
-            value="Edit Racket"
+            value="Add Racket"
             [disabled]="createForm.form.invalid" 
           />
-        </div> -->
-
-        <div class="d-flex justify-content-center ">
-            <!-- <a class="btn btn-info m-2" routerLink="/racket/all">All Rackets</a> -->
-
-            <input 
-            type="submit" 
-            class="btn btn-warning m-5" 
-            value="Edit "
-            [disabled]="createForm.form.invalid" 
-          />
-
-            <input 
-            type="submit" 
-            class="btn btn-info m-5" 
-            value="Cancel"
-            routerLink="/racket/all"
-          />
-         
-        
-          </div>
+        </div>
      
     </form>
   </div>

@@ -20,7 +20,10 @@ public final class ResponseMessageConstants {
     public static final String FAILURE_ORDER_CREATE_MESSAGE = "Order or User cannot be null!";
     public static final String FAILURE_CHECKOUT_MESSAGE = "Error during checkout!";
     public static final String FAILURE_ORDER_REMOVE_MESSAGE = "Error during removing order!";
-    public static final String FAILURE_RACKET_NOT_FOUND_MESSAGE = "Racket doesn't exist.";
+    public static final String FAILURE_RACKET_NOT_FOUND_MESSAGE = "Racket doesn't exist!";
+    public static final String FAILURE_ORDER_EDIT_MESSAGE = "Failure editing order!";
+    public static final String FAILURE_LOGS_NOT_FOUND_MESSAGE = "No logs available for selected username!";
+    public static final String FAILURE_LOGS_CLEARING_ERROR_MESSAGE = "Logs clearing error.";
 
     // Successful Response Messages
     public static final String SUCCESSFUL_REGISTER_MESSAGE = "You have been successfully registered.";
@@ -33,9 +36,12 @@ public final class ResponseMessageConstants {
     public static final String SUCCESSFUL_CATEGORY_ADDITION_MESSAGE = "Category have been successfully added.";
     public static final String SUCCESSFUL_CATEGORY_RESTORE_MESSAGE = "Category restored successfully.";
     public static final String SUCCESSFUL_CATEGORY_DELETE_MESSAGE = "Category deleted successfully.";
+    public static final String SUCCESSFUL_CATEGORY_DISABLE_MESSAGE = "Category disabled successfully.";
     public static final String SUCCESSFUL_CATEGORY_EDIT_MESSAGE = "Category edited successfully.";
     public static final String SUCCESSFUL_ADDED_TO_CART_MESSAGE = "Product added to cart successfully.";
     public static final String SUCCESSFUL_CHECKOUT_MESSAGE = "Checkout processed successfully.";
     public static final String SUCCESSFUL_REMOVE_ORDER_MESSAGE = "Product removed from shopping cart.";
     public static final String SUCCESSFUL_CLEAR_LOGS_MESSAGE = "Logs have been successfully deleted.";
+    public static final String SUCCESSFUL_ORDER_UPDATE_MESSAGE = "Order updated successfully.";
+
 }

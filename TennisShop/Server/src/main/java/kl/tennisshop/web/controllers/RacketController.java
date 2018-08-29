@@ -7,6 +7,7 @@ import kl.tennisshop.domain.models.bindingModels.racket.RacketEditBindingModel;
 import kl.tennisshop.domain.models.serviceModels.RacketServiceModel;
 import kl.tennisshop.domain.models.viewModels.racket.RacketAllViewModel;
 import kl.tennisshop.domain.models.viewModels.racket.RacketDetailsViewModel;
+import kl.tennisshop.services.CloudinaryService;
 import kl.tennisshop.services.RacketService;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;
 import kl.tennisshop.utils.responseHandler.exceptions.CustomException;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,16 +30,18 @@ public class RacketController {
     private RacketService racketService;
     private ModelMapper modelMapper;
     private ObjectMapper objectMapper;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public RacketController(RacketService racketService, ModelMapper modelMapper, ObjectMapper objectMapper) {
+    public RacketController(RacketService racketService, ModelMapper modelMapper, ObjectMapper objectMapper, CloudinaryService cloudinaryService) {
         this.racketService = racketService;
         this.modelMapper = modelMapper;
         this.objectMapper = objectMapper;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity createRacket(@RequestBody @Valid RacketCreateBindingModel racketCreateBindingModel) throws JsonProcessingException {
+    public ResponseEntity createRacket(@RequestBody @Valid RacketCreateBindingModel racketCreateBindingModel) throws IOException {
 
         boolean result = this.racketService.saveRacket(this.modelMapper.map(racketCreateBindingModel, RacketServiceModel.class));
 
@@ -50,9 +54,7 @@ public class RacketController {
 
             System.out.println(this.objectMapper.writeValueAsString(successResponse));
 
-//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(successResponse));
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
-//        return ResponseEntity.created(new URI("/rackets/create")).body(result);
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
@@ -67,9 +69,7 @@ public class RacketController {
                     "Racket have been successfully edited.",
                     "",
                     true);
-//            return ResponseEntity.ok(this.objectMapper.writeValueAsString(successResponse));
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
-//        return ResponseEntity.created(new URI("/rackets/create")).body(result);
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }

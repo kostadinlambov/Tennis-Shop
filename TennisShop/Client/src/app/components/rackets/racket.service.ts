@@ -32,4 +32,12 @@ export class RacketService {
     deleteRacket(id) {
         return this.http.delete(baseUrl + `delete/${id}`);
     }
+
+    loadCategories() {
+        return this.http.get(baseUrl + 'categories');
+    }
+
+    uploadFile(fd){
+      return this.http.post(baseUrl, fd);
+    }
 }

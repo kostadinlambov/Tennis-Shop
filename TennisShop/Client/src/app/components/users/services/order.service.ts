@@ -27,5 +27,9 @@ export class OrderService {
     removeOrder(id) {
         return this.http.post(baseUrl + 'remove?id=' + id, id);
     }
+    
+    saveChanges(payload){
+        return this.http.put(baseUrl + `edit`, payload);
+    }
 
 }

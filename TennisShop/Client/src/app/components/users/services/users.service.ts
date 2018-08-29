@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AllUserModel } from './models/all-user.model';
-import { DetailsUserModel } from './models/details-user.model';
-import { RegisterUser } from './models/register-user.model';
-import { LogModel } from './models/log.model';
+import { DetailsUserModel } from '../models/details-user.model';
+import { RegisterUser } from '../models/register-user.model';
+import { LogModel } from '../models/log.model';
+import { AllUserModel } from '../models/all-user.model';
 
 const baseUrl = 'http://localhost:8000/users/';
 
@@ -73,6 +73,12 @@ export class UsersService {
         return this.http.delete(url);
     }
 
+    clearLogsByName(username: string){
+        debugger;
+        const url = `http://localhost:8000/logs/clearByName/${username}`;
+        return this.http.delete(url);
+    }
+
     // Utility Functions
 
     checkIfLoggedIn(): boolean {
@@ -131,7 +137,7 @@ export class UsersService {
         }
     }
 
-    getId(){
+    getId() {
         if (this.token) {
             const payload = JSON.parse(atob(this.token.split('.')[1]));
             const id = payload['id'];

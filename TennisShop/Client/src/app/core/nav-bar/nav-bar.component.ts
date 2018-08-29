@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../components/users/users.service';
+import { UsersService } from '../../components/users/services/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DataSharingService } from '../services/app.data-sharing.service';

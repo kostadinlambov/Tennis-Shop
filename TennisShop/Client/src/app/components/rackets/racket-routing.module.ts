@@ -11,7 +11,7 @@ import { AdminAuthGuard } from "../../core/guards/admin-auth.guard";
 
 
 const racketRoutes: Routes = [
-    { path: 'all', component: AllRacketComponent },
+    { path: 'all', component: AllRacketComponent, canActivate: [AuthGuard] },
     { path: 'create', component: CreateRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'details/:id', component: DetailsRacketComponent, canActivate: [AuthGuard] },
     { path: 'delete/:id', component: DeleteRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },

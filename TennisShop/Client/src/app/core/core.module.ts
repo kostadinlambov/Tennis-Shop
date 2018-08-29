@@ -12,7 +12,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 // Services
 import { HttpService } from './services/http.service';
-import { UsersService } from '../components/users/users.service';
+import { UsersService } from '../components/users/services/users.service';
 import { DataSharingService } from './services/app.data-sharing.service';
 
 

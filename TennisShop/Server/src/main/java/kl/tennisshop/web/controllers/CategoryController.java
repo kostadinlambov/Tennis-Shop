@@ -93,7 +93,7 @@ public class CategoryController {
         if (resultOfRestore) {
             SuccessResponse successResponse = new SuccessResponse(
                     new Date(),
-                    SUCCESSFUL_CATEGORY_DELETE_MESSAGE,
+                    SUCCESSFUL_CATEGORY_DISABLE_MESSAGE,
                     "",
                     true);
             return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);

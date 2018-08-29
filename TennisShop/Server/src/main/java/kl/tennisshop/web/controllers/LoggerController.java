@@ -70,6 +70,21 @@ public class LoggerController {
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
 
+    @DeleteMapping(value = "/clearByName/{username}", produces = "application/json")
+    public ResponseEntity deleteLogsByName(@PathVariable String username) throws JsonProcessingException {
+        boolean result = this.loggerService.deleteByName(username);
+
+        if (result) {
+            SuccessResponse successResponse = new SuccessResponse(
+                    new Date(),
+                    "Logs have been successfully deleted.",
+                    "",
+                    true);
+            return new ResponseEntity<>(this.objectMapper.writeValueAsString(successResponse), HttpStatus.OK);
+        }
+        throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
+    }
+
 
     private LoggerViewModel parseDate(LoggerServiceModel x ) {
         LoggerViewModel loggerViewModel = new LoggerViewModel();

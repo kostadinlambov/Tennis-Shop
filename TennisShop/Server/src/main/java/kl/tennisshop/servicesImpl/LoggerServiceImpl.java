@@ -11,8 +11,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static kl.tennisshop.utils.constants.ResponseMessageConstants.FAILURE_LOGS_CLEARING_ERROR_MESSAGE;
+import static kl.tennisshop.utils.constants.ResponseMessageConstants.FAILURE_LOGS_NOT_FOUND_MESSAGE;
 
 @Service
 @Transactional
@@ -51,11 +55,17 @@ public class LoggerServiceImpl implements LoggerService {
 
     @Override
     public List<LoggerServiceModel> getLogsByUsername(String username) {
-        return this.loggerRepository
+        List<LoggerServiceModel> logsByUsername = this.loggerRepository
                 .findAllByUsernameOrderByTimeDesc(username)
                 .stream()
                 .map(x -> this.modelMapper.map(x, LoggerServiceModel.class))
                 .collect(Collectors.toUnmodifiableList());
+
+        if(logsByUsername.size() == 0){
+            throw new CustomException(FAILURE_LOGS_NOT_FOUND_MESSAGE);
+        }
+
+        return logsByUsername;
     }
 
     @Override
@@ -64,12 +74,28 @@ public class LoggerServiceImpl implements LoggerService {
             this.loggerRepository.deleteAll();
 
         }catch (Exception e){
-            throw new CustomException("Logs clearing error.");
+            throw new CustomException(FAILURE_LOGS_CLEARING_ERROR_MESSAGE);
         }
         return true;
     }
 
-    @Scheduled(cron = "* */10 * * * *")
+    @Override
+    public boolean deleteByName(String username) {
+        List<Logger> loggers = new ArrayList<>();
+        try{
+            loggers =  this.loggerRepository.deleteAllByUsername(username);
+
+        }catch (Exception e){
+            throw new CustomException(FAILURE_LOGS_CLEARING_ERROR_MESSAGE);
+        }
+
+        if(loggers.size() == 0){
+            throw new CustomException(FAILURE_LOGS_NOT_FOUND_MESSAGE);
+        }
+        return true;
+    }
+
+    @Scheduled(cron = "* */30 * * * *")
     public void testSchedule(){
         System.out.println("Logs deleted successfully");
         this.deleteAll();

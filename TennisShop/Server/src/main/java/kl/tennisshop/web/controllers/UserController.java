@@ -46,9 +46,7 @@ public class UserController {
 //        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
         if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
-//            throw new IllegalArgumentException("Passwords do not match.");
             throw new BadRequestException(PASSWORDS_MISMATCH_ERROR_MESSAGE);
-//            return ResponseEntity.badRequest().body("Error: Passwords do not match!");
         }
 
         UserServiceModel user = modelMapper.map(userRegisterBindingModel, UserServiceModel.class);

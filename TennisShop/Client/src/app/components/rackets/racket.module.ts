@@ -10,16 +10,17 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MDBBootstrapModule, WavesModule, CardsFreeModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { UserModule } from '../users/users.module';
 
+
 // Components and Directives
 import { racketComponents } from '.';
 
 // Services
 import { RacketService } from './racket.service';
-
+import { CategoryService } from './../categories/category.service';
 
 @NgModule({
     imports: [
-        FormsModule,
+FormsModule,
         CommonModule,
         RouterModule,
         CustomFormsModule,
@@ -32,14 +33,14 @@ import { RacketService } from './racket.service';
         InputsModule,
         ButtonsModule,
         CardsFreeModule,
-        UserModule
-
+        UserModule,
     ],
     declarations: [
         ...racketComponents,
     ],
     providers: [
-        RacketService
+        RacketService,
+        CategoryService
     ],
     exports: []
 })

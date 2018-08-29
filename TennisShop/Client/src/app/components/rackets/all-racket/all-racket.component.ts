@@ -5,7 +5,7 @@ import { DetailsRacketModel } from '../models/deatils-racket.model';
 
 import { NgProgress } from 'ngx-progressbar';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../users/services/users.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class AllRacketComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.spinner.show();
+    // this.spinner.show();
     // this.racketsObs = this.racketService.getAll()
     // this.ngProgress.done();
 
@@ -37,7 +37,7 @@ export class AllRacketComponent implements OnInit {
         debugger;
         this.rackets = res;
         console.log('allRackets res: ', res);
-        this.spinner.hide();
+        // this.spinner.hide();
         // setTimeout(() => {
         //   this.spinner.hide();
         // }, 5000);

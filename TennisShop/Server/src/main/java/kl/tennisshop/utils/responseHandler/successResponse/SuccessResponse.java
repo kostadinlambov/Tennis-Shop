@@ -1,8 +1,5 @@
 package kl.tennisshop.utils.responseHandler.successResponse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.Serializable;
 import java.util.Date;
 

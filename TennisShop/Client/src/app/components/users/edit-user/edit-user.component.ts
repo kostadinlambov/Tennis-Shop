@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterUser } from '../models/register-user.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-edit-user',

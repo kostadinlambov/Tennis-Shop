@@ -13,7 +13,7 @@
         <div class="row space-top">
             
             <div class="col-md-6">
-                <div class="form-group ">
+                <!-- <div class="form-group ">
                     <label class="form-control-label" for="new-categoryName">Category Name</label>
                     <input 
                       class="form-control" 
@@ -27,8 +27,24 @@
                     >
                     <div class="alert alert-danger" *ngIf="categoryNameField.invalid && (categoryNameField.dirty || categoryNameField.touched)">
                       <div *ngIf="categoryNameField.errors.required">Category Name is required</div>
-                    </div>
-              </div>
+                    </div> -->
+                    <label class="form-control-label" for="new-categoryName">Category Name (select one):</label>
+                    <select 
+                        class="form-control" 
+                        id="new-categoryName" 
+                        [(ngModel)]="bindingModel.categoryName" 
+                        name="categoryName"
+                        #categoryNameField="ngModel" 
+                        ngModel 
+                        required
+                        >
+                      <!-- <option value="" disabled selected>Select Category Name...</option> -->
+                      <option *ngFor="let category of allCategories$ | async" [ngValue]="category.name">{{category.name}}</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="categoryNameField.invalid && (categoryNameField.dirty || categoryNameField.touched)">
+                        <div *ngIf="categoryNameField.errors.required">Category Name is required</div>
+                      </div> 
+              <!-- </div> -->
                 <div class="form-group ">
                     <label class="form-control-label" for="new-racketName">Racket Name</label>
                     <input 
@@ -48,9 +64,6 @@
                     </div>
               </div>
 
-
-              
-            
                 <div class="form-group">
                     <label class="form-control-label" for="new-price">Price</label>
                     <input 
@@ -189,7 +202,6 @@
                       ngModel
                       >
                 </div>
-             
             </div>
         </div>
         <div >

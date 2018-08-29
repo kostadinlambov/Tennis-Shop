@@ -50,6 +50,7 @@ public class ApplicationSecurityConfiguration
                         "/orders/all",
                         "/orders/checkout",
                         "/orders/remove",
+                        "/orders/edit",
                         "/rackets/test",
                         "/users/update"
                         ).permitAll()
@@ -57,6 +58,7 @@ public class ApplicationSecurityConfiguration
                         "/rackets/details",
                         "/rackets/create",
                         "/rackets/edit",
+                        "/rackets/categories",
                         "/users/all",
                         "/users/promote",
                         "/users/demote",
@@ -71,7 +73,8 @@ public class ApplicationSecurityConfiguration
                         "categories/delete",
                         "logs/all",
                         "logs/findByUserName",
-                        "logs/clear"
+                        "logs/clear",
+                        "logs/clearByName"
                 ).hasAnyAuthority("ADMIN", "ROOT")
                 .antMatchers(  "/rackets/delete", "/users/delete", "categories/delete").hasAuthority("ROOT")
                 .anyRequest().authenticated()
