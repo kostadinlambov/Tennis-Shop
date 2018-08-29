@@ -1,0 +1,26 @@
+<!-- Card -->
+<div *ngIf="racket">
+  <mdb-card>
+    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+      <!-- Card img -->
+      <mdb-card-img src="{{racket.mainImageUrl}}" alt="Card image cap"></mdb-card-img>
+      <a>
+        <div class="mask"></div>
+      </a>
+    </div>
+    <!--Card content-->
+    <mdb-card-body class="card">
+      <!--Title-->
+      <mdb-card-title>
+        <h4>{{racket.name}}</h4>
+      </mdb-card-title>
+      <!--Text-->
+      <mdb-card-text> Price: ${{racket.price}} </mdb-card-text>
+      <a class="btn btn-info  waves-light" routerLink="/racket/details/{{racket.id}}" mdbWavesEffect>Details</a>
+      <a *ngIf="userService.isAdmin()" routerLink="/racket/delete/{{racket.id}}" class="btn btn-danger  waves-light m-2"
+        mdbWavesEffect>Delete</a>
+      <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{racket.id}}" class="btn btn-warning   waves-lightm-2"
+        mdbWavesEffect>Edit</a>
+    </mdb-card-body>
+  </mdb-card>
+</div>

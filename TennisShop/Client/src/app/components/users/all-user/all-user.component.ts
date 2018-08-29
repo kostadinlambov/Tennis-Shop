@@ -3,11 +3,13 @@ import { Observable } from 'rxjs';
 import { AllUserModel } from '../models/all-user.model';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { allUserAnimations } from './all-user.animations';
 
 @Component({
   selector: 'app-all-user',
   templateUrl: './all-user.component.html',
-  styleUrls: ['./all-user.component.css']
+  styleUrls: ['./all-user.component.css'],
+  animations: allUserAnimations
 })
 export class AllUserComponent implements OnInit {
   allUsers: Observable<AllUserModel[]>;

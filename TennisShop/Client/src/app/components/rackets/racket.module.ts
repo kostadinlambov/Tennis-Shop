@@ -17,6 +17,7 @@ import { racketComponents } from '.';
 // Services
 import { RacketService } from './racket.service';
 import { CategoryService } from './../categories/category.service';
+import { RacketComponent } from './racket/racket.component';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ FormsModule,
     ],
     declarations: [
         ...racketComponents,
+        RacketComponent,
     ],
     providers: [
         RacketService,

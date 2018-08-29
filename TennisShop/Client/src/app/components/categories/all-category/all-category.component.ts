@@ -5,11 +5,13 @@ import { CategoryService } from '../category.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../../users/services/users.service';
 import { CreateCategoryModel } from './models/create-category.model';
+import { allCategoryAnimations } from './all-category.animations';
 
 @Component({
   selector: 'app-all-category',
   templateUrl: './all-category.component.html',
-  styleUrls: ['./all-category.component.css']
+  styleUrls: ['./all-category.component.css'],
+  animations: allCategoryAnimations
 })
 export class AllCategoryComponent implements OnInit {
   allCategories$: Observable<AllCategoryModel[]>;

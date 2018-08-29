@@ -12,7 +12,7 @@
       </thead>
       <tbody>
 
-        <tr class="row" *ngFor="let item of allUsers | async; index as i">
+        <tr class="row" [@list2] *ngFor="let item of allUsers | async; index as i">
           <td class="col-md-1" scope="col">
             <h5>{{i+1}}</h5>
           </td>

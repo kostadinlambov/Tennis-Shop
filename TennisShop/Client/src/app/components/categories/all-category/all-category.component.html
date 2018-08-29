@@ -50,7 +50,7 @@
     </thead>
     <tbody>
 
-      <tr class="row" *ngFor="let item of allCategories$ | async; index as i">
+      <tr class="row" *ngFor="let item of allCategories$ | async; index as i" > 
         <td class="col-md-2" scope="col">
           <h5>{{i+1}}</h5>
         </td>
@@ -100,7 +100,7 @@
       </thead>
       <tbody>
 
-        <tr class="row" *ngFor="let item of allDeletedCategories$ | async; index as i">
+        <tr class="row" *ngFor="let item of allDeletedCategories$ | async; index as i" > 
           <td class="col-md-2" scope="col">
             <h5>{{i+1}}</h5>
           </td>

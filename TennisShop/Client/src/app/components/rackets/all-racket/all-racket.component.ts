@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RacketService } from '../racket.service';
 import { Observable } from 'rxjs';
 import { DetailsRacketModel } from '../models/deatils-racket.model';
+import {allRacketAnimations} from './all-racket.animations';
 
 import { NgProgress } from 'ngx-progressbar';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +12,8 @@ import { UsersService } from '../../users/services/users.service';
 @Component({
   selector: 'app-all-racket',
   templateUrl: './all-racket.component.html',
-  styleUrls: ['./all-racket.component.css']
+  styleUrls: ['./all-racket.component.css'],
+  animations: allRacketAnimations
 })
 export class AllRacketComponent implements OnInit {
 
@@ -19,6 +21,7 @@ export class AllRacketComponent implements OnInit {
   rackets: DetailsRacketModel[];
   pageSize: number = 3;
   currentPage: number = 1;
+  racket: Object;
 
   constructor(
     private racketService: RacketService,

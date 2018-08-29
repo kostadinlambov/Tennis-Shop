@@ -12,70 +12,12 @@
   </div>
   <div class="row space-top">
 
-    <div class="col-md-4" *ngFor="let item of rackets | paginate: {
+    <div class="col-md-4" [@list2] *ngFor="let item of rackets | paginate: {
         id: 'AllRackets',
         itemsPerPage: pageSize,
         currentPage: currentPage
       }">
-      <!-- <div class="card text-white bg-primary">
-        <div class="card-body">
-          <blockquote class="card-blockquote">
-            <div className="container d-flex justify-content-between mt-5">
-              <div className="p-2">
-                <img src="{{item.mainImageUrl}}" width="" height="" />
-              </div>
-              <div>
-                <br>
-                <h5 class="text-dark">{{item.name}}</h5>
-                <br>
-                <p ng-style="{text-color: red}">Head Size: {{item.headSize}}</p>
-                <p>Weight: {{item.weight}}</p>
-                <p>String Pattern: {{item.stringPattern}}</p>
-                <p>Price: ${{item.price}}</p>
-                <div class="pull-right">
-                  <a class="btn btn-info" routerLink="/racket/details/{{item.id}}">Details</a>
-                  <a *ngIf="userService.isAdmin()" routerLink="/racket/delete/{{item.id}}" class="btn btn-danger m-2">Delete</a>
-                  <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning m-2">Edit</a>
-                </div>
-              </div>
-
-
-            </div>
-          </blockquote>
-        </div>
-
-      </div> -->
-
-      <!-- Card -->
-      <mdb-card >
-        <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-          <!-- Card img -->
-          <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
-          <mdb-card-img src="{{item.mainImageUrl}}" alt="Card image cap"></mdb-card-img>
-         
-          <!-- <mdb-card-img style="width: 100px; height: 200px;" src="http://www.britishtennisshop.com/Images/ExtraLarge/head_ti_s6_tennis_racket_black.jpg" alt="Racket image"></mdb-card-img> -->
-          <!-- <mdb-card-img src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg" alt="Card image cap"></mdb-card-img> -->
-          <a>
-            <div class="mask"></div>
-          </a>
-        </div>
-        <!--Card content-->
-        <mdb-card-body class="card">
-          <!--Title-->
-          <mdb-card-title>
-            <h4>{{item.name}}</h4>
-          </mdb-card-title>
-
-          <!--Text-->
-          <mdb-card-text> Price: ${{item.price}}  </mdb-card-text>
-          <a class="btn btn-info  waves-light" routerLink="/racket/details/{{item.id}}" mdbWavesEffect>Details</a>
-          <a *ngIf="userService.isAdmin()" routerLink="/racket/delete/{{item.id}}" class="btn btn-danger  waves-light m-2" mdbWavesEffect>Delete</a>
-          <a *ngIf="userService.isAdmin()" routerLink="/racket/edit/{{item.id}}" class="btn btn-warning   waves-lightm-2" mdbWavesEffect>Edit</a>
-        </mdb-card-body>
-      </mdb-card>
-
-      <!-- Card -->
- 
+      <app-racket  [racket]="item"></app-racket>
     </div>
   </div>
 
