@@ -55,7 +55,7 @@ public class RacketController {
             @RequestParam(name = "categoryName") String categoryName) throws IOException {
 
         RacketCreateBindingModel racketCreateBindingModel = new RacketCreateBindingModel(name,description,price, headSize, weight, stringPattern, categoryName);
-        
+
         RacketServiceModel racketServiceModel = this.modelMapper
                 .map(racketCreateBindingModel, RacketServiceModel.class);
 

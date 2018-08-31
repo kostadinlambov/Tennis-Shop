@@ -46,12 +46,6 @@ export class CreateRacketComponent implements OnInit {
     data.append('stringPattern', this.bindingModel.stringPattern);
     data.append('mainImageUrl', this.bindingModel.mainImageUrl.get('mainImageUrl'));
     debugger;
-    // this.racketService
-    //   .createRacket(data)
-    //   .subscribe(
-    //     res => console.log('create Res: ', res),
-    //     err => console.log('create Err: ', err),
-    //   );
 
     this.spinner.show();
       this.racketService
@@ -75,8 +69,16 @@ export class CreateRacketComponent implements OnInit {
     this.bindingModel.mainImageUrl = this.fd;
     console.log('bindingModel: ', this.bindingModel);
     console.log('bindingModel: ', this.fd);
+
+    // Show image preview
+    const reader = new FileReader();
+    reader.onload = (event1: any) => {
+      this.imageUrl = event1.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
-  onUpload(){
+
+  onUpload() {
     const fd = new FormData();
     fd.append('image', this.selectedFile, this.selectedFile.name);
     this.racketService.uploadFile(fd).subscribe(

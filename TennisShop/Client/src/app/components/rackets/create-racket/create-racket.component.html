@@ -88,7 +88,7 @@
                   <textarea 
                     class="form-control" 
                     id="new-description" 
-                    rows="8"
+                    rows="11"
                     cols="6"
                     name="description"
                     [(ngModel)]="bindingModel.description"
@@ -180,8 +180,11 @@
 
                     
                 <div class="form-group">
-                  <label class="form-control-label" for="new-mainImageUrl">Main Image URL</label>
-                  <img  [src]="imageUrl" style="width:250px;height:200px" (change)="handleFileInput($event.target.files)">
+                    <div>
+                        <label class="form-control-label" for="new-mainImageUrl">Image</label>
+                    </div>
+                    <img  [src]="imageUrl" style="width:250px;height:200px" (change)="handleFileInput($event.target.files)">
+                 
                   <input 
                     class="form-control" 
                     style="display: none"
@@ -194,14 +197,15 @@
                     required
                     ngModel
                   >
-                  <!-- <button type="button" (click)="mainImageUrlField.click()">Pick File</button> -->
-                  <button  type="button" (click)="mainImageUrlField.click()">Pick File</button>
+                  <div>
+                      <button  type="button" class="btn btn-info" (click)="mainImageUrlField.click()">Pick File</button>
+                  </div>
                   <!-- <button type="button" (click)="onUpload()">Upload</button> -->
                   <div class="alert alert-danger" *ngIf="mainImageUrlField.invalid && (mainImageUrlField.dirty || mainImageUrlField.touched)">
-                        <div *ngIf="mainImageUrlField.errors.required">Main Image URL is required.</div>
+                        <div *ngIf="mainImageUrlField.errors.required">Image is required.</div>
                   </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" for="new-secondImageUrl">Second Image URL (optional)</label>
                     <input 
                       class="form-control" 
@@ -224,7 +228,7 @@
                       #secondImageUrlField="ngModel"
                       ngModel
                       >
-                </div>
+                </div> -->
             </div>
         </div>
         <div >

@@ -7,8 +7,9 @@ export class DetailsRacketModel {
         public headSize: number,
         public weight: number,
         public stringPattern: string,
+        // public mainImageUrl: string,
         public mainImageUrl: FormData,
-        public secondImageUrl?: FormData,
-        public thirdImageUrl?: FormData,
+        // public secondImageUrl?: FormData,
+        // public thirdImageUrl?: FormData,
     ) { }
 }

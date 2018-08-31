@@ -36,7 +36,7 @@ export class EditRacketComponent implements OnInit {
   edit() {
     this.racketService.editRacket(this.bindingModel['id'], this.bindingModel)
       .subscribe(data => {
-        console.log('editRacketById: ', data);
+        console.log('editRacketById: ', data); 
       });
   }
 }
