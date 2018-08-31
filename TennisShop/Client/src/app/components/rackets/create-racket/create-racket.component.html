@@ -9,7 +9,7 @@
 
         </div>
     </div>
-    <form #createForm="ngForm" (ngSubmit)="createRacket(createForm)" >
+    <form #createForm="ngForm" (ngSubmit)="createRacket(createForm)" enctype="multipart/form-data">
         <div class="row space-top">
             
             <div class="col-md-6">
@@ -162,7 +162,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" for="new-mainImageUrl">Main Image URL</label>
                     <input 
                       class="form-control" 
@@ -176,7 +176,30 @@
                     >
                     <div class="alert alert-danger" *ngIf="mainImageUrlField.invalid && (mainImageUrlField.dirty || mainImageUrlField.touched)">
                           <div *ngIf="mainImageUrlField.errors.required">Main Image URL is required.</div>
-                    </div>
+                    </div> -->
+
+                    
+                <div class="form-group">
+                  <label class="form-control-label" for="new-mainImageUrl">Main Image URL</label>
+                  <img  [src]="imageUrl" style="width:250px;height:200px" (change)="handleFileInput($event.target.files)">
+                  <input 
+                    class="form-control" 
+                    style="display: none"
+                    id="new-mainImageUrl" 
+                    type="file"
+                    accept="img/*"
+                    name="mainImageUrl"
+                    (change) = "onFileSelected($event)"
+                    #mainImageUrlField 
+                    required
+                    ngModel
+                  >
+                  <!-- <button type="button" (click)="mainImageUrlField.click()">Pick File</button> -->
+                  <button  type="button" (click)="mainImageUrlField.click()">Pick File</button>
+                  <!-- <button type="button" (click)="onUpload()">Upload</button> -->
+                  <div class="alert alert-danger" *ngIf="mainImageUrlField.invalid && (mainImageUrlField.dirty || mainImageUrlField.touched)">
+                        <div *ngIf="mainImageUrlField.errors.required">Main Image URL is required.</div>
+                  </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="new-secondImageUrl">Second Image URL (optional)</label>

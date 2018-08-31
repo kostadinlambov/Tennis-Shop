@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Payment  extends BaseEntity {
-//    private String id;
     private BigDecimal amount;
     private LocalDateTime entryDate;
     private User user;
@@ -32,20 +31,6 @@ public class Payment  extends BaseEntity {
         this.entryDate = LocalDateTime.now();
         this.order = order;
     }
-
-//    @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator")
-//    @Column(name = "id", nullable = false, unique = true, updatable = false)
-//    public String getId() {
-//        return this.id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
 
     // BiDirectional
     //    @OneToOne(optional = false, mappedBy = "payment", targetEntity = Order.class,

@@ -14,12 +14,6 @@ import java.util.Set;
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 //@DynamicUpdate
 public class Category  extends BaseEntity {
-    // Tour rackets
-    // Allround rackets
-    // Comfort rackets
-    // Junior rackets
-
-//    private String id;
     private String name;
     private Boolean deleted = false;
 
@@ -41,20 +35,6 @@ public class Category  extends BaseEntity {
         this.name = name;
         this.rackets = rackets;
     }
-//
-//    @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator")
-//    @Column(name = "id", nullable = false, unique = true, updatable = false)
-//    public String getId() {
-//        return this.id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
 
     @Column(name = "name", nullable = false)
     public String getName() {
@@ -73,11 +53,6 @@ public class Category  extends BaseEntity {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
-
-
-
-
-
 
     @OneToMany(mappedBy = "category", targetEntity = Racket.class,
             cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

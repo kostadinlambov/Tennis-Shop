@@ -1,6 +1,5 @@
 package kl.tennisshop.domain.models.bindingModels.racket;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import kl.tennisshop.utils.constants.ValidationMessageConstants;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class RacketCreateBindingModel implements Serializable {
+public class RacketCreateBindingModel_old implements Serializable {
     private String name;
     private String description;
     private BigDecimal price;
@@ -21,26 +20,26 @@ public class RacketCreateBindingModel implements Serializable {
     private String stringPattern;
     private String categoryName;
 
-    @JsonIgnore
-    private String mainImageUrl;
+//    private String mainImageUrl;
 //    private String secondImageUrl;
 //    private String thirdImageUrl;
-//    private MultipartFile mainImageUrl;
-//    private MultipartFile secondImageUrl;
-//    private MultipartFile thirdImageUrl;
 
-    public RacketCreateBindingModel() {
+    private MultipartFile mainImageUrl;
+    private MultipartFile secondImageUrl;
+    private MultipartFile thirdImageUrl;
+
+    public RacketCreateBindingModel_old() {
     }
 
-    public RacketCreateBindingModel(String name, String description, BigDecimal price, BigDecimal headSize, BigDecimal weight, String stringPattern, String categoryName) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.headSize = headSize;
-        this.weight = weight;
-        this.stringPattern = stringPattern;
-        this.categoryName = categoryName;
-    }
+//    public RacketCreateBindingModel(String name, String description, BigDecimal price, BigDecimal headSize, BigDecimal weight, String stringPattern, String categoryName) {
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.headSize = headSize;
+//        this.weight = weight;
+//        this.stringPattern = stringPattern;
+//        this.categoryName = categoryName;
+//    }
 
     @Size(min = 5, message = ValidationMessageConstants.RACKET_INVALID_RACKET_NAME_MESSAGE)
     public String getName() {
@@ -110,30 +109,29 @@ public class RacketCreateBindingModel implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public String getMainImageUrl() {
+    public MultipartFile getMainImageUrl() {
         return this.mainImageUrl;
     }
 
-    public void setMainImageUrl(String mainImageUrl) {
+    public void setMainImageUrl(MultipartFile mainImageUrl) {
         this.mainImageUrl = mainImageUrl;
     }
 
-    //
-//    public MultipartFile getSecondImageUrl() {
-//        return this.secondImageUrl;
-//    }
-//
-//    public void setSecondImageUrl(MultipartFile secondImageUrl) {
-//        this.secondImageUrl = secondImageUrl;
-//    }
-//
-//    public MultipartFile getThirdImageUrl() {
-//        return this.thirdImageUrl;
-//    }
-//
-//    public void setThirdImageUrl(MultipartFile thirdImageUrl) {
-//        this.thirdImageUrl = thirdImageUrl;
-//    }
+    public MultipartFile getSecondImageUrl() {
+        return this.secondImageUrl;
+    }
+
+    public void setSecondImageUrl(MultipartFile secondImageUrl) {
+        this.secondImageUrl = secondImageUrl;
+    }
+
+    public MultipartFile getThirdImageUrl() {
+        return this.thirdImageUrl;
+    }
+
+    public void setThirdImageUrl(MultipartFile thirdImageUrl) {
+        this.thirdImageUrl = thirdImageUrl;
+    }
 
     //    @NotNull(message = ValidationMessageConstants.RACKET_MAIN_IMAGE_URL_REQUIRED_MESSAGE)
 //    @Length(min = 1, message = ValidationMessageConstants.RACKET_MAIN_IMAGE_URL_REQUIRED_MESSAGE)

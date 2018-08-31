@@ -29,6 +29,7 @@
                       <div *ngIf="categoryNameField.errors.required">Category Name is required</div>
                     </div> -->
                     <label class="form-control-label" for="new-categoryName">Category Name (select one):</label>
+                   
                     <select class="form-control" id="new-categoryName" [(ngModel)]="bindingModel.categoryName" name="categoryName" ngModel >
                       <option *ngFor="let category of allCategories$ | async"  >{{category.name}}</option>
                     </select>
@@ -170,7 +171,7 @@
                     style="display: none"
                     (change) = "onFileSelected($event)"
                     id="new-mainImageUrl" 
-                    type="text"
+                    type="file"
                     name="mainImageUrl"
                     [(ngModel)]="bindingModel.mainImageUrl"
                     #mainImageUrlField="ngModel"

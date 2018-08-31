@@ -13,9 +13,15 @@ export class RacketService {
 
     constructor(private http: HttpClient) { }
 
-    createRacket(data: CreateRacketModel) {
+    // createRacket(data, fileToUpload) {
+    createRacket(data) {
+        // const uploadData = {data, fileToUpload};
         return this.http.post(baseUrl + 'create' , data);
     }
+
+    // createRacket(data: CreateRacketModel) {
+    //     return this.http.post(baseUrl + 'create' , data);
+    // }
 
     getAll(): Observable<DetailsRacketModel[]> {
         return this.http.get<DetailsRacketModel[]>(baseUrl + 'all');

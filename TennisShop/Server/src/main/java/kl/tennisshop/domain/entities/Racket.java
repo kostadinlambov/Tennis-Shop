@@ -15,7 +15,6 @@ import java.util.Set;
 //@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class)
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Racket   extends BaseEntity{
-//    private String id;
     private String name;
     private String description;
     private BigDecimal price;
@@ -73,20 +72,6 @@ public class Racket   extends BaseEntity{
 //        this.feedbackSet = feedbackSet;
         this.feedbackSet = new HashSet<>();
     }
-
-//    @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator")
-//    @Column(name = "id", nullable = false, unique = true, updatable = false)
-//    public String getId() {
-//        return this.id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
 
 //    @OneToMany(targetEntity = Order.class, mappedBy = "racket", fetch = FetchType.EAGER)
 //    public Set<Order> getOrders() {

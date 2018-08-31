@@ -15,11 +15,14 @@ import kl.tennisshop.utils.responseHandler.successResponse.SuccessResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,8 +43,29 @@ public class RacketController {
         this.cloudinaryService = cloudinaryService;
     }
 
-    @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity createRacket(@RequestBody @Valid RacketCreateBindingModel racketCreateBindingModel) throws IOException {
+    @PostMapping(value = "/create")
+    public ResponseEntity createRacket(
+            @RequestParam(name = "mainImageUrl") MultipartFile mainImageUrl,
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "description") String description,
+            @RequestParam(name = "price") BigDecimal price,
+            @RequestParam(name = "headSize") BigDecimal headSize,
+            @RequestParam(name = "weight") BigDecimal weight,
+            @RequestParam(name = "stringPattern") String stringPattern,
+            @RequestParam(name = "categoryName") String categoryName) throws IOException {
+
+        RacketCreateBindingModel racketCreateBindingModel = new RacketCreateBindingModel(name,description,price, headSize, weight, stringPattern, categoryName);
+        
+        RacketServiceModel racketServiceModel = this.modelMapper
+                .map(racketCreateBindingModel, RacketServiceModel.class);
+
+        String pictureUrl = this.cloudinaryService.uploadImage(mainImageUrl);
+
+        if (pictureUrl == null) {
+            throw new IllegalArgumentException("Racket Picture upload failed.");
+        }
+
+        racketCreateBindingModel.setMainImageUrl(pictureUrl);
 
         boolean result = this.racketService.saveRacket(this.modelMapper.map(racketCreateBindingModel, RacketServiceModel.class));
 
@@ -73,7 +97,6 @@ public class RacketController {
         }
         throw new CustomException(ResponseMessageConstants.SERVER_ERROR_MESSAGE);
     }
-
 
     @GetMapping(value = "/all", produces = "application/json")
     public @ResponseBody

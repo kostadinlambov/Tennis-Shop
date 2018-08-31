@@ -8,28 +8,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "roles")
 public class UserRole  extends BaseEntity implements GrantedAuthority {
-//    private String id;
     private String authority;
 
 //    private Set<User> user;
 
     public UserRole() {
     }
-
-//    @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator")
-//    @Column(name = "id", nullable = false, unique = true, updatable = false)
-//    public String getId() {
-//        return this.id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-
 
     @Column(name = "authority", nullable = false)
     public String getAuthority() {
