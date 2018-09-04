@@ -2,10 +2,8 @@ package kl.tennisshop.web.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kl.tennisshop.domain.models.bindingModels.category.CategoryEditBindingModel;
 import kl.tennisshop.domain.models.bindingModels.order.OrderEditBindingModel;
 import kl.tennisshop.domain.models.bindingModels.order.OrderRacketBindingModel;
-import kl.tennisshop.domain.models.serviceModels.CategoryServiceModel;
 import kl.tennisshop.domain.models.viewModels.order.OrderViewModel;
 import kl.tennisshop.services.OrderService;
 import kl.tennisshop.utils.constants.ResponseMessageConstants;

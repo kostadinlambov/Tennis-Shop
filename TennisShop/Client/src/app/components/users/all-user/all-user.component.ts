@@ -4,6 +4,7 @@ import { AllUserModel } from '../models/all-user.model';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
 import { allUserAnimations } from './all-user.animations';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-all-user',
@@ -12,11 +13,13 @@ import { allUserAnimations } from './all-user.animations';
   animations: allUserAnimations
 })
 export class AllUserComponent implements OnInit {
-  allUsers: Observable<AllUserModel[]>;
+  allUsers$: Observable<AllUserModel[]>;
+  allUsers: AllUserModel[];
   users: Object;
   constructor(
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private ngProgress: NgProgress,
   ) { }
 
   ngOnInit() {
@@ -46,16 +49,19 @@ export class AllUserComponent implements OnInit {
   }
 
   loadUsers() {
-    this.allUsers = this.userService.getAll();
-    // this.userService.getAll().subscribe(
-    //   res => {
-    //     debugger;
-    //     console.log('allUsers res: ', res);
-    //   },
-    //   err => {
-    //     debugger;
-    //     console.log('allUsers error: ', err);
-    //   });
+    this.ngProgress.start();
+    // this.allUsers$ = this.userService.getAll();
+    this.userService.getAll().subscribe(
+      res => {
+        debugger;
+        this.allUsers = res;
+        this.ngProgress.done();
+        console.log('allUsers res: ', res);
+      },
+      err => {
+        debugger;
+        console.log('allUsers error: ', err);
+      });
   }
 
   isRoot(role) {

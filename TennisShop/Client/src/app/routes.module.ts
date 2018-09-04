@@ -4,8 +4,6 @@ import { RacketModule } from './components/rackets/racket.module';
 import { UserModule } from './components/users/users.module';
 import { CategoryModule } from './components/categories/category.module';
 
-import { AuthGuard } from './core/guards/auth.guard';
-
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/pages/home/home.component';
 

@@ -90,7 +90,7 @@ public class RacketCreateBindingModel implements Serializable {
         this.weight = weight;
     }
 
-    @NotNull(message = ValidationMessageConstants.RACKET_STRING_PATTERN_REQUIRED_MESSAGE)
+//    @NotNull(message = ValidationMessageConstants.RACKET_STRING_PATTERN_REQUIRED_MESSAGE)
     @Length(min = 1, message = ValidationMessageConstants.RACKET_STRING_PATTERN_REQUIRED_MESSAGE)
     public String getStringPattern() {
         return this.stringPattern;
@@ -100,7 +100,7 @@ public class RacketCreateBindingModel implements Serializable {
         this.stringPattern = stringPattern;
     }
 
-    @NotNull(message = ValidationMessageConstants.RACKET_CATEGORY_NAME_REQUIRED_MESSAGE)
+//    @NotNull(message = ValidationMessageConstants.RACKET_CATEGORY_NAME_REQUIRED_MESSAGE)
     @Length(min = 1, message = ValidationMessageConstants.RACKET_CATEGORY_NAME_REQUIRED_MESSAGE)
     public String getCategoryName() {
         return this.categoryName;

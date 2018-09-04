@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   username;
   constructor(
     private toastr: ToastrService,
-  private userService: UsersService,
+  public userService: UsersService,
   private router: Router
 ) { }
 

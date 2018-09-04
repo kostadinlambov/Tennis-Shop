@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../users/services/users.service';
 import { CreateCategoryModel } from './models/create-category.model';
 import { allCategoryAnimations } from './all-category.animations';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-all-category',
@@ -16,12 +17,13 @@ import { allCategoryAnimations } from './all-category.animations';
 export class AllCategoryComponent implements OnInit {
   allCategories$: Observable<AllCategoryModel[]>;
   allDeletedCategories$: Observable<AllCategoryModel[]>;
-  allCategories: AllCategoryModel[] = [];
+  allCategories: AllCategoryModel[];
   category: CreateCategoryModel;
   constructor(
     private categoryService: CategoryService,
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private ngProgress: NgProgress
   ) {
     this.category = new CreateCategoryModel('');
    }
@@ -32,18 +34,20 @@ export class AllCategoryComponent implements OnInit {
 
 
   loadCategories() {
-    this.allCategories$ = this.categoryService.getAll();
+    this.ngProgress.start();
+    // this.allCategories$ = this.categoryService.getAll();
     this.allDeletedCategories$ = this.categoryService.getAllDeleted();
-    // this.categoryService.getAll().subscribe(
-      // res => {
-      //   debugger;
-      //   this.allCategories = res;
-      //   console.log('allUsers res: ', res);
-      // },
-      // err => {
-      //   debugger;
-      //   console.log('allUsers error: ', err);
-      // });
+    this.categoryService.getAll().subscribe(
+      res => {
+        debugger;
+        this.allCategories = res;
+        this.ngProgress.done();
+        console.log('allUsers res: ', res);
+      },
+      err => {
+        debugger;
+        console.log('allUsers error: ', err);
+      });
   }
 
   create(formData) {

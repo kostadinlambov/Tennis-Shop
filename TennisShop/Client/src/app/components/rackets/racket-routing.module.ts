@@ -16,7 +16,6 @@ const racketRoutes: Routes = [
     { path: 'details/:id', component: DetailsRacketComponent, canActivate: [AuthGuard] },
     { path: 'delete/:id', component: DeleteRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'edit/:id', component: EditRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    // { path: 'my', component: MyFurnitureComponent, canActivate: [AuthGuard] },
 ];
 
 

@@ -3,6 +3,7 @@ import { OrderModel } from '../models/order.model';
 import { Observable } from 'rxjs';
 import { UsersService } from '../services/users.service';
 import { OrderService } from '../services/order.service';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,14 +12,15 @@ import { OrderService } from '../services/order.service';
 })
 export class ShoppingCartComponent implements OnInit {
   // orders$: Observable<OrderModel[]>;
-  orders: OrderModel[] = [];
+  orders: OrderModel[];
   totalPrice: number = 0;
   userId: string;
   newTotalPrice: number = 0;
 
   constructor(
     private userService: UsersService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private ngProgress: NgProgress
   ) {
     this.userId = this.userService.getId();
    }
@@ -39,6 +41,7 @@ export class ShoppingCartComponent implements OnInit {
 
   load() {
     debugger;
+    this.ngProgress.start();
     const id = this.userService.getId();
     let sum = 0;
     this.orderService.loadOrders(id).subscribe(
@@ -53,6 +56,7 @@ export class ShoppingCartComponent implements OnInit {
         // this.totalPrice = sum;
         this.orders = res;
         this.calculateTotalPrice() ;
+        this.ngProgress.done();
       },
       err => console.log('loadOrders err:', err),
     );

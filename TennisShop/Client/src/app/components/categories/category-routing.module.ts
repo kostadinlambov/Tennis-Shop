@@ -8,11 +8,6 @@ import { AllCategoryComponent } from "./all-category/all-category.component";
 
 const categoryRoutes: Routes = [
     { path: 'all', component: AllCategoryComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-    // { path: 'create', component: CreateRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    // { path: 'details/:id', component: DetailsRacketComponent, canActivate: [AuthGuard] },
-    // { path: 'delete/:id', component: DeleteRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    // { path: 'edit/:id', component: EditRacketComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    // { path: 'my', component: MyFurnitureComponent, canActivate: [AuthGuard] },
 ];
 
 

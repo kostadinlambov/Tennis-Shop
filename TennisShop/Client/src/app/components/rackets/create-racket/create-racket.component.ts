@@ -47,6 +47,8 @@ export class CreateRacketComponent implements OnInit {
     data.append('mainImageUrl', this.bindingModel.mainImageUrl.get('mainImageUrl'));
     debugger;
 
+    
+
     this.spinner.show();
       this.racketService
       .createRacket(data)

@@ -5,7 +5,7 @@
 
   <div class="mx-auto ">
      
-    <form  #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <form  #registerForm="ngForm" (ngSubmit)="register()">
       <div class="row space-top mx-auto ">
         <div class="col-md-6">
           <div class="form-group">
@@ -185,7 +185,7 @@
           <button 
             type="submit" 
             class="btn btn-success mx-auto"
-            [disabled]="!registerForm.form.valid ||  password?.value !== confirmPassword?.value">
+            [disabled]="!registerForm.form.valid">
             Register
           </button>
          </div>  

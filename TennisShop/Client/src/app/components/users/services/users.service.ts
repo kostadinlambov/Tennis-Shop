@@ -58,22 +58,22 @@ export class UsersService {
         return this.http.post(baseUrl + 'demote?id=' + id, id);
     }
 
-    loadLogs(){
+    loadLogs() {
         const url = 'http://localhost:8000/logs/all';
         return this.http.get<LogModel[]>(url);
     }
 
-    searchByUsername(username: string){
+    searchByUsername(username: string) {
         const url = `http://localhost:8000/logs/findByUserName/${username}`;
         return this.http.get<LogModel[]>(url);
     }
 
-    clearLogs(){
+    clearLogs() {
         const url = 'http://localhost:8000/logs/clear';
         return this.http.delete(url);
     }
 
-    clearLogsByName(username: string){
+    clearLogsByName(username: string) {
         debugger;
         const url = `http://localhost:8000/logs/clearByName/${username}`;
         return this.http.delete(url);
@@ -98,7 +98,7 @@ export class UsersService {
         return false;
     }
 
-    isAdminAfterChangeRole(role){
+    isAdminAfterChangeRole(role) {
         if (role === 'ADMIN' || role === 'ROOT') {
             return true;
         }
@@ -119,7 +119,7 @@ export class UsersService {
         return false;
     }
 
-    checkIfUserIsRoot(userData){
+    checkIfUserIsRoot(userData) {
         debugger;
         const role = userData[0]['authority'];
         if (role === 'ROOT') {
@@ -163,8 +163,4 @@ export class UsersService {
     //     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     //     return currentUser;
     // }
-
-    createCar(formData) {
-        return this.http.post('cars/create', formData);
-    }
 }

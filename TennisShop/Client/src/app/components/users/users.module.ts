@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 import { MDBBootstrapModule, CardsFreeModule, WavesModule, ModalModule, InputsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
+import { NgProgressModule } from 'ngx-progressbar';
 
 // Components
 import { userComponents } from '.';
@@ -26,7 +26,8 @@ FormsModule,
         ModalModule,
         InputsModule,
         ButtonsModule,
-        WavesModule
+        WavesModule,
+        NgProgressModule
     ],
     declarations: [
       ...userComponents,

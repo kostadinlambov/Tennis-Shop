@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { CustomFormsModule } from 'ng5-validation';
 import { CategoryRoutingModule } from './category-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgProgressModule } from 'ngx-progressbar';
 
 // Components and Directives
 import { categoryComponents } from '.';
@@ -21,7 +22,8 @@ import { CategoryService } from './category.service';
         RouterModule,
         CustomFormsModule,
         CategoryRoutingModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        NgProgressModule
     ],
     declarations: [
         ...categoryComponents

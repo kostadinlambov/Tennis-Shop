@@ -12,7 +12,7 @@ export class OrderService {
     private currentAuthtoken: string;
     constructor(private http: HttpClient) { }
 
-    placeOrder(payload){
+    placeOrder(payload) {
         return this.http.post(baseUrl + 'order', payload);
     }
 

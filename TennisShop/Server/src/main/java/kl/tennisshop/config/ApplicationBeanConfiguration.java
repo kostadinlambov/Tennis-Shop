@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
@@ -29,8 +29,8 @@ public class ApplicationBeanConfiguration {
     }
 
 //    @Bean
-//    public CommonsMultipartResolver multipartResolver() {
-//        return new CommonsMultipartResolver();
+//    public MethodValidationPostProcessor methodValidationPostProcessor() {
+//        return new MethodValidationPostProcessor();
 //    }
 
     @Bean(name = "multipartResolver")
@@ -39,9 +39,6 @@ public class ApplicationBeanConfiguration {
 //        multipartResolver.setMaxUploadSize(100000);
         return multipartResolver;
     }
-
-
-
 
 
 //    @Bean

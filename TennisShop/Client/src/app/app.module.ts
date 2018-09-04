@@ -13,7 +13,6 @@ import { MDBBootstrapModule, CardsFreeModule, WavesModule, ModalModule, InputsMo
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-
 // Components
 import { AppComponent } from './app.component';
 
