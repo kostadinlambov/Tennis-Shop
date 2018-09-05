@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateRacketModel } from '../models/create-racket.model';
 import { RacketService } from '../racket.service';
 import { Observable } from 'rxjs';
-import { AllCategoryModel } from './../../categories/all-category/models/all-category.model';
-import { CategoryService } from './../../categories/category.service';
+import { AllCategoryModel } from '../../categories/all-category/models/all-category.model';
+import { CategoryService } from '../../categories/category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

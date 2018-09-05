@@ -1,0 +1,6 @@
+{
+  "/": {
+    "target": "https://tennisshop.herokuapp.com",
+    "secure": false
+  }
+}

@@ -74,7 +74,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102282.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536158599/xhtpvptovvdukujvy4ub.jpg",
                     category1);
 
             Racket racket2 = new Racket("Babolat Pure Aero Decima French Open",
@@ -83,7 +83,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/head_ti_s6_tennis_racket_black.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536177745/hu29zuy1xo3cyal3btts.jpg",
                     category1);
 
             Racket racket3 = new Racket("Wilson " +
@@ -93,7 +93,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(612),
                     BigDecimal.valueOf(280),
                     "18/20",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536157224/wrqauz4ncuvjbsjy5ife.jpg",
                     category2);
 
             Racket racket4 = new Racket("Pro Staff 97 Black Countervail Tour Racket",
@@ -102,7 +102,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(626),
                     BigDecimal.valueOf(315),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536117753/olcpedcqa24wx6r08uh7.jpg",
                     category2);
 
             Racket racket5 = new Racket("HEAD MXG 5 Comfort racket",
@@ -111,8 +111,9 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/18",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102385.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536116212/ximr4iebzd3jy7zcifq2.jpg",
                     category3);
+            
             //####################################################################################
 
             Racket racket6 = new Racket("HEAD Graphene XT Radical MP Tour Racket (strung)",
@@ -121,7 +122,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102282.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536072459/p1e8xmunhsktwsdaddkn.jpg",
                     category1);
 
             Racket racket7 = new Racket("Babolat Pure Aero Decima French Open",
@@ -130,7 +131,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/head_ti_s6_tennis_racket_black.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536023253/pq7wvlk5aaohutjgbdru.jpg",
                     category1);
 
             Racket racket8 = new Racket("Wilson " +
@@ -140,7 +141,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "18/20",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536010714/qoly7zbtaerioe4migbh.jpg",
                     category2);
 
             Racket racket9 = new Racket("Pro Staff 97 Black Countervail Tour Racket",
@@ -149,7 +150,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/19",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102239.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536023253/pq7wvlk5aaohutjgbdru.jpg",
                     category2);
 
             Racket racket10 = new Racket("HEAD MXG 5 Comfort racket",
@@ -158,7 +159,7 @@ public class EntitiesSeedExecutor {
                     BigDecimal.valueOf(630),
                     BigDecimal.valueOf(295),
                     "16/18",
-                    "http://www.britishtennisshop.com/Images/ExtraLarge/Bab_102385.jpg",
+                    "http://res.cloudinary.com/tennis-shop/image/upload/v1536072459/p1e8xmunhsktwsdaddkn.jpg",
                     category3);
 
             this.racketService.persistRacket(racket1);

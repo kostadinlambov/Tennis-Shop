@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { OrderModel } from '../models/order.model';
 
-const baseUrl = 'http://localhost:8000/orders/';
+const baseUrl = 'https://tennisshop.herokuapp.com/orders/';
 
 
 @Injectable()

@@ -10,9 +10,12 @@ import { HomeComponent } from './components/pages/home/home.component';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent},
-    { path: 'user', loadChildren: () => UserModule },
-    { path: 'racket', loadChildren: () => RacketModule },
-    { path: 'category', loadChildren: () => CategoryModule },
+    { path: 'user', loadChildren: './components/users/users.module#UserModule' },
+    { path: 'racket', loadChildren: './components/rackets/racket.module#RacketModule' },
+    { path: 'category', loadChildren: './components/categories/category.module#CategoryModule' },
+    // { path: 'user', loadChildren: () => UserModule },
+    // { path: 'racket', loadChildren: () => RacketModule },
+    // { path: 'category', loadChildren: () => CategoryModule },
     { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -6,7 +6,7 @@
     <groupId>kl.tennis-shop</groupId>
     <artifactId>tennis-shop</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>tennis-shop</name>
     <description>Spring Boot Project</description>
@@ -24,6 +24,7 @@
         <java.version>10</java.version>
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.2.0</thymeleaf-layout-dialect.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -66,7 +67,7 @@
             <scope>runtime</scope>
         </dependency>
 
-         <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security-->
+        <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -104,7 +105,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -121,24 +121,24 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.thymeleaf.extras</groupId>-->
-            <!--<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
-            <!--<version>3.0.2.RELEASE</version>-->
+        <!--<groupId>org.thymeleaf.extras</groupId>-->
+        <!--<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
+        <!--<version>3.0.2.RELEASE</version>-->
         <!--</dependency>-->
 
 
         <!--Import From Spring Data-->
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-validator</artifactId>-->
-            <!--<version>6.0.10.Final</version>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--<version>6.0.10.Final</version>-->
         <!--</dependency>-->
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.glassfish/javax.el &ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>org.glassfish</groupId>-->
-            <!--<artifactId>javax.el</artifactId>-->
-            <!--<version>3.0.1-b08</version>-->
+        <!--<groupId>org.glassfish</groupId>-->
+        <!--<artifactId>javax.el</artifactId>-->
+        <!--<version>3.0.1-b08</version>-->
         <!--</dependency>-->
 
     </dependencies>
@@ -149,6 +149,36 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+                            <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/../Client/dist/Client</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <skipTests>${skipTests}</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
 </project>

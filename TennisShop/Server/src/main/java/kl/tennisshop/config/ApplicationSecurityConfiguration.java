@@ -52,7 +52,8 @@ public class ApplicationSecurityConfiguration
                         "/orders/remove",
                         "/orders/edit",
                         "/rackets/test",
-                        "/users/update"
+                        "/users/update",
+                        "/**"
                         ).permitAll()
                 .antMatchers(
                         "/rackets/details",
