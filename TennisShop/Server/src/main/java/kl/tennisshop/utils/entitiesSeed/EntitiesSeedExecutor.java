@@ -113,7 +113,7 @@ public class EntitiesSeedExecutor {
                     "16/18",
                     "http://res.cloudinary.com/tennis-shop/image/upload/v1536116212/ximr4iebzd3jy7zcifq2.jpg",
                     category3);
-            
+
             //####################################################################################
 
             Racket racket6 = new Racket("HEAD Graphene XT Radical MP Tour Racket (strung)",

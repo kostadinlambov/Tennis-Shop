@@ -5,7 +5,7 @@ import { DetailsRacketModel } from './models/deatils-racket.model';
 import { Observable } from "rxjs";
 import { CreateRacketModel } from './models/create-racket.model';
 
-const baseUrl = 'https://tennisshop.herokuapp.com/rackets/';
+const baseUrl = 'http://localhost:8000/rackets/';
 
 
 @Injectable()

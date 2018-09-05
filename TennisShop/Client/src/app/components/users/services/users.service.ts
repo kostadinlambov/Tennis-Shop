@@ -6,7 +6,7 @@ import { RegisterUser } from '../models/register-user.model';
 import { LogModel } from '../models/log.model';
 import { AllUserModel } from '../models/all-user.model';
 
-const baseUrl = 'https://tennisshop.herokuapp.com/users/';
+const baseUrl = 'http://localhost:8000/users/';
 
 
 @Injectable()
@@ -22,7 +22,7 @@ export class UsersService {
     }
 
     login(formData) {
-        return this.http.post('https://tennisshop.herokuapp.com/login', formData);
+        return this.http.post('http://localhost:8000/login', formData);
     }
 
     getAll(): Observable<AllUserModel[]> {
@@ -59,23 +59,23 @@ export class UsersService {
     }
 
     loadLogs() {
-        const url = 'https://tennisshop.herokuapp.com/logs/all';
+        const url = 'http://localhost:8000/logs/all';
         return this.http.get<LogModel[]>(url);
     }
 
     searchByUsername(username: string) {
-        const url = `https://tennisshop.herokuapp.com/logs/findByUserName/${username}`;
+        const url = `http://localhost:8000/logs/findByUserName/${username}`;
         return this.http.get<LogModel[]>(url);
     }
 
     clearLogs() {
-        const url = 'https://tennisshop.herokuapp.com/logs/clear';
+        const url = 'http://localhost:8000/logs/clear';
         return this.http.delete(url);
     }
 
     clearLogsByName(username: string) {
         debugger;
-        const url = `https://tennisshop.herokuapp.com/logs/clearByName/${username}`;
+        const url = `http://localhost:8000/logs/clearByName/${username}`;
         return this.http.delete(url);
     }
 
