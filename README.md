@@ -1,6 +1,6 @@
 # Tennis-Shop
 
-This site was built using [Angular 6](https://angular.io/) and [Spring Boot](http://spring.io/projects/spring-boot).
+This site was built using [Angular 6](https://angular.io/) (Client), [Spring Boot](http://spring.io/projects/spring-boot) (Server) and [MySQL](https://www.mysql.com/) (Database).
 
 The site is published at https://tennisshop.herokuapp.com.
 
